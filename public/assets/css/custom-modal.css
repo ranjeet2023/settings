@@ -1,0 +1,500 @@
+/* .page-container {
+    -ms-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+} */
+
+.vdb-rb-overflow-hidden {
+    overflow: hidden;
+}
+
+.vdb-rb-modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1), visibility 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: 99;
+    overflow-y: auto;
+}
+
+.vdb-rb-modal-overlay.vdb-rb-open-modal {
+    opacity: 1;
+    visibility: visible;
+    max-height: calc(100vh - 80px);
+}
+
+
+/**
+  * Modal
+  */
+.vdb-rb-find-stone-modal {
+    display: none;
+    border-radius: 8px;
+    position: relative;
+    margin: 0 auto;
+    background-color: #fff;
+    width: calc(700px - 48px);
+    max-width: 700px;
+    min-height: 340px;
+    max-height: 452px;
+    padding: 28px 24px;
+    opacity: 0;
+    overflow-y: auto;
+    visibility: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.vdb-rb-find-stone-modal .vdb-rb-close-find-stone-modal {
+    position: absolute;
+    cursor: pointer;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.vdb-rb-modal-content a:active,
+.vdb-rb-modal-content a:focus-visible {
+    outline: 0;
+}
+
+.vdb-rb-find-stone-modal .vdb-rb-modal-content {
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+    transition-delay: 0.3s;
+}
+
+.vdb-rb-find-stone-modal.vdb-rb-open-modal {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+.vdb-rb-find-stone-modal.vdb-rb-open-modal .vdb-rb-modal-content {
+    opacity: 1;
+    padding: 1rem 0 0 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.vdb-rb-find-stone-modal.vdb-rb-open-modal .vdb-rb-close-find-stone-modal {
+    opacity: 1;
+}
+
+.vdb-rb-modal-header .vdb-rb-modal-title {
+    display: flex;
+    align-items: center;
+}
+
+.vdb-rb-modal-header .vdb-rb-modal-title span {
+    font-size: 24px;
+}
+
+.vdb-rb-modal-header .vdb-rb-modal-title p {
+    margin: 0 0 0 0.5rem;
+    color: #292735;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 32px;
+}
+
+.vdb-rb-modal-content h3 {
+    color: #292735;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 18px;
+}
+
+/**
+  * Mobile styling
+  */
+
+.vdb-rb-prefer-budget-wrapper,
+.vdb-rb-prefer-shape-wrapper {
+    max-width: 100%;
+}
+
+.vdb-rb-modal-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vdb-rb-modal-content ul li {
+    display: inline-block;
+}
+
+.vdb-rb-prefer-shape-wrapper ul {
+    margin: 0 0 0 -6px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vdb-rb-prefer-shape-wrapper ul li {
+    text-align: center;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.vdb-rb-prefer-shape-wrapper ul li .vdv-rb-item-title {
+    font-size: 12px;
+    margin: 5px 0 20px;
+}
+
+.vdb-rb-prefer-shape-wrapper ul li a {
+    color: #000;
+}
+
+.vdb-rb-prefer-shape-wrapper .vdb-rb-list-item .vdb-rb-icon {
+    font-size: 40px;
+}
+
+.vdb-rb-title-with-back-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.vdb-rb-title-with-back-button .vdb-rb-back-button {
+    margin-right: 24px;
+    font-weight: 500;
+    color: #804294;
+}
+
+.vdb-rb-title-with-back-button .vdb-rb-back-button>.vdb-rb-icon {
+    font-size: 12px;
+}
+
+.vdb-rb-title-with-back-button h3 {
+    margin-bottom: 0;
+}
+
+.vdb-rb-find-best-diamonds-modal .vdb-rb-title-with-back-button {
+    justify-content: space-between;
+    font-weight: bold;
+
+    position: absolute;
+    left: 25px;
+    right: 25px;
+    bottom: 0;
+    background-color: #fff;
+    padding-top: 8px;
+}
+
+.vdb-rb-find-best-diamonds-modal .vdb-rb-title-with-back-button .vdb-rb-back-button {
+    font-weight: 500;
+}
+
+.vdb-rb-matters-block ul li a,
+.vdb-rb-prefer-budget-wrapper ul li a {
+    border-radius: 4px;
+    background-color: #E8F1F7;
+    padding: 9px 16px;
+    color: #804294;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: block;
+    border: 2px solid transparent;
+}
+
+.vdb-rb-matters-block ul li.vdb-rb-list-item-active a,
+.vdb-rb-prefer-budget-wrapper ul li.vdb-rb-list-item-active a {
+    border-color: #804294;
+}
+
+.vdb-rb-stones {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vdb-rb-stones a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 80px;
+    width: 164px;
+    border-radius: 4px;
+    background-color: #E8F1F7;
+    color: #804294;
+    margin-right: 8px;
+    border: 2px solid transparent;
+}
+
+.vdb-rb-stones a.vdb-rb-list-item-active {
+    border-color: #804294;
+}
+
+.vdb-rb-stones a.vdb-rb-list-item-active p {
+    color: #804294;
+}
+
+.vdb-rb-stones .vdb-rb-icon {
+    min-height: 32px;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.vdb-rb-stones .vdb-rb-icon.vdb-rb-icon-LAB-Icon {
+    font-size: 24px;
+}
+
+.vdb-rb-stones a p {
+    font-size: 14px;
+    letter-spacing: -0.47px;
+    line-height: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+.vdb-rb-matters-block {
+    max-width: 100%;
+}
+
+.vdb-rb-best-diamond-list {
+    display: flex;
+}
+
+.vdb-rb-best-diamond-list .vdb-rb-list-product-item {
+    flex: 0 0 33%;
+    max-width: 33%;
+    padding: 0 5px;
+}
+
+.vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-img-wrapper {
+    width: 100%;
+    height: 164px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-details .vdb-rb-product-name {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-details .vdb-rb-price-block h3 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.vdb-rb-selected-diamond-button-wrapper {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.vdb-rb-list-product-item .vdb-modal-btn {
+    height: 32px;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    border-radius: 4px;
+    margin: 0 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-in-out 0.3s;
+}
+
+.vdb-rb-list-product-item .vdb-rb-primary-btn {
+    color: #FFFFFF;
+    background-color: #804294;
+    border: 1px solid #804294;
+}
+
+.vdb-rb-list-product-item .vdb-rb-primary-btn-outline {
+    color: #804294;
+    background-color: transparent;
+    border: 1px solid #804294;
+}
+
+.vdb-rb-no-results {
+    min-height: 210px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .vdb-rb-find-stone-modal {
+        display: none;
+        width: calc(100% - 30px);
+        max-width: 100%;
+        height: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0;
+        z-index: 99;
+        padding: 2rem 1rem;
+    }
+
+    .vdb-rb-modal-overlay.vdb-rb-open-modal {
+        max-height: calc(100vh - 0px);
+    }
+
+    .vdb-rb-product-result-wrapper .vdb-rb-row .vdb-rb-col-md-3 {
+        flex: 0 0 46%;
+        max-width: 46%;
+        margin: 0 0 30px;
+        padding-left: 6px;
+        padding-right: 7px;
+    }
+
+    .vdb-rb-prefer-budget-wrapper,
+    .vdb-rb-prefer-shape-wrapper {
+        max-width: 100%;
+    }
+
+    .vdb-rb-quize-block {
+        width: 100%;
+        height: 100px;
+    }
+
+    .vdb-rb-quize-block .vdb-rb-content {
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .vdb-rb-quize-block .vdb-rb-content p {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .vdb-rb-prefer-shape-wrapper ul {
+        margin: 0;
+    }
+
+    .vdb-rb-prefer-shape-wrapper ul li {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .vdb-rb-modal-header .vdb-rb-modal-title p {
+        font-size: 16px;
+    }
+
+    .vdb-rb-modal-header .vdb-rb-modal-title span {
+        font-size: 20px;
+    }
+
+    .vdb-rb-find-stone-modal .vdb-rb-close-find-stone-modal {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .vdb-rb-tab-wrap .vdb-rb-tabbing {
+        min-width: 31.5%;
+    }
+
+    .vdb-rb-stones a:last-child {
+        margin-right: 0;
+    }
+
+    .vdb-rb-stones {
+        justify-content: center;
+    }
+
+    .vdb-rb-stones .vdb-rb-icon {
+        font-size: 22px;
+    }
+
+    .vdb-rb-stones .vdb-rb-icon.vdb-rb-icon-LAB-Icon {
+        font-size: 18px;
+    }
+
+    .vdb-rb-best-diamond-list {
+        flex-wrap: wrap;
+        overflow: auto;
+        max-height: 450px;
+    }
+
+    .vdb-rb-best-diamond-list .vdb-rb-list-product-item {
+        flex: 0 0 60%;
+        max-width: 60%;
+        margin: 0 auto;
+    }
+
+    .vdb-rb-list-product-item .vdb-modal-btn,
+    .vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-img-wrapper {
+        width: 100%;
+    }
+
+    .vdb-rb-best-diamond-list .vdb-rb-list-product-item .vdb-rb-product-details .vdb-rb-product-name {
+        min-height: auto;
+    }
+
+    .vdb-rb-stones a.vdb_rb_quiz_stone {
+        max-width: 100%;
+        margin: 0 6px 0;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .vdb-rb-stones a.vdb_rb_quiz_stone {
+        max-width: 100%;
+        margin: 0 10px 12px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .vdb-rb-tab-wrap .vdb-rb-tabbing {
+        min-width: 30%;
+    }
+
+    .vdb-rb-title-with-back-button .vdb-rb-back-button {
+        margin-right: 12px;
+    }
+
+    .vdb-rb-stones a {
+        max-width: 153px;
+    }
+
+    .vdb-rb-stones a.vdb_rb_quiz_stone {
+        margin: 0 0px 12px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .vdb-rb-tab-wrap .vdb-rb-tabbing {
+        min-width: 31.2%;
+    }
+
+    .vdb-rb-prefer-shape-wrapper ul li {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+
+    .vdb-rb-stones a {
+        max-width: 146px;
+    }
+}

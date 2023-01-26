@@ -1,0 +1,275 @@
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block {
+    padding: 16px 40px;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul {
+    margin: 0 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.vdb-rb-gem-desktop-none {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .vdb_rb_gemstone_block .vdb-rb-filter-options-block ul {
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .vdb_rb_gemstone_block .vdb-rb-filter-options-block ul {
+        display: none;
+    }
+
+    .vdb_rb_gemstone_block .vdb-rb-filter-options-block {
+        padding: 0px 14px;
+    }
+
+    .vdb_rb_gemstone_block .vdb-rb-filter-range-slider {
+        display: none;
+    }
+
+    .vdb-rb-gem-desktop-none {
+        display: block;
+    }
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul.swiper-wrapper {
+    margin: 0 40px 0 26px;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+    .vdb_rb_gemstone_block .vdb-rb-filter-options-block ul.swiper-wrapper {
+        margin: 0 0 0 20px;
+    }
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul li {
+    list-style: none;
+    margin: 0;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul li.swiper-slide {
+    margin: 0 10px;
+    width: auto !important;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul li a:focus {
+    outline: 0;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul li a .vdv-rb-item-title {
+    color: #292735;
+    font-size: 13px;
+    letter-spacing: -0.47px;
+    line-height: 14px;
+    text-align: center;
+    margin: 8px 0 0 0;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-filter-options-block ul li a .vdv-rb-item-title:focus {
+    outline: 0;
+}
+
+
+.vdb_rb_gemstone_block .vdb-rb-list-item {
+    min-width: 81px;
+    max-width: 81px;
+    min-height: 56px;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-list-item.vdb-rb-list-item-active {
+    background-color: #FFFFFF;
+    color: #9264A5;
+    border: 2px solid #9264A5;
+    border-radius: 8px;
+}
+
+.vdb_rb_gemstone_block .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-icon {
+    color: #9264A5;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item {
+    position: relative;
+    min-width: 75px;
+    min-height: 56px;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item img {
+    max-width: 40px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item .vdb-rb-active-shape {
+    display: none;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-active-shape {
+    display: block;
+    background: #9264A5;
+    border: none;
+    height: 2px;
+    width: 100%;
+    max-width: 12px;
+    position: absolute;
+    bottom: 7px;
+    right: 3px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    transform: rotate(-45deg);
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-active-shape::before,
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-active-shape::after {
+    content: '';
+    display: block;
+    background: #9264A5;
+    border: none;
+    height: 2px;
+    position: absolute;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    transform: rotate(0deg);
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-active-shape::after {
+    min-width: 6px;
+    bottom: -4px;
+    right: 3px;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-list-item.vdb-rb-list-item-active .vdb-rb-active-shape::before {
+    bottom: 4px;
+    right: -3px;
+    min-width: 18px;
+}
+
+.vdb-rb-gem-type-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    max-width: 390px;
+    min-width: 230px;
+    padding: 40px 40px 18px 40px;
+    border-radius: 0 0 8px 8px;
+    background-color: #FFFFFF;
+    box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.1);
+    z-index: 12;
+    display: none;
+}
+
+.vdb-rb-gem-type-dropdown .vdb-rb-gem-title {
+    color: #292735;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 16px;
+    margin-bottom: 19px;
+}
+
+
+.vdb-rb-gem-type-dropdown .vdb-rb-color-type-item {
+    margin: 0px 0px 8px;
+    display: flex;
+    align-items: center;
+    min-width: 50%;
+}
+
+.vdb-rb-gem-typ-list-wrapper #vdbrb_type_filter_slider_gemstone {
+    justify-content: space-between;
+}
+
+.vdb-rb-gem-type-dropdown .vdb-rb-color-type-item>a {
+    display: flex;
+    align-items: center;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-gem-type-dropdown .vdb-rb-color-type-item .vdb-rb-list-item {
+    min-width: 40px;
+    min-height: 40px;
+    margin-right: 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-gem-type-dropdown .vdb-rb-color-type-item>a.vdb-rg-gem-color-active .vdb-rb-list-item {
+    border-color: #9264A5;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-gem-type-dropdown .vdb-rb-color-type-item p {
+    margin: 0;
+}
+
+.vdb_rb_gemstone_block #vdbrb_type_filter_slider_gemstone .vdb-rb-gem-type-dropdown .vdb-rb-color-type-item .vdb-rb-list-item img {
+    max-width: 21px;
+}
+
+.vdb-rb-color-type-itemlist {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vdb-rb-gem-color-list-wrapper {
+    border-top: 2px solid #F0F0F0;
+    padding-top: 13px;
+    margin-top: 12px;
+}
+
+.vdb-rb-gem-color-list-wrapper .vdb-rb-list-item {
+    min-width: 68px;
+    max-width: 68px;
+}
+
+.vdb-rb-gem-color-list-wrapper .vdb-rb-list-item img {
+    max-width: 24px;
+    height: auto;
+}
+
+.vdb-rb-gem-color-list-wrapper ul {
+    width: 100%;
+}
+
+.vdb-rb-gem-color-list-wrapper ul .slick-list {
+    width: 100%;
+}
+
+.vdb-rb-gem-color-list-wrapper ul .slick-slide {
+    min-width: 68px;
+}
+
+.vdb-rb-gem-color-list-wrapper ul .slick-track {
+    min-width: 100%;
+}
+
+.vdb-rb-pe-0 {
+    padding-right: 0 !important;
+}
+
+@media screen and (max-width: 991px) {
+    .vdb-rb-gem-color-list-wrapper ul {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .vdb-rb-hide-mobile {
+        display: none;
+    }
+}
+#vdbrb_color_filter_slider_gemstone li{
+    margin: 0 5px;
+}
