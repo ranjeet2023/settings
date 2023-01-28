@@ -19,35 +19,127 @@ class ShapeController extends Controller
             $token = "6913277571670500485";
             $client = new Client();
             $searchParams = [
-                // 'shape' => 'round',
-                // 'weight' => $request->input('weight'),
                 'diamond_type' => 'natural',
+                'page'=>3,
             ];
             $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
-                'form_params' => $searchParams
+                'form_params' => $searchParams,
             ]);
             $config  = json_decode($response->getBody(), true);
             $data['diamond_data'] = $config['data']['data'];
+            $data['pegination']=$config;
 
         return view('welcome')->with($data);
+    }
+    public function test(){
+        return view('test');
+        $client = new Client();
+        $token = "6913277571670500485";
+        $searchParams = [
+            'diamond_type' => 'natural',
+            'page'=>3,
+        ];
+        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
+            'form_params' => $searchParams,
+        ]);
+        $config  = json_decode($response->getBody(), true);
+        print_r($config);
+        die;
     }
     public function search(Request $request)
     {
         $client = new Client();
+
         $shape = $request->input('shape');
+        $eyeclean = $request->input('eyeclean');
+        if(!empty( $request->input('color'))){
+            $colors = $request->input('color');
+            $color = implode(',', $colors);
+        }else{
+            $color=null;
+        }
+        if(!empty($request->input('clarity'))){
+            $claritys = $request->input('clarity');
+            $clarity = implode(',', $claritys);
+        }else{
+            $clarity=null;
+        }
+        if(!empty($request->input('lab'))){
+            $labs = $request->input('lab');
+            $lab = implode(',', $labs);
+        }else{
+            $lab=null;
+        }
+        if(!empty($request->input('cut'))){
+            $cuts = $request->input('cut');
+            $cut = implode(',', $cuts);
+        }else{
+            $cut=null;
+        }
+        if(!empty($request->input('polish'))){
+            $polishs = $request->input('polish');
+            $polish = implode(',', $polishs);
+        }else{
+            $polish=null;
+        }
+        if(!empty($request->input('symmetry'))){
+            $symmetrys = $request->input('symmetry');
+            $symmetry = implode(',', $symmetrys);
+        }else{
+            $symmetry=null;
+        }
+        if(!empty($request->input('fluorescence'))){
+            $fluorescences = $request->input('fluorescence');
+            $fluorescence = implode(',', $fluorescences);
+        }else{
+            $fluorescence=null;
+        }
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
             'form_params' => [
                 'shape' => $shape,
+                'color' => $color,
+                'clarity' => $clarity,
+                'lab' => $lab,
+                'cut' => $cut,
+                'polish' => $polish,
+                'symmetry' => $symmetry,
+                'fluorescence' => $fluorescence,
+                'eyeclean' => $eyeclean,
                 'token' => '6913277571670500485',
                 'diamond_type' => 'natural',
             ]
         ]);
         $config = json_decode($response->getBody(), true);
         $data['diamond_data'] = $config['data']['data'];
-        // echo "<pre>";
-        // print_R($data);
-        // // die;
         return $data;
     }
+
+
+    // public function search(Request $request)
+    // {
+    //     $client = new Client();
+    //     $shape = $request->input('shape');
+    //     $color = $request->input('color');
+    //     $clarity = $request->input('clarity');
+    //     // echo "<pre>";
+    //     // print_r($request->all());
+    //     // die;
+
+    //     $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
+    //         'form_params' => [
+    //             'shape' => $shape,
+    //             'color' => $color,
+    //             'clarity' => $clarity,
+    //             'token' => '6913277571670500485',
+    //             'diamond_type' => 'natural',
+    //         ]
+    //     ]);
+    //     $config = json_decode($response->getBody(), true);
+    //     $data['diamond_data'] = $config['data']['data'];
+    //     // echo "<pre>";
+    //     // print_R($data);
+    //     // // die;
+    //     return $data;
+    // }
 
 }

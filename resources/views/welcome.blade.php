@@ -1,22 +1,13 @@
 @include('header');
-
+{{-- scroll pegination link  --}}
+<link href="/path/to/css/scrollpagination.css" rel="stylesheet" />
+<script src="/path/to/cdn/jquery.min.js"></script>
+<script src="/path/to/js/scrollpagination.js"></script>
+{{-- end scroll pegination link  --}}
 <body>
+
     <script id="klarna-osm-script-tag" async="" src="{{ asset('assets/js/lib.js')}}" data-client-id="5e4d5d37-f827-5937-9c36-f181fb846ad3"></script>
-    <div>
-
-    </div>
-
-
-
-    <span class="LoadingBar"></span>
-    <div class="PageOverlay"></div>
-
-    <div id="shopify-section-popup" class="shopify-section"></div>
-
-    </div>
     <div class="PageContainer">
-
-
         <main id="main" role="main">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
             <title>Ring Builder</title>
@@ -134,100 +125,107 @@
                                                 <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="princess" class="shape_diamond" >
+
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_oval">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a   data-val="princess" class="shape_diamond" >
                                                                     <img class="image_off" src="{{asset('assets/img/shape/princess.png')}}" width="25" alt="Princess">
+                                                            </a>
+
                                                                 </div>
                                                                 <p class="vdv-rb-item-title"  class="shape" >Princess</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a    data-val="cushion" class="shape_diamond">
+
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_pear">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                     <a    data-val="cushion" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/cushion.png')}}" width="25" alt="Cushion">
+                                                                </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title"  class="shape">Cushion</p>
-                                                            </a>
+
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="3" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a     data-val="emerald" class="shape_diamond" >
+
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_emerald">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a     data-val="emerald" class="shape_diamond" >
                                                                     <img class="image_off" src="{{asset('assets/img/shape/emerald.png')}}" width="25" alt="Emerald">
+                                                                      </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title"  class="shape" >Emerald</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="4" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a    data-val="heart" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_princess">
-                                                                    <!--vdb-rb-list-item-active-->
-                                                                    <img class="image_off" src="{{asset('assets/img/shape/heart.png')}}" width="25" alt="Heart">
+                                                                            <!--vdb-rb-list-item-active-->
+                                                                    <a data-val="heart" class="shape_diamond">
+                                                                            <img class="image_off" src="{{asset('assets/img/shape/heart.png')}}" width="25" alt="Heart">
+                                                                    </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title" >Heart</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="5" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-short_code="radiant"  data-val="marquise" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_radiant">
-                                                                    <img class="image_off" src="{{asset('assets/img/shape/marquise.png')}}" width="25" alt="Marquise">
+                                                                    <a     data-val="marquise" class="shape_diamond">
+                                                                            <img class="image_off" src="{{asset('assets/img/shape/marquise.png')}}" width="25" alt="Marquise">
+                                                                    </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Marquise</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="6" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a    data-val="oval" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_triangle">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a     data-val="oval" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/oval.png')}}" width="25" alt="Oval">
+                                                                    </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Oval</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="7" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="pear" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_cushion">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a    data-val="pear" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/pear.png')}}" width="25" alt="Pear">
+                                                                    </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Pear</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="8" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="radient" class="shape_diamond">
+
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_square">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                       <a   data-val="radient" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/radiant.png')}}" width="25" alt="Radiant">
+                                                                       </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Radiant</p>
                                                             </a>
@@ -237,52 +235,52 @@
                                                 <div class="slick-slide slick-active" data-slick-index="9" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="SQ.Radiant" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_marquise">
-                                                                    <!--vdb-rb-list-item-active-->
+                                                            <a   data-val="sq.radiant" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/lradiant.png')}}" width="25" alt="SQUARE Radiant">
+                                                            </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">SQ.Radiant</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="10" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="trilliant" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_asscher">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a   data-val="trilliant" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/trilliant.png')}}" width="25" alt="Trilliant">
+                                                                    </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Trilliant</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide slick-active" data-slick-index="11" aria-hidden="false" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a   data-val="Cushion mod" class="shape_diamond">
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_sq_emerald">
                                                                     <!--vdb-rb-list-item-active-->
+                                                            <a   data-val="cushion" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/cushion.png')}}" width="25" alt="Cushion Modify">
+                                                            </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Cushion mod.</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
                                                 <div class="slick-slide" data-slick-index="12" aria-hidden="true" tabindex="-1" style="width: 69px;">
                                                     <div>
                                                         <li style="width: 100%; display: inline-block;">
-                                                            <a data-val="Triangle" class="shape_diamond" class="btn btn-sm togglebtn ">
+
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_heart">
                                                                     <!--vdb-rb-list-item-active-->
+                                                                    <a data-val="asscher" class="shape_diamond" class="btn btn-sm togglebtn ">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/triangle.png')}}" width="25" alt="Triangle">
+                                                                     </a>
                                                                 </div>
                                                                 <p class="vdv-rb-item-title">Triangle</p>
-                                                            </a>
                                                         </li>
                                                     </div>
                                                 </div>
@@ -312,7 +310,6 @@
                                         Carat <span class="vdb-rb-filters-count">All</span>
                                     </h5>
                                     <div class="vdb-rb-filter-range-slider">
-                                        <span class="irs irs--round js-irs-12"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="display: none;">0</span><span class="irs-max" style="display: none;">1</span><span class="irs-from" style="display: none; left: 0%;">0</span><span class="irs-to" style="display: none; left: 0%;">0</span><span class="irs-single" style="display: none; left: 0%;">0</span></span><span class="irs-grid"></span><span class="irs-bar" style="left: 2.72503%; width: 71.3104%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 0%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 71.3104%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider vbdrb_carat_natural_web irs-hidden-input" value="" tabindex="-1" readonly="">
                                         <div class="vdb-rb-group-input-between">
                                             <div class="vdb-carat">
                                                 <input type="text" inputmode="decimal" pattern="\d*" class="vdbrb_min_carat_natural_web vdbrb_only_digit_with_two_decimal" value="0.30" placeholder="Min">
@@ -327,7 +324,7 @@
                                 </div>
                             </div>
                             {{-- colour  --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 " >
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b>Colour</b></span>
@@ -338,11 +335,13 @@
                                         <br>
                                         <br>
                                         @foreach($config->data->color as $color)
-                                        <a  data-val="{{ $color }}" class="color_diamond">
+
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;" >
+                                            <a  data-val="{{ $color }}" class="color_diamond">
                                             <p class="btn btn-light"  style="margin-left: 12px">{{ $color }}</p>
-                                        </h5>
                                         </a>
+
+                                        </h5>
                                         @endforeach
                                     </div>
                                 </div>
@@ -350,7 +349,7 @@
                             {{-- end  colour  --}}
                             {{-- start  clarity  --}}
 
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 " >
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b>Clarity</b></span>
@@ -359,12 +358,12 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->clarity as $shape)
-                                        <a  data-val="{{ $shape }}" class="clarity_diamond">
+                                        @foreach($config->data->clarity as $clarity)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
-                                        </h5>
+                                        <a  data-val="{{ $clarity }}" class="clarity_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $clarity }}</p>
                                         </a>
+                                        </h5>
                                         @endforeach
                                     </div>
                                 </div>
@@ -372,7 +371,7 @@
 
                             {{-- end  clarity  --}}
                             {{-- start lab   --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Lab</b></span>
@@ -381,16 +380,18 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->lab as $shape)
+                                        @foreach($config->data->lab as $lab)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $lab }}" class="lab_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $lab }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             {{-- start cut  --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Cut</b></span>
@@ -399,16 +400,18 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->cut as $shape)
+                                        @foreach($config->data->cut as $cut)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $cut }}" class="cut_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $cut }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             {{-- start polish  --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Polish</b></span>
@@ -417,16 +420,18 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->polish as $shape)
+                                        @foreach($config->data->polish as $polish)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $polish }}" class="polish_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $polish }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             {{-- [symmetry --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Symmetry</b></span>
@@ -435,16 +440,18 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->symmetry as $shape)
+                                        @foreach($config->data->symmetry as $symmetry)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $symmetry }}" class="symmetry_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $symmetry }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             {{-- fluorescence --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Fluorescence</b></span>
@@ -453,16 +460,18 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->fluorescence as $shape)
+                                        @foreach($config->data->fluorescence as $fluorescence)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $fluorescence }}" class="fluorescence_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $fluorescence }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             {{-- eyeclean --}}
-                            <div class="vdb-rb-col-md-6 ">
+                            <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                                 <div class="vdb-rb-filter-options-block">
                                     <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                         </span><b> Eyeclean</b></span>
@@ -471,16 +480,28 @@
                                     <div class="vdb-rb-filter-range-slider vdbrb_natural_color vdbrb_natural_white_color" style="">
                                         <br>
                                         <br>
-                                        @foreach($config->data->eyeclean as $shape)
+                                        @foreach($config->data->eyeclean as  $eyeclean)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $shape }}</p>
+                                            <a  data-val="{{ $eyeclean }}" class="eyeclean_diamond">
+                                            <p class="btn btn-light" style="margin-left: 5px">{{ $eyeclean }}</p>
+                                            </a>
                                         </h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             <!-- WEB VIEW ADVANCE FILTER NATURAL HTML RENDER HERE -->
-
+                            {{-- pegination --}}
+                            {{-- <div class="results">
+                                @foreach($data as $item)
+                                    <div class="result-item">
+                                        <!-- display result item -->
+                                    </div>
+                                @endforeach
+                                {{ $data->links() }}
+                            </div> --}}
+                            {{-- pegination --}}
+                            {{-- {{ $pegination->links() }} --}}
                         </div>
                     </div>
                     <div class="vdb-rb-mobilr-filter-options-wrapper vdb_rb_labgrown_mob_block">
@@ -605,16 +626,27 @@
                     </div>
 
                     <div class="vdb-rb-reset-filters">
-                        <p class="vdb-rb-advanced-filter" id="show-hide-btn">Advanced Filters <span class="vdb-rb-arrow-down vdb-rb-icon vdb-rb-arrow-right"></span>
+                        <p class="vdb-rb-advanced-filter" id="show-hide-btn">Advanced Filters
+                            <button class="btn btn-light down-button">
+                            <i class="arrow down" id="down-icon"></i>
+                            </button>
                         </p>
 
-                        <p id="vdbrb_stone_reset_filter">Reset Filters <span class="vdb-rb-icon vdb-rb-refresh-icon"></span>
+                        <div class="hide-reset">
+                        <p id="vdbrb_stone_reset_filter">Reset Filters
+                             <span class="vdb-rb-icon vdb-rb-refresh-icon "></span>
                         </p>
+                        </div>
                     </div>
                     {{-- show data  --}}
+                    <button id="more-button" class="btn btn-success" >Load more</button>
+                    {{-- <div id="app"  class="btn btn-primary" data-scroll="{{ $pegination['current_page'] }}">Load</div> --}}
+                    <div id="scrollpagination">
+                        <ul id="content"></ul>
+                      </div>
                     <div class="vdb-rb-product-result-wrapper">
                         <span  data-val="button" class="button_id">
-                        <div style="position: relative;">
+                          <div style="position: relative;">
                             <div class="vdb-rb-row" id="vdbrb_stone_grid_view_row"  >
                                  {{-- show data  --}}
                                 @foreach($diamond_data as $labdata)
@@ -624,7 +656,7 @@
                                                 <img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">
                                             </div>
                                             <div class="vdb-rb-product-details">
-                                                <p class="vdb-rb-product-name">{{ ucfirst(strtolower($labdata['shape'])) }} {{ ($labdata['carat'])}} {{ ($labdata['color'])}}; </p>
+                                                <p class="vdb-rb-product-name">{{ ucfirst(strtolower($labdata['shape'])) }} {{ ($labdata['carat'])}} {{ ($labdata['color'])}} {{ ($labdata['clarity'])}};  </p>
                                                 <div class="vdb-rb-price-block">
                                                     <h3><b>{{ ($labdata['rate'])}} {{ ($labdata['currency_symbol'])}}</b></h3>
                                                 </div>
@@ -633,31 +665,128 @@
                                     </div>
                                 </div>
                                 @endforeach
-                            </div>
+                             </div>
                         </div>
-                    </span>
-                    </div>
+                     </span>
                 </div>
-
                        {{-- show data  --}}
-
         </main>
-
-
+     </div>
     </div>
     <script>
-        $('.shape_diamond').click(function(event){
-            var diamond_val = $(this).attr("data-val");
-            var diamond_color = $(this).attr("data-val");
-            console.log(diamond_val);
-            console.log(diamond_color);
-        $.ajax({
-            type:'post',
-            url: '{{ url('api/search') }}',
-            dataType: 'json',
-			headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data:{'shape': diamond_val },
-            success: function(data) {
+        $(document).ready(function() {
+            var prevShape = "";
+            var color='';
+            var clarity='';
+            var lab ='';
+            var cut ='';
+            var polish= '';
+            var symmetry= '';
+            var fluorescence ='';
+            var eyeclean ='';
+
+            $(".shape_diamond").click(function() {
+                    $(".shape_diamond").removeClass("active");
+                    $(".shape_diamond").removeClass("btn btn-success");
+                    $(this).addClass("active");
+                    $(this).addClass("btn btn-success");
+                    prevShape =  $(this).attr("data-val");
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".color_diamond").click(function() {
+                 $(this).toggleClass("active btn btn-success");
+                    color = $(".color_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".clarity_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                   clarity = $(".clarity_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".lab_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                lab = $(".lab_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".cut_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                 cut = $(".cut_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".polish_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                polish = $(".polish_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".symmetry_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                symmetry = $(".symmetry_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".fluorescence_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                fluorescence = $(".fluorescence_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+            $(".eyeclean_diamond").click(function() {
+                $(".eyeclean_diamond").removeClass("active");
+                    $(".eyeclean_diamond").removeClass("btn btn-success");
+                    $(this).addClass("active");
+                    $(this).addClass("btn btn-success");
+                eyeclean = $(this).attr("data-val");
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+            });
+        });
+        function search(shape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean) {
+            var data = {};
+            if(shape) {
+                data.shape = shape;
+            }
+            if(color) {
+                data.color = color;
+            }
+            if(clarity) {
+                data.clarity= clarity;
+            }
+            if(lab) {
+                data.lab= lab;
+            }
+            if(cut) {
+                data.cut= cut;
+            }
+            if(polish) {
+                data.polish= polish;
+            }
+            if(symmetry) {
+                data.symmetry = symmetry;
+            }
+            if(fluorescence){
+                data.fluorescence = fluorescence;
+            }
+            if(eyeclean){
+                data.eyeclean = eyeclean;
+            }
+            $.ajax({
+                type: "post",
+                dataType: 'json',
+			    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: '{{ url('api/search') }}',
+                data: data,
+                success: function(data) {
                 var output = '';
                 if(data.diamond_data.length > 0) {
                     output+=' <div style="position: relative;">'+
@@ -670,9 +799,9 @@
                                                  '<img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
                                                 '</div>' +
                                               '<div class="vdb-rb-product-details">' +
-                                                  '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + '</p>' +
+                                                  '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
                                                      '<div class="vdb-rb-price-block">' +
-                                                        '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ '</b></h3>' +
+                                                        '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
                                                      '</div>' +
                                               '</div>' +
                                             '</a>' +
@@ -690,10 +819,9 @@
                     output += '</tr>';
                     }
                 $('.button_id').html(output);
-
                 }
             });
-        });
+        }
     </script>
 
 </body>
