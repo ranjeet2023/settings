@@ -31,20 +31,27 @@ class ShapeController extends Controller
 
         return view('welcome')->with($data);
     }
-    public function test(){
-        return view('test');
+    public function pagination(Request $request){
         $client = new Client();
+        $response = $response = $client->post('https://stage.thediamondport.com/api/get_config', [
+            'query' => ['token' => '6913277571670500485']
+        ]);
+        $configs = json_decode($response->getBody()->getContents());
+           $data['config']=$configs;
+           
         $token = "6913277571670500485";
+        $page=$request->input('page');
         $searchParams = [
             'diamond_type' => 'natural',
-            'page'=>3,
+            'page'=>$page,
         ];
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
             'form_params' => $searchParams,
         ]);
         $config  = json_decode($response->getBody(), true);
-        print_r($config);
-        die;
+        $data['diamond_data'] = $config['data']['data'];
+        $data['pegination']=$config;
+        return view('welcome')->with($data);
     }
     public function search(Request $request)
     {
@@ -94,11 +101,19 @@ class ShapeController extends Controller
         }else{
             $fluorescence=null;
         }
+        if(!empty($request->input('min_price')) && !empty($request->input('max_price'))){
+            $min = $request->input('min_price');
+            $max = $request->input('min_price');
+        }else{
+            $min=null;
+            $max=null;
+        }
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
             'form_params' => [
                 'shape' => $shape,
                 'color' => $color,
                 'clarity' => $clarity,
+                'carat'=> $min-$max,
                 'lab' => $lab,
                 'cut' => $cut,
                 'polish' => $polish,
