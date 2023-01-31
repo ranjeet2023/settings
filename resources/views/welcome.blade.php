@@ -662,6 +662,9 @@
     </div>
     <script>
         $(document).ready(function() {
+            $(".down-button").click(function(){
+                    $(".hide-filter").toggle();
+              });
             var prevShape = "";
             var color='';
             var clarity='';

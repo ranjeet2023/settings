@@ -19,7 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 route::get('/',[ShapeController::class,'index']);
-// route::get('/',[ShapeController::class,'index']);
 Route::post('/',[ShapeController::class,'index']);
 Route::post('/page',[ShapeController::class,'pagination']);
 Route::post('/search', [ShapeController::class,'search']);
