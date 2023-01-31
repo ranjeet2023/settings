@@ -15,37 +15,33 @@ class ShapeController extends Controller
             'query' => ['token' => '6913277571670500485']
         ]);
         $configs = json_decode($response->getBody()->getContents());
-           $data['config']=$configs;
+            $data['config']=$configs;
             $token = "6913277571670500485";
             $client = new Client();
             $searchParams = [
                 'diamond_type' => 'natural',
-                'page'=>3,
             ];
             $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
                 'form_params' => $searchParams,
             ]);
             $config  = json_decode($response->getBody(), true);
             $data['diamond_data'] = $config['data']['data'];
-            $data['pegination']=$config;
-
+            $data['pegination']=$config['data'];
         return view('welcome')->with($data);
     }
-    public function test(){
-        return view('test');
-        $client = new Client();
-        $token = "6913277571670500485";
-        $searchParams = [
-            'diamond_type' => 'natural',
-            'page'=>3,
-        ];
-        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
-            'form_params' => $searchParams,
-        ]);
-        $config  = json_decode($response->getBody(), true);
-        print_r($config);
-        die;
-    }
+    // public function test(){
+        //     return view('test');
+        //     $client = new Client();
+        //     $token = "6913277571670500485";
+    //     $searchParams = [
+    //         'diamond_type' => 'natural',
+    //     ];
+    //     $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
+    //         'form_params' => $searchParams,
+    //     ]);
+    //     $config  = json_decode($response->getBody(), true);
+
+    // }
     public function search(Request $request)
     {
         $client = new Client();

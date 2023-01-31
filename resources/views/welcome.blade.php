@@ -81,7 +81,7 @@
                         <div class="vdb-rb-col-md-10">
                             <div class="vdb-rb-tab-wrap">
                                 <div class="vdb-rb-tabbing vdb-rb-active-tab" id="vdbrb_natural_tab" data-id="natural">
-                                    <span class="vdb-rb-icon vdb-rb-icon-mainmenu_switch_diamond"></span>
+                                        <img src="https://media.giphy.com/media/RFmjTxTo50pkQ/giphy.gif" style="width:40px;border-radius: 50px">
                                     Natural Diamonds </div>
                                 <div class="vdb-rb-tabbing" id="vdbrb_labgrown_tab" data-id="labgrown">
                                     <span class="vdb-rb-icon vdb-rb-icon-LAB-Icon">
@@ -490,18 +490,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- WEB VIEW ADVANCE FILTER NATURAL HTML RENDER HERE -->
-                            {{-- pegination --}}
-                            {{-- <div class="results">
-                                @foreach($data as $item)
-                                    <div class="result-item">
-                                        <!-- display result item -->
-                                    </div>
-                                @endforeach
-                                {{ $data->links() }}
-                            </div> --}}
-                            {{-- pegination --}}
-                            {{-- {{ $pegination->links() }} --}}
+
                         </div>
                     </div>
                     <div class="vdb-rb-mobilr-filter-options-wrapper vdb_rb_labgrown_mob_block">
@@ -638,12 +627,7 @@
                         </p>
                         </div>
                     </div>
-                    {{-- show data  --}}
-                    <button id="more-button" class="btn btn-success" >Load more</button>
-                    {{-- <div id="app"  class="btn btn-primary" data-scroll="{{ $pegination['current_page'] }}">Load</div> --}}
-                    <div id="scrollpagination">
-                        <ul id="content"></ul>
-                      </div>
+
                     <div class="vdb-rb-product-result-wrapper">
                         <span  data-val="button" class="button_id">
                           <div style="position: relative;">
@@ -675,6 +659,11 @@
     </div>
     <script>
         $(document).ready(function() {
+        //  show and hide
+            $(".down-button").click(function(){
+                    $(".hide-filter").toggle();
+              });
+
             var prevShape = "";
             var color='';
             var clarity='';

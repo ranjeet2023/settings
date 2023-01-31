@@ -6,26 +6,9 @@
     <!-- Google Tag Manager -->
     <script src="{{asset('assets/js/bat.js')}}" async="">
     </script>
-    {{-- <script type="text/javascript" async="" src="{{asset('assets/js/pixel.js')}}"></script>
-    <script type="text/javascript" async="" src="{{asset('assets/js/heera-jewels.myshopify.com-1653598799884.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/tracking_script')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/init.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/ec32d63ec2214ff0230db71697145c26.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/appointment-booking-client.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/CartJS.min.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/img/ultimatesalesboost.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/bundle.js')}}"></script> --}}
-    {{-- <script type="text/javascript" async="" src="{{ asset('assets/img/w.js')}}"></script> --}}
-    {{-- <script type="text/javascript" async="" src="https://d2ri8b9356zs03.cloudfront.net/js/gdpr_cookie_consent.min.js?shop=heera-jewels.myshopify.com"></script> --}}
-    {{-- <script async="" src="{{ asset('assets/js/main.f6304d83.js')}}"></script>
-    <script async="" src="{{ asset('assets/js/call-tracking_7.js')}}" nonce=""></script>
-    <script async="" src="{{ asset('assets/js/core.js')}}"></script>
-    <script async="" src="{{ asset('assets/js/analytics.js')}}"></script>
-    <script async="" src="{{ asset('assets/js/fbevents.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/loader.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/analytics.js')}}"></script>
-    <script type="text/javascript" async="" src="{{ asset('assets/js/trekkie.storefront.ab3032c28027516fdaebe33d84256417cef9e6d8.min.js')}}"></script>
-    <script async="" src="{{ asset('assets/js/gtm')}}"></script> --}}
+ <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
 
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
