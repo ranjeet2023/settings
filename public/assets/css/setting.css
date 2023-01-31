@@ -1533,4 +1533,9 @@ color: #ffffff !important;
     display: block;
     clear: both;
 }
-
+.filter{
+    margin-left: 12px;
+    padding:8px;
+    border:1px solid Violet;
+    border-radius:10px;
+}
