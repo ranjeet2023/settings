@@ -29,19 +29,21 @@ class ShapeController extends Controller
             $data['pegination']=$config['data'];
         return view('welcome')->with($data);
     }
-    // public function test(){
-        //     return view('test');
-        //     $client = new Client();
-        //     $token = "6913277571670500485";
-    //     $searchParams = [
-    //         'diamond_type' => 'natural',
-    //     ];
-    //     $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
-    //         'form_params' => $searchParams,
-    //     ]);
-    //     $config  = json_decode($response->getBody(), true);
-
-    // }
+    public function test(){
+        return view('test');
+        $client = new Client();
+        $token = "6913277571670500485";
+        $searchParams = [
+            'diamond_type' => 'natural',
+            'page'=>3,
+        ];
+        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
+            'form_params' => $searchParams,
+        ]);
+        $config  = json_decode($response->getBody(), true);
+        print_r($config);
+        die;
+    }
     public function search(Request $request)
     {
         $client = new Client();
@@ -90,11 +92,19 @@ class ShapeController extends Controller
         }else{
             $fluorescence=null;
         }
+        if(!empty($request->input('min_price')) && !empty($request->input('max_price'))){
+            $min = $request->input('min_price');
+            $max = $request->input('min_price');
+        }else{
+            $min=null;
+            $max=null;
+        }
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
             'form_params' => [
                 'shape' => $shape,
                 'color' => $color,
                 'clarity' => $clarity,
+                'carat'=> $min-$max,
                 'lab' => $lab,
                 'cut' => $cut,
                 'polish' => $polish,

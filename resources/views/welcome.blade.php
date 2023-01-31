@@ -3,6 +3,10 @@
 <link href="/path/to/css/scrollpagination.css" rel="stylesheet" />
 <script src="/path/to/cdn/jquery.min.js"></script>
 <script src="/path/to/js/scrollpagination.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./price_range_style.css"/>
 {{-- end scroll pegination link  --}}
 <body>
 
@@ -309,18 +313,12 @@
                                         <span class="vdb-rb-info"><img src="{{ asset('assets/img/info-icon.svg')}}" alt=""></span>
                                         Carat <span class="vdb-rb-filters-count">All</span>
                                     </h5>
-                                    <div class="vdb-rb-filter-range-slider">
-                                        <div class="vdb-rb-group-input-between">
-                                            <div class="vdb-carat">
-                                                <input type="text" inputmode="decimal" pattern="\d*" class="vdbrb_min_carat_natural_web vdbrb_only_digit_with_two_decimal" value="0.30" placeholder="Min">
-                                                <span>ct</span>
-                                            </div>
-                                            <div class="vdb-carat">
-                                                <input type="text" inputmode="decimal" pattern="\d*" class="vdbrb_max_carat_natural_web vdbrb_only_digit_with_two_decimal" value="30.00" placeholder="Max">
-                                                <span>ct</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                             <div id="slider-range" class="price-filter-range" name="rangeInput">
+                                 </div>
+                                <div style="margin:30px auto" >
+                                <input type="number" min=0.10 max="30" oninput="validity.valid||(value='0 ');" id="min_price"   class="price-range-field" disabled />.Crt
+                                <input type="number"  min=0.10 max="30" oninput="validity.valid||(value='30');"  id="max_price" class="price-range-field" disabled  />.Crt
+                                </div>
                                 </div>
                             </div>
                             {{-- colour  --}}
@@ -337,9 +335,9 @@
                                         @foreach($config->data->color as $color)
 
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;" >
-                                            <a  data-val="{{ $color }}" class="color_diamond">
-                                            <p class="btn btn-light"  style="margin-left: 12px">{{ $color }}</p>
-                                        </a>
+                                            {{-- <a  data-val="{{ $color }}" class="color_diamond"> --}}
+                                            <p class=" color_diamond" data-val="{{ $color }}"  style="margin-left: 12px;padding:8px;">{{ $color }}</p>
+                                        {{-- </a> --}}
 
                                         </h5>
                                         @endforeach
@@ -627,7 +625,12 @@
                         </p>
                         </div>
                     </div>
-
+                    {{-- show data  --}}
+                    <button id="more-button" class="btn btn-success" >Load more</button>
+                    {{-- <div id="app"  class="btn btn-primary" data-scroll="{{ $pegination['current_page'] }}">Load</div> --}}
+                    <div id="scrollpagination">
+                        <ul id="content"></ul>
+                      </div>
                     <div class="vdb-rb-product-result-wrapper">
                         <span  data-val="button" class="button_id">
                           <div style="position: relative;">
@@ -659,11 +662,6 @@
     </div>
     <script>
         $(document).ready(function() {
-        //  show and hide
-            $(".down-button").click(function(){
-                    $(".hide-filter").toggle();
-              });
-
             var prevShape = "";
             var color='';
             var clarity='';
@@ -673,7 +671,60 @@
             var symmetry= '';
             var fluorescence ='';
             var eyeclean ='';
+// range slider
+        $('#price-range-submit').hide();
+        $("#min_price,#max_price").on('change', function () {
+          $('#price-range-submit').show();
+          var min_price_range = parseInt($("#min_price").val());
+          var max_price_range = parseInt($("#max_price").val());
+          if (min_price_range > max_price_range) {
+            $('#max_price').val(min_price_range);
+          }
+          $("#slider-range").slider({
+            values: [min_price_range, max_price_range]
+          });
 
+        });
+        $("#min_price,#max_price").on("paste keyup", function () {
+          $('#price-range-submit').show();
+          var min_price_range = parseInt($("#min_price").val());
+          var max_price_range = parseInt($("#max_price").val());
+          if(min_price_range == max_price_range){
+                max_price_range = min_price_range + 100;
+                $("#min_price").val(min_price_range);
+                $("#max_price").val(max_price_range);
+          }
+          $("#slider-range").slider({
+            values: [min_price_range, max_price_range]
+          });
+        });
+        $(function () {
+          $("#slider-range").slider({
+            range: true,
+            orientation: "horizontal",
+            min: 0.10,
+            max: 30,
+            values: [0.10, 30],
+            step: 0.10,
+            slide: function (event, ui) {
+              if (ui.values[0] == ui.values[1]) {
+                  return false;
+              }
+              $("#min_price").val(ui.values[0]);
+              $("#max_price").val(ui.values[1]);
+            }
+          });
+          $("#min_price").val($("#slider-range").slider("values", 0));
+          $("#max_price").val($("#slider-range").slider("values", 1));
+        });
+        $("#slider-range,#price-range-submit").click(function () {
+          var min_price = $('#min_price').val();
+          var max_price = $('#max_price').val();
+          console.log(min_price);
+          console.log(max_price);
+          search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price);
+        });
+        // end range slider
             $(".shape_diamond").click(function() {
                     $(".shape_diamond").removeClass("active");
                     $(".shape_diamond").removeClass("btn btn-success");
@@ -739,9 +790,64 @@
                 eyeclean = $(this).attr("data-val");
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
             });
+            // scroll peginaion
+            var containers = document.getElementById("containers");
+            var pageSize = containers.offsetHeight;
+            var currentPage=1;
+            containers.addEventListener("scroll", function() {
+            if (containers.scrollTop + containers.offsetHeight >= (currentPage + 1) * pageSize) {
+                currentPage++;
+                $.ajax({
+                dataType: 'json',
+                type: "post",
+                data: {page:currentPage},
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: '{{ url('api/page') }}',
+                success: function(data) {
+                var output = '';
+                if(data.diamond_data.length > 0) {
+                    output+=' <div style="position: relative;">'+
+                            '<div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
+                    for(var count = 0; count < data.diamond_data.length; count++) {
+                        output +='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">' +
+                                        '<div class="vdb-rb-list-product-item">' +
+                                           '<a target="_top">' +
+                                                '<div class="vdb-rb-product-img-wrapper">' +
+                                                 '<img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
+                                                '</div>' +
+                                              '<div class="vdb-rb-product-details">' +
+                                                  '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
+                                                     '<div class="vdb-rb-price-block">' +
+                                                        '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
+                                                     '</div>' +
+                                              '</div>' +
+                                            '</a>' +
+                                        '</div>' +
+                                   '</div>';
+                            }
+                        output+='</div>' +
+                                        '</div>';
+                        }
+                    else
+                    {
+                    output += '<tr>';
+                    output += '<td colspan="6">No Data Found</td>';
+                    output += '</tr>';
+                    }
+                $('.button_id').html(output);
+                }
+                 });
+                }
+                });
         });
-        function search(shape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean) {
+        function search(shape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price) {
             var data = {};
+            if(min_price) {
+                data.min_price = min_price;
+            }
+            if(max_price) {
+                data.max_price = max_price;
+            }
             if(shape) {
                 data.shape = shape;
             }
@@ -811,6 +917,8 @@
                 }
             });
         }
+
+
     </script>
 
 </body>

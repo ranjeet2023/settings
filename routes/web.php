@@ -14,9 +14,9 @@ use App\Http\Controllers\ShapeController;
 |
 */
 
-Route::any('/tests', function () {
+Route::any('/', function () {
     return view('test');
 });
-route::get('/',[ShapeController::class,'fetch_record']);
-route::any('/test',[ShapeController::class,'test']);
+// route::get('/',[ShapeController::class,'fetch_record']);
+// route::any('/test',[ShapeController::class,'test']);
 // route::get('/data',[ShapeController::class,'fetch_record']);
