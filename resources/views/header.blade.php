@@ -1,5 +1,5 @@
 <!-- saved from url=(0213)https://heeradiamonds.com/apps/ring-creator/rb-stone-list?diamond_type=natural&min_price=0.00&max_price=9999999.00&min_carat=0.30&max_carat=22.70&clarity_to=SI3&clarity_from=SI3&white_color_to=D&white_color_from=Z -->
-<html class=" js  supports-sticky supports-hover" lang="en" style="--window-height:969px; --announcement-bar-height:42px; --header-height:107px; --header-is-not-transparent:1;">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }} ">
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,8 +8,9 @@
     </script>
  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
- <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
-
+ <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+ <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=1.0">

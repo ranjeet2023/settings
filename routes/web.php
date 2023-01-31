@@ -14,9 +14,12 @@ use App\Http\Controllers\ShapeController;
 |
 */
 
-Route::any('/', function () {
-    return view('test');
-});
+// Route::any('/', function () {
+//     return view('test');
+// });
 // route::get('/',[ShapeController::class,'fetch_record']);
 // route::any('/test',[ShapeController::class,'test']);
 // route::get('/data',[ShapeController::class,'fetch_record']);
+// Route::get('/', [ShapeController::class, 'index1']);
+// Route::get('/users', [ShapeController::class, 'getUsers'])->name('users');
+// Route::get('/blogs', [ShapeController::class, 'getArticles']);

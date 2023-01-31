@@ -18,10 +18,7 @@ use App\Http\Controllers\ShapeController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-route::get('/',[ShapeController::class,'index']);
-Route::post('/',[ShapeController::class,'index']);
-Route::post('/page',[ShapeController::class,'pagination']);
+route::get('/',[ShapeController::class,'fetch_diamond']);
+// Route::post('/',[ShapeController::class,'index']);
+Route::get('/blogs',[ShapeController::class,'fetch_diamond']);
 Route::post('/search', [ShapeController::class,'search']);
-Route::any('/test', function () {
-    return view('test');
-});

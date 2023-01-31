@@ -1,12 +1,17 @@
 @include('header');
 {{-- scroll pegination link  --}}
-<link href="/path/to/css/scrollpagination.css" rel="stylesheet" />
+{{-- <link href="/path/to/css/scrollpagination.css" rel="stylesheet" />
 <script src="/path/to/cdn/jquery.min.js"></script>
-<script src="/path/to/js/scrollpagination.js"></script>
+<script src="/path/to/js/scrollpagination.js"></script> --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="./price_range_style.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{{-- <link rel="stylesheet" type="text/css" href="./price_range_style.css"/> --}}
+
 {{-- end scroll pegination link  --}}
 <body>
 
@@ -146,7 +151,6 @@
                                                         <li style="width: 100%; display: inline-block;">
 
                                                                 <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_pear">
-                                                                    <!--vdb-rb-list-item-active-->
                                                                      <a    data-val="cushion" class="shape_diamond">
                                                                     <img class="image_off" src="{{asset('assets/img/shape/cushion.png')}}" width="25" alt="Cushion">
                                                                 </a>
@@ -270,7 +274,7 @@
                                                                     <img class="image_off" src="{{asset('assets/img/shape/cushion.png')}}" width="25" alt="Cushion Modify">
                                                             </a>
                                                                 </div>
-                                                                <p class="vdv-rb-item-title">Cushion mod.</p>
+                                                                <p class="vdv-rb-item-title">Cushion</p>
                                                         </li>
                                                     </div>
                                                 </div>
@@ -313,13 +317,13 @@
                                         <span class="vdb-rb-info"><img src="{{ asset('assets/img/info-icon.svg')}}" alt=""></span>
                                         Carat <span class="vdb-rb-filters-count">All</span>
                                     </h5>
-                             <div id="slider-range" class="price-filter-range" name="rangeInput">
-                                 </div>
-                                <div style="margin:30px auto" >
-                                <input type="number" min=0.10 max="30" oninput="validity.valid||(value='0 ');" id="min_price"   class="price-range-field" disabled />.Crt
-                                <input type="number"  min=0.10 max="30" oninput="validity.valid||(value='30');"  id="max_price" class="price-range-field" disabled  />.Crt
-                                </div>
-                                </div>
+                                    <div id="slider-range" class="price-filter-range" name="rangeInput">
+                                        </div>
+                                    <div >
+                                    <input type="number" min=0.10 max="30" oninput="validity.valid||(value='0 ');" id="min_price"   class="price-range-field" disabled />.Crt
+                                    <p  style="float: right">   <input type="number"  min=0.10 max="30" oninput="validity.valid||(value='30');"  id="max_price" class="price-range-field" disabled  />.Crt</p>
+                                    </div>
+                                    </div>
                             </div>
                             {{-- colour  --}}
                             <div class="vdb-rb-col-md-6 " >
@@ -335,9 +339,7 @@
                                         @foreach($config->data->color as $color)
 
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;" >
-                                            {{-- <a  data-val="{{ $color }}" class="color_diamond"> --}}
-                                            <p class=" color_diamond" data-val="{{ $color }}"  style="margin-left: 12px;padding:8px;">{{ $color }}</p>
-                                        {{-- </a> --}}
+                                            <p class="filter color_diamond" data-val="{{ $color }}"  style="">{{ $color }}</p>
 
                                         </h5>
                                         @endforeach
@@ -358,9 +360,7 @@
                                         <br>
                                         @foreach($config->data->clarity as $clarity)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                        <a  data-val="{{ $clarity }}" class="clarity_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $clarity }}</p>
-                                        </a>
+                                            <p class=" filter clarity_diamond" data-val="{{ $clarity }}"  style="margin-left: 5px">{{ $clarity }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -380,9 +380,7 @@
                                         <br>
                                         @foreach($config->data->lab as $lab)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $lab }}" class="lab_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $lab }}</p>
-                                            </a>
+                                            <p data-val="{{ $lab }}" class="filter lab_diamond" style="margin-left: 5px">{{ $lab }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -400,9 +398,7 @@
                                         <br>
                                         @foreach($config->data->cut as $cut)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $cut }}" class="cut_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $cut }}</p>
-                                            </a>
+                                            <p  data-val="{{ $cut }}" class="filter cut_diamond" style="margin-left: 5px">{{ $cut }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -420,9 +416,7 @@
                                         <br>
                                         @foreach($config->data->polish as $polish)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $polish }}" class="polish_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $polish }}</p>
-                                            </a>
+                                            <p data-val="{{ $polish }}" class=" filter polish_diamond" style="margin-left: 5px">{{ $polish }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -440,9 +434,7 @@
                                         <br>
                                         @foreach($config->data->symmetry as $symmetry)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $symmetry }}" class="symmetry_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $symmetry }}</p>
-                                            </a>
+                                            <p data-val="{{ $symmetry }}" class=" filter symmetry_diamond" style="margin-left: 5px" >{{ $symmetry }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -460,9 +452,7 @@
                                         <br>
                                         @foreach($config->data->fluorescence as $fluorescence)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $fluorescence }}" class="fluorescence_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $fluorescence }}</p>
-                                            </a>
+                                            <p data-val="{{ $fluorescence }}" class="filter fluorescence_diamond" style="margin-left: 5px">{{ $fluorescence }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -480,9 +470,7 @@
                                         <br>
                                         @foreach($config->data->eyeclean as  $eyeclean)
                                         <h5 class="vdb-rb-filter-options-title" style="display: inline-block;margin:auto;float:right;">
-                                            <a  data-val="{{ $eyeclean }}" class="eyeclean_diamond">
-                                            <p class="btn btn-light" style="margin-left: 5px">{{ $eyeclean }}</p>
-                                            </a>
+                                            <p data-val="{{ $eyeclean }}" class=" filter eyeclean_diamond" style="margin-left: 5px">{{ $eyeclean }}</p>
                                         </h5>
                                         @endforeach
                                     </div>
@@ -615,47 +603,39 @@
                     <div class="vdb-rb-reset-filters">
                         <p class="vdb-rb-advanced-filter" id="show-hide-btn">Advanced Filters
                             <button class="btn btn-light down-button">
-                            <i class="arrow down" id="down-icon"></i>
-                            </button>
+                            <i class="arrow down" id="down-icon"></i>                            </button>
                         </p>
 
                         <div class="hide-reset">
-                        <p id="vdbrb_stone_reset_filter">Reset Filters
-                             <span class="vdb-rb-icon vdb-rb-refresh-icon "></span>
-                        </p>
+                        <a href="{{ url('/') }}/api" >
+                            <p id="vdbrb_stone_reset_filter">Reset Filters
+                                <i class="fa fa-refresh " style="font-size:18px"></i>
+                            </p>
+                        </a>
                         </div>
                     </div>
                     {{-- show data  --}}
-                    <button id="more-button" class="btn btn-success" >Load more</button>
-                    {{-- <div id="app"  class="btn btn-primary" data-scroll="{{ $pegination['current_page'] }}">Load</div> --}}
-                    <div id="scrollpagination">
-                        <ul id="content"></ul>
-                      </div>
-                    <div class="vdb-rb-product-result-wrapper">
-                        <span  data-val="button" class="button_id">
-                          <div style="position: relative;">
-                            <div class="vdb-rb-row" id="vdbrb_stone_grid_view_row"  >
-                                 {{-- show data  --}}
-                                @foreach($diamond_data as $labdata)
-                                <div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">
-                                    <div class="vdb-rb-list-product-item"> <a target="_top">
-                                            <div class="vdb-rb-product-img-wrapper">
-                                                <img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">
-                                            </div>
-                                            <div class="vdb-rb-product-details">
-                                                <p class="vdb-rb-product-name">{{ ucfirst(strtolower($labdata['shape'])) }} {{ ($labdata['carat'])}} {{ ($labdata['color'])}} {{ ($labdata['clarity'])}};  </p>
-                                                <div class="vdb-rb-price-block">
-                                                    <h3><b>{{ ($labdata['rate'])}} {{ ($labdata['currency_symbol'])}}</b></h3>
-                                                </div>
-                                            </div>
-                                        </a>
+                   {{-- <p id="page" data-val="{{$pagination['current_page'] }}"></p> --}}
+                    {{-- <div class="vdb-rb-product-result-wrapper" id ="containers" style="overflow: auto;height:900px">
+                        <span   class="button_id"  > --}}
+                                    <div id="data-wrapper">
+                                    </div>
+                                    <!-- Data Loader -->
+                                    <div class="auto-load text-center">
+                                        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
                                     </div>
                                 </div>
-                                @endforeach
-                             </div>
-                        </div>
-                     </span>
-                </div>
+                            {{-- </span>
+                        </div> --}}
+                    </div>
+                    </div>
                        {{-- show data  --}}
         </main>
      </div>
@@ -723,11 +703,9 @@
         $("#slider-range,#price-range-submit").click(function () {
           var min_price = $('#min_price').val();
           var max_price = $('#max_price').val();
-          console.log(min_price);
-          console.log(max_price);
           search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price);
         });
-        // end range slider
+    // end range slider
             $(".shape_diamond").click(function() {
                     $(".shape_diamond").removeClass("active");
                     $(".shape_diamond").removeClass("btn btn-success");
@@ -793,56 +771,6 @@
                 eyeclean = $(this).attr("data-val");
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
             });
-            // scroll peginaion
-            var containers = document.getElementById("containers");
-            var pageSize = containers.offsetHeight;
-            var currentPage=1;
-            containers.addEventListener("scroll", function() {
-            if (containers.scrollTop + containers.offsetHeight >= (currentPage + 1) * pageSize) {
-                currentPage++;
-                $.ajax({
-                dataType: 'json',
-                type: "post",
-                data: {page:currentPage},
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: '{{ url('api/page') }}',
-                success: function(data) {
-                var output = '';
-                if(data.diamond_data.length > 0) {
-                    output+=' <div style="position: relative;">'+
-                            '<div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
-                    for(var count = 0; count < data.diamond_data.length; count++) {
-                        output +='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">' +
-                                        '<div class="vdb-rb-list-product-item">' +
-                                           '<a target="_top">' +
-                                                '<div class="vdb-rb-product-img-wrapper">' +
-                                                 '<img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
-                                                '</div>' +
-                                              '<div class="vdb-rb-product-details">' +
-                                                  '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
-                                                     '<div class="vdb-rb-price-block">' +
-                                                        '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
-                                                     '</div>' +
-                                              '</div>' +
-                                            '</a>' +
-                                        '</div>' +
-                                   '</div>';
-                            }
-                        output+='</div>' +
-                                        '</div>';
-                        }
-                    else
-                    {
-                    output += '<tr>';
-                    output += '<td colspan="6">No Data Found</td>';
-                    output += '</tr>';
-                    }
-                $('.button_id').html(output);
-                }
-                 });
-                }
-                });
-        });
         function search(shape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price) {
             var data = {};
             if(min_price) {
@@ -878,6 +806,7 @@
             if(eyeclean){
                 data.eyeclean = eyeclean;
             }
+            function infinteLoadMore(page) {
             $.ajax({
                 type: "post",
                 dataType: 'json',
@@ -885,44 +814,78 @@
                 url: '{{ url('api/search') }}',
                 data: data,
                 success: function(data) {
-                var output = '';
-                if(data.diamond_data.length > 0) {
-                    output+=' <div style="position: relative;">'+
-                            '<div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
-                    for(var count = 0; count < data.diamond_data.length; count++) {
-                        output +='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">' +
-                                        '<div class="vdb-rb-list-product-item">' +
-                                           '<a target="_top">' +
-                                                '<div class="vdb-rb-product-img-wrapper">' +
-                                                 '<img src="{{ asset('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
-                                                '</div>' +
-                                              '<div class="vdb-rb-product-details">' +
-                                                  '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
-                                                     '<div class="vdb-rb-price-block">' +
-                                                        '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
-                                                     '</div>' +
-                                              '</div>' +
-                                            '</a>' +
-                                        '</div>' +
-                                   '</div>';
-                       }
-                   output+='</div>' +
-                                '</div>';
-                   }
+                    
+                // var output = '';
+                // if(data.diamond_data.length > 0) {
+                //     output+=' <div style="position: relative;">'+
+                //             '<div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
+                //     for(var count = 0; count < data.diamond_data.length; count++) {
+                //         output +='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">' +
+                //                         '<div class="vdb-rb-list-product-item">' +
+                //                            '<a target="_top">' +
+                //                                 '<div class="vdb-rb-product-img-wrapper">' +
+                //                                  '<img src="{{ url('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
+                //                                 '</div>' +
+                //                               '<div class="vdb-rb-product-details">' +
+                //                                   '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
+                //                                      '<div class="vdb-rb-price-block">' +
+                //                                         '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
+                //                                      '</div>' +
+                //                               '</div>' +
+                //                             '</a>' +
+                //                         '</div>' +
+                //                    '</div>';
+                //        }
+                //    output+='</div>' +
+                //                 '</div>';
+                //    }
 
-                    else
-                    {
-                    output += '<tr>';
-                    output += '<td colspan="6">No Data Found</td>';
-                    output += '</tr>';
+                //     else
+                //     {
+                //     output += '<tr>';
+                //     output += '<td colspan="6">No Data Found</td>';
+                //     output += '</tr>';
+                //     }
+                // $('.button_id').html(output);
+                // }
+                // });
+             }
+            }
+        });
+        // scroll pegination
+        var ENDPOINT = "{{ url('/api') }}";
+        var page = 1;
+        infinteLoadMore(page);
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                infinteLoadMore(page);
+            }
+        });
+        function infinteLoadMore(page) {
+            $.ajax({
+                    url: ENDPOINT + "/blogs?page=" + page,
+                    datatype: "html",
+                    type: "get",
+                    beforeSend: function () {
+                        $('.auto-load').show();
                     }
-                $('.button_id').html(output);
-                }
-            });
+                })
+                .done(function (response) {
+                    if (response.length == 0) {
+                        $('.auto-load').html("We don't have more data to display :(");
+                        return;
+                    }
+                    $('.auto-load').hide();
+                    $("#data-wrapper").append(response);
+                })
+                .fail(function (jqXHR, ajaxOptions, thrownError) {
+                    console.log('Server error occured');
+                });
         }
-
-
+        // scroll pegination
+        // search pegination
+        // search pegination
     </script>
-
 </body>
 </html>

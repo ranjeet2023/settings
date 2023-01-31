@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ShapeController extends Controller
 {
@@ -26,23 +28,35 @@ class ShapeController extends Controller
             ]);
             $config  = json_decode($response->getBody(), true);
             $data['diamond_data'] = $config['data']['data'];
-            $data['pegination']=$config['data'];
-        return view('welcome')->with($data);
+            $data['pagination']=$config['data'];
+           return view('welcome')->with($data);
     }
-    public function test(){
-        return view('test');
-        $client = new Client();
-        $token = "6913277571670500485";
-        $searchParams = [
-            'diamond_type' => 'natural',
-            'page'=>3,
-        ];
-        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
-            'form_params' => $searchParams,
-        ]);
-        $config  = json_decode($response->getBody(), true);
-        print_r($config);
-        die;
+    public function pagination(Request $request){
+
+          $data= user::orderBy('created_at','desc')->paginate(6);
+          $data=compact('data');
+         return view('test')->with($data);
+
+        // $client = new Client();
+        // $page=$request->input('page');
+        // $response = $response = $client->post('https://stage.thediamondport.com/api/get_config', [
+        //     'query' => ['token' => '6913277571670500485']
+        // ]);
+        // $configs = json_decode($response->getBody()->getContents());
+        //     $data['config']=$configs;
+        // $token = "6913277571670500485";
+        // $searchParams = [
+        //     'diamond_type' => 'natural',
+        //     'page'=>$page,
+        // ];
+        // $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
+        //     'form_params' => $searchParams,
+        // ]);
+        // $config  = json_decode($response->getBody(), true);
+        // $data['diamond_data'] = $config['data']['data'];
+        // $data['pagination']=$config['data'];
+        // return  view('test')->with($data);
+        //  return $data;
     }
     public function search(Request $request)
     {
@@ -119,33 +133,55 @@ class ShapeController extends Controller
         $data['diamond_data'] = $config['data']['data'];
         return $data;
     }
+    public function fetch_diamond(Request $request)
+    {
+        $token = "6913277571670500485";
+        $client = new Client();
+        $response = $response = $client->post('https://stage.thediamondport.com/api/get_config', [
+            'query' => ['token' => '6913277571670500485']
+        ]);
+        $configs = json_decode($response->getBody()->getContents());
+            $data['config']=$configs;
 
+        $searchParams = [
+            'diamond_type' => 'natural',
+        ];
+        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond?token='.$token, [
+            'form_params' => $searchParams,
+        ]);
+        $config = json_decode($response->getBody(), true);
+        $data['diamond_data'] = $config['data']['data'];
+        $results=$data['diamond_data'];
+        $artilces = '';
+        if ($request->ajax()) {
+            $count=0;
+            $artilces.='<div style="position: relative;">
+            <div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
+            foreach ($results as $result) {
+                $artilces.='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">
+                    <div class="vdb-rb-list-product-item">
+                            <div class="vdb-rb-product-img-wrapper">
+                                <img src="'. url('assets/img/661004702B.jpg').'" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">
+                            </div>
+                            <div class="vdb-rb-product-details">
+                                <p class="vdb-rb-product-name">
+                                '.$data['diamond_data'][$count]['shape'].'
+                                '.$data['diamond_data'][$count]['color'].'
+                                '.$data['diamond_data'][$count]['clarity'].'
+                                  </p>
+                                <div class="vdb-rb-price-block">
+                                    <h3><b>'.$data['diamond_data'][$count]['rate'].''.$data['diamond_data'][$count]['currency_symbol'].'</b></h3>
+                                </div>
+                            </div>
+                    </div>
+                </div>';
+            $count++;
+            }
+            $artilces.='</div> </div>';
+            return $artilces;
+        }
+        return view('welcome')->with($data);
+    }
 
-    // public function search(Request $request)
-    // {
-    //     $client = new Client();
-    //     $shape = $request->input('shape');
-    //     $color = $request->input('color');
-    //     $clarity = $request->input('clarity');
-    //     // echo "<pre>";
-    //     // print_r($request->all());
-    //     // die;
-
-    //     $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
-    //         'form_params' => [
-    //             'shape' => $shape,
-    //             'color' => $color,
-    //             'clarity' => $clarity,
-    //             'token' => '6913277571670500485',
-    //             'diamond_type' => 'natural',
-    //         ]
-    //     ]);
-    //     $config = json_decode($response->getBody(), true);
-    //     $data['diamond_data'] = $config['data']['data'];
-    //     // echo "<pre>";
-    //     // print_R($data);
-    //     // // die;
-    //     return $data;
-    // }
 
 }
