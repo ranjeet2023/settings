@@ -60,10 +60,25 @@ class ShapeController extends Controller
     }
     public function search(Request $request)
     {
+
         $client = new Client();
 
-        $shape = $request->input('shape');
-        $eyeclean = $request->input('eyeclean');
+        $response = $client->post('https://stage.thediamondport.com/api/get_config', [
+            'query' => ['token' => '6913277571670500485']
+        ]);
+        $configs = json_decode($response->getBody()->getContents());
+        $data['config']=$configs;
+        if(!empty($request->input('prevShape'))){
+            $shape  = $request->input('prevShape');
+        }else{
+            $shape =null;
+        }
+        if(!empty($request->input('eyeclean'))){
+            $eyeclean  = $request->input('eyeclean');
+        }else{
+            $eyeclean =null;
+        }
+        // $eyeclean = $request->input('eyeclean');
         if(!empty( $request->input('color'))){
             $colors = $request->input('color');
             $color = implode(',', $colors);
@@ -106,15 +121,19 @@ class ShapeController extends Controller
         }else{
             $fluorescence=null;
         }
-        if(!empty($request->input('min_price')) && !empty($request->input('max_price'))){
-            $min = $request->input('min_price');
-            $max = $request->input('min_price');
+        if(!empty($request->input('minp')) && !empty($request->input('maxp'))){
+            $min = $request->input('minp');
+            $max = $request->input('maxp');
         }else{
             $min=null;
             $max=null;
         }
+        $page=$request->input('page');
+
+
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond',[
             'form_params' => [
+                'page'=>$page,
                 'shape' => $shape,
                 'color' => $color,
                 'clarity' => $clarity,
@@ -131,7 +150,37 @@ class ShapeController extends Controller
         ]);
         $config = json_decode($response->getBody(), true);
         $data['diamond_data'] = $config['data']['data'];
-        return $data;
+        $results=$data['diamond_data'];
+
+        $artilces = '';
+        if ($request->ajax()) {
+            $count=0;
+            $artilces.='<div style="position: relative;">
+            <div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
+            foreach ($results as $result) {
+                $artilces.='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">
+                    <div class="vdb-rb-list-product-item">
+                            <div class="vdb-rb-product-img-wrapper">
+                                <img src="'. url('assets/img/661004702B.jpg').'" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">
+                            </div>
+                            <div class="vdb-rb-product-details">
+                                <p class="vdb-rb-product-name">
+                                '.$result['shape'].'
+                                '.$result['color'].'
+                                '.$result['clarity'].'
+                                  </p>
+                                <div class="vdb-rb-price-block">
+                                    <h3><b>'.$result['rate'].''.$result['currency_symbol'].'</b></h3>
+                                </div>
+                            </div>
+                    </div>
+                </div>';
+            $count++;
+            }
+            $artilces.='</div> </div>';
+            return $artilces;
+        }
+        return view('welcome')->with($data);
     }
     public function fetch_diamond(Request $request)
     {
@@ -165,12 +214,12 @@ class ShapeController extends Controller
                             </div>
                             <div class="vdb-rb-product-details">
                                 <p class="vdb-rb-product-name">
-                                '.$data['diamond_data'][$count]['shape'].'
-                                '.$data['diamond_data'][$count]['color'].'
-                                '.$data['diamond_data'][$count]['clarity'].'
+                                '.$result['shape'].'
+                                '.$result['color'].'
+                                '.$result['clarity'].'
                                   </p>
                                 <div class="vdb-rb-price-block">
-                                    <h3><b>'.$data['diamond_data'][$count]['rate'].''.$data['diamond_data'][$count]['currency_symbol'].'</b></h3>
+                                    <h3><b>'.$result['rate'].''.$result['currency_symbol'].'</b></h3>
                                 </div>
                             </div>
                     </div>

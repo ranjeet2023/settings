@@ -620,6 +620,8 @@
                         <span   class="button_id"  > --}}
                                     <div id="data-wrapper">
                                     </div>
+                                    {{-- <div id="data-wrapper1">
+                                    </div> --}}
                                     <!-- Data Loader -->
                                     <div class="auto-load text-center">
                                         <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -646,15 +648,19 @@
                     $(".hide-filter").toggle();
               });
             var prevShape = "";
-            var color='';
-            var clarity='';
-            var lab ='';
-            var cut ='';
-            var polish= '';
-            var symmetry= '';
-            var fluorescence ='';
-            var eyeclean ='';
-// range slider
+            var color= "";
+            var clarity= "";
+            var lab = "";
+            var cut = "";
+            var polish= "";
+            var symmetry= "";
+            var fluorescence = "";
+            var eyeclean = "";
+            var page = 1;
+            var minp = "";
+            var maxp = "";
+
+// ----------------------------------------------------range slider-----------------------------------------
         $('#price-range-submit').hide();
         $("#min_price,#max_price").on('change', function () {
           $('#price-range-submit').show();
@@ -701,67 +707,69 @@
           $("#max_price").val($("#slider-range").slider("values", 1));
         });
         $("#slider-range,#price-range-submit").click(function () {
-          var min_price = $('#min_price').val();
-          var max_price = $('#max_price').val();
-          search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price);
+          var minp = $('#min_price').val();
+          var maxp = $('#max_price').val();
+               search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+        //   search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
         });
-    // end range slider
+    // --------------------------------------------------end range slider-----------------------------------------------
             $(".shape_diamond").click(function() {
                     $(".shape_diamond").removeClass("active");
                     $(".shape_diamond").removeClass("btn btn-success");
                     $(this).addClass("active");
                     $(this).addClass("btn btn-success");
+                    // $('#data-wrapper').closest('div').remove()
                     prevShape =  $(this).attr("data-val");
-                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".color_diamond").click(function() {
                  $(this).toggleClass("active btn btn-success");
                     color = $(".color_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".clarity_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                    clarity = $(".clarity_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".lab_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                 lab = $(".lab_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".cut_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                  cut = $(".cut_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".polish_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                 polish = $(".polish_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".symmetry_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                 symmetry = $(".symmetry_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".fluorescence_diamond").click(function() {
                 $(this).toggleClass("active btn btn-success");
                 fluorescence = $(".fluorescence_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".eyeclean_diamond").click(function() {
                 $(".eyeclean_diamond").removeClass("active");
@@ -769,18 +777,66 @@
                     $(this).addClass("active");
                     $(this).addClass("btn btn-success");
                 eyeclean = $(this).attr("data-val");
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean);
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
-        function search(shape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,min_price,max_price) {
+               // ------------------------------------scroll pegination---------------------------------
+        if (prevShape == "" || color == ""  || clarity == "" || lab == "" || cut == "" || polish == "" || symmetry == "" || fluorescence == "" || eyeclean == "" || minp == "" || maxp == "") {
+            var ENDPOINT = "{{ url('/api') }}";
+            var page = 1;
+            infinteLoadMore(page);
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    page++;
+                    infinteLoadMore(page);
+                }
+            });
+            function infinteLoadMore(page) {
+                console.log('page loaded');
+            $.ajax({
+                    url: ENDPOINT + "/blogs?page=" + page,
+                    datatype: "html",
+                    type: "get",
+                    beforeSend: function () {
+                        $('.auto-load').show();
+                    }
+                })
+                .done(function (response) {
+                    if (response.length == 0) {
+                        $('.auto-load').html("We don't have more data to display :(");
+                        return;
+                    }
+                    $('.auto-load').hide();
+                    $("#data-wrapper").append(response);
+                })
+                .fail(function (jqXHR, ajaxOptions, thrownError) {
+                    console.log('Server error occured');
+                });
+            }
+            console.log('workings');
+            }
+ // ------------------------------------ end scroll pegination---------------------------------
+// ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
+           $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                console.log(page);
+                if (prevShape != "" || color != ""  || clarity != "" || lab != "" || cut != "" || polish != "" || symmetry != "" || fluorescence != "" || eyeclean != "" || minp != "" || maxp != "") {
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+                }
+                }
+            });
+        function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page) {
+            var ENDPOINT = "{{ url('/api') }}";
+            console.log('scroll fileer');
             var data = {};
-            if(min_price) {
-                data.min_price = min_price;
+            if(minp) {
+                data.minp = minp;
             }
-            if(max_price) {
-                data.max_price = max_price;
+            if(maxp) {
+                data.maxp = maxp;
             }
-            if(shape) {
-                data.shape = shape;
+            if(prevShape) {
+                data.prevShape = prevShape;
             }
             if(color) {
                 data.color = color;
@@ -806,67 +862,11 @@
             if(eyeclean){
                 data.eyeclean = eyeclean;
             }
-            function infinteLoadMore(page) {
             $.ajax({
-                type: "post",
-                dataType: 'json',
-			    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: '{{ url('api/search') }}',
-                data: data,
-                success: function(data) {
-                    
-                // var output = '';
-                // if(data.diamond_data.length > 0) {
-                //     output+=' <div style="position: relative;">'+
-                //             '<div class="vdb-rb-row" id="vdbrb_stone_grid_view_row" >';
-                //     for(var count = 0; count < data.diamond_data.length; count++) {
-                //         output +='<div class="vdb-rb-col-md-3 vdb-rb-col-sm-6">' +
-                //                         '<div class="vdb-rb-list-product-item">' +
-                //                            '<a target="_top">' +
-                //                                 '<div class="vdb-rb-product-img-wrapper">' +
-                //                                  '<img src="{{ url('assets/img/661004702B.jpg')}}" alt="Emerald 0.78 U SI3" class="vdb-rb-img-fluid">' +
-                //                                 '</div>' +
-                //                               '<div class="vdb-rb-product-details">' +
-                //                                   '<p class="vdb-rb-product-name">' + data.diamond_data[count].shape + ' ' + data.diamond_data[count].carat + ' ' + data.diamond_data[count].color + ' '+data.diamond_data[count].clarity+ '</p>' +
-                //                                      '<div class="vdb-rb-price-block">' +
-                //                                         '<h3><b>  '+data.diamond_data[count].rate+'  '+data.diamond_data[count].currency_symbol+ ' </b></h3>' +
-                //                                      '</div>' +
-                //                               '</div>' +
-                //                             '</a>' +
-                //                         '</div>' +
-                //                    '</div>';
-                //        }
-                //    output+='</div>' +
-                //                 '</div>';
-                //    }
-
-                //     else
-                //     {
-                //     output += '<tr>';
-                //     output += '<td colspan="6">No Data Found</td>';
-                //     output += '</tr>';
-                //     }
-                // $('.button_id').html(output);
-                // }
-                // });
-             }
-            }
-        });
-        // scroll pegination
-        var ENDPOINT = "{{ url('/api') }}";
-        var page = 1;
-        infinteLoadMore(page);
-        $(window).scroll(function () {
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                page++;
-                infinteLoadMore(page);
-            }
-        });
-        function infinteLoadMore(page) {
-            $.ajax({
-                    url: ENDPOINT + "/blogs?page=" + page,
+                    url: ENDPOINT + "/search?page=" + page,
                     datatype: "html",
-                    type: "get",
+                    type: "post",
+                    data: data,
                     beforeSend: function () {
                         $('.auto-load').show();
                     }
@@ -882,10 +882,11 @@
                 .fail(function (jqXHR, ajaxOptions, thrownError) {
                     console.log('Server error occured');
                 });
-        }
-        // scroll pegination
-        // search pegination
-        // search pegination
+
+            }
+        // -------------------------------------------------------end filter pegination--------------------------------------------------------------
+
+    });
     </script>
 </body>
 </html>
