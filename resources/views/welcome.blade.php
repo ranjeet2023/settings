@@ -620,9 +620,18 @@
                         <span   class="button_id"  > --}}
                                     <div id="data-wrapper">
                                     </div>
-                                    {{-- <div id="data-wrapper1">
-                                    </div> --}}
-                                    <!-- Data Loader -->
+                                    <div id="data-wrapper1">
+                                    </div>
+                                    <div class="auto-load1 text-center">
+                                        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </div>
                                     <div class="auto-load text-center">
                                         <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
@@ -709,6 +718,7 @@
         $("#slider-range,#price-range-submit").click(function () {
           var minp = $('#min_price').val();
           var maxp = $('#max_price').val();
+               $("#data-wrapper").empty();
                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
         //   search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
         });
@@ -720,6 +730,8 @@
                     $(this).addClass("btn btn-success");
                     // $('#data-wrapper').closest('div').remove()
                     prevShape =  $(this).attr("data-val");
+                    page=1;
+                    $("#data-wrapper").empty();
                 search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".color_diamond").click(function() {
@@ -727,6 +739,8 @@
                     color = $(".color_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".clarity_diamond").click(function() {
@@ -734,6 +748,8 @@
                    clarity = $(".clarity_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".lab_diamond").click(function() {
@@ -741,6 +757,8 @@
                 lab = $(".lab_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".cut_diamond").click(function() {
@@ -748,6 +766,8 @@
                  cut = $(".cut_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".polish_diamond").click(function() {
@@ -755,6 +775,8 @@
                 polish = $(".polish_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".symmetry_diamond").click(function() {
@@ -762,6 +784,8 @@
                 symmetry = $(".symmetry_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".fluorescence_diamond").click(function() {
@@ -769,6 +793,8 @@
                 fluorescence = $(".fluorescence_diamond.active").map(function() {
                     return $(this).attr("data-val");
                 }).toArray();
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
             $(".eyeclean_diamond").click(function() {
@@ -777,113 +803,90 @@
                     $(this).addClass("active");
                     $(this).addClass("btn btn-success");
                 eyeclean = $(this).attr("data-val");
+                $("#data-wrapper").empty();
+                page=1;
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             });
                // ------------------------------------scroll pegination---------------------------------
-        if (prevShape == "" || color == ""  || clarity == "" || lab == "" || cut == "" || polish == "" || symmetry == "" || fluorescence == "" || eyeclean == "" || minp == "" || maxp == "") {
             var ENDPOINT = "{{ url('/api') }}";
             var page = 1;
-            infinteLoadMore(page);
+            var data={};
+
+ // ------------------------------------ end scroll pegination---------------------------------
+// ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
+            search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
             $(window).scroll(function () {
                 if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
                     page++;
-                    infinteLoadMore(page);
-                }
-            });
-            function infinteLoadMore(page) {
-                console.log('page loaded');
-            $.ajax({
-                    url: ENDPOINT + "/blogs?page=" + page,
-                    datatype: "html",
-                    type: "get",
-                    beforeSend: function () {
-                        $('.auto-load').show();
+                    console.log(data);
+                    search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
                     }
-                })
-                .done(function (response) {
-                    if (response.length == 0) {
-                        $('.auto-load').html("We don't have more data to display :(");
-                        return;
-                    }
-                    $('.auto-load').hide();
-                    $("#data-wrapper").append(response);
-                })
-                .fail(function (jqXHR, ajaxOptions, thrownError) {
-                    console.log('Server error occured');
                 });
-            }
-            console.log('workings');
-            }
- // ------------------------------------ end scroll pegination---------------------------------
-// ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
-           $(window).scroll(function () {
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                page++;
-                console.log(page);
-                if (prevShape != "" || color != ""  || clarity != "" || lab != "" || cut != "" || polish != "" || symmetry != "" || fluorescence != "" || eyeclean != "" || minp != "" || maxp != "") {
-                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page) {
+                console.log('scroll fileer');
+                 data = {};
+                if(minp) {
+                    data.minp = minp;
                 }
+                if(maxp) {
+                    data.maxp = maxp;
                 }
-            });
-        function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page) {
-            var ENDPOINT = "{{ url('/api') }}";
-            console.log('scroll fileer');
-            var data = {};
-            if(minp) {
-                data.minp = minp;
-            }
-            if(maxp) {
-                data.maxp = maxp;
-            }
-            if(prevShape) {
-                data.prevShape = prevShape;
-            }
-            if(color) {
-                data.color = color;
-            }
-            if(clarity) {
-                data.clarity= clarity;
-            }
-            if(lab) {
-                data.lab= lab;
-            }
-            if(cut) {
-                data.cut= cut;
-            }
-            if(polish) {
-                data.polish= polish;
-            }
-            if(symmetry) {
-                data.symmetry = symmetry;
-            }
-            if(fluorescence){
-                data.fluorescence = fluorescence;
-            }
-            if(eyeclean){
+                if(prevShape) {
+                    data.prevShape = prevShape;
+                }
+                if(color) {
+                    data.color = color;
+                }
+                if(clarity) {
+                    data.clarity= clarity;
+                }
+                if(lab) {
+                    data.lab= lab;
+                }
+                if(cut) {
+                    data.cut= cut;
+                }
+                if(polish) {
+                    data.polish= polish;
+                }
+                if(symmetry) {
+                    data.symmetry = symmetry;
+                }
+                if(fluorescence){
+                    data.fluorescence = fluorescence;
+                }
+                if(eyeclean){
                 data.eyeclean = eyeclean;
-            }
-            $.ajax({
-                    url: ENDPOINT + "/search?page=" + page,
-                    datatype: "html",
-                    type: "post",
-                    data: data,
-                    beforeSend: function () {
-                        $('.auto-load').show();
-                    }
-                })
-                .done(function (response) {
-                    if (response.length == 0) {
-                        $('.auto-load').html("We don't have more data to display :(");
-                        return;
-                    }
-                    $('.auto-load').hide();
-                    $("#data-wrapper").append(response);
-                })
-                .fail(function (jqXHR, ajaxOptions, thrownError) {
-                    console.log('Server error occured');
-                });
+                }
+                $.ajax({
+                        url: ENDPOINT + "/search?page=" + page,
+                        datatype: "html",
+                        type: "post",
+                        data: data,
+                        beforeSend: function () {
+                            $('.auto-load').show();
+                        }
+                    })
+                    .done(function (response) {
+                        if (response.length == 0) {
+                            $('.auto-load').html("We don't have more data to display :(");
+                            return;
+                        }
+                        if (Object.keys(data).length > 0) {
+                            // $("#data-wrapper").empty();
+                            $('.auto-load').hide();
+                            $("#data-wrapper").append(response);
+                        } else {
+                            $('.auto-load').hide();
+                            $("#data-wrapper").append(response);
+                        }
 
-            }
+                    })
+                    .fail(function (jqXHR, ajaxOptions, thrownError) {
+                        console.log('Server error occured');
+                    });
+
+                 }
         // -------------------------------------------------------end filter pegination--------------------------------------------------------------
 
     });

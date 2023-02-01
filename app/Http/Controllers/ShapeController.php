@@ -151,7 +151,6 @@ class ShapeController extends Controller
         $config = json_decode($response->getBody(), true);
         $data['diamond_data'] = $config['data']['data'];
         $results=$data['diamond_data'];
-
         $artilces = '';
         if ($request->ajax()) {
             $count=0;
