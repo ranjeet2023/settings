@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShapeController;
+use App\Http\Controllers\ChooseStoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,4 @@ use App\Http\Controllers\ShapeController;
 // route::get('/data',[ShapeController::class,'fetch_record']);
 // Route::get('/', [ShapeController::class, 'index1']);
 // Route::get('/users', [ShapeController::class, 'getUsers'])->name('users');
-// Route::get('/blogs', [ShapeController::class, 'getArticles']);
+Route::get('/select/{id}', [ChooseStoneController::class, 'Select_stone']);
