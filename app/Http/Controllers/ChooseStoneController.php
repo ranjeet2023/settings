@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
 
 class ChooseStoneController extends Controller
 {
     //
-    public function Select_stone($id){
+    public function Select_stone(Request $request ,$id){
         $client = new Client();
         $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
             'form_params' => [
@@ -18,10 +19,11 @@ class ChooseStoneController extends Controller
             ],
         ]);
         $config = json_decode($response->getBody(), true);
-        $data['diamond_data'] = $config['data']['data'];
-        // echo "<pre>";
-        // print_r($data);
-        // die;
-       return view('SelectStone')->with($data);
+        $data1['diamond_data'] = $config['data']['data'][0];
+        if (request()->routeIs('settings')){
+            session(['certificate' => $data1['diamond_data']['certificate_no'],'rates' => $data1['diamond_data']['rate'],'shapes' => $data1['diamond_data']['shape'],'currency' => $data1['diamond_data']['currency_symbol']]);
+            return view('ring');
+            }
+         return view('SelectStone')->with($data1);
     }
 }

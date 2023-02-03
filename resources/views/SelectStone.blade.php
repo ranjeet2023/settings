@@ -1,4 +1,3 @@
-@include('header');
 <style>
     .breadcrumb-item+.breadcrumb-item::before {
         content: ">"
@@ -115,7 +114,8 @@
     }
 
     .shop-button {
-        height: 47px
+        /* height: 47px; */
+        padding:15px;
     }
 
     .product_fav i {
@@ -179,28 +179,6 @@
         padding: 15px
     }
 
-    .image_list li {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 165px;
-        border: solid 1px #e8e8e8;
-        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
-        margin-bottom: 15px;
-        cursor: pointer;
-        padding: 15px;
-        -webkit-transition: all 200ms ease;
-        -moz-transition: all 200ms ease;
-        -ms-transition: all 200ms ease;
-        -o-transition: all 200ms ease;
-        transition: all 200ms ease;
-        overflow: hidden
-    }
 
     @media (max-width: 390px) {
         .product_fav {
@@ -208,53 +186,69 @@
         }
     }
 </style>
+@include('header')
 <div class="super_container">
+<a href="{{ url('api/') }}"><i class="arrow left "></i>  Change Stone</a>
     <div class="single_product">
-        <div class="container" style=" background-color: #fff; padding: 11px;margin-top:80px">
+        <div class="container" >
             <div class="row">
-                <div class="col-lg-2 order-lg-1 order-2">
-                    <ul class="image_list">
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"><img
-                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg" alt="">
-                        </li>
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg"><img
-                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg" alt="">
-                        </li>
-                        <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg"><img
-                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg" alt="">
-                        </li>
-                    </ul>
-                </div>
                 <div class="col-lg-4 order-lg-2 order-1">
-                    <div class="image_selected"><img
-                            src="{{ url('assets/img/shape/'.ucfirst(strtolower($diamond_data[0]['shape'])).'.png') }}" alt="">
+                    <div class="image_selected"><img  src="{{ url('assets/img/shape/'.ucfirst(strtolower($diamond_data['shape'])).'.png') }}">
                     </div>
                 </div>
+
                 <div class="col-lg-6 order-3" style="padding: 100px">
+                    Stock #
+                    {{ $diamond_data['certificate_no'] }}
                     <div class="product_description">
-                        <h1 style="font-size:30px">{{ $diamond_data[0]['shape'] }}   {{ $diamond_data[0]['rate'] }}{{ $diamond_data[0]['currency_symbol'] }}</h1>
+                        <h1 style="font-size:30px">{{ $diamond_data['shape'] }} {{ $diamond_data['rate'] }}{{
+                            $diamond_data['currency_symbol'] }}</h1>
                         <hr class="singleline">
-                        <div class="row">
-                            <div class="col-xs-6"> <button type="button" class="btn btn-primary shop-button">Add to Cart</button>
-                                 <button type="button" class="btn btn-success shop-button">Buy Now</button>
-                                <div class="product_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
+                        <a href="{{ url('choose-setting')  }}/{{ $diamond_data['certificate_no'] }}">
+                             <button type="submit" class="btn btn-dark shop-button rounded-pill">
+                                Select
+                                @if ($diamond_data['diamond_type']=='W')
+                                <i>Natural</i>
+                                @else
+                                <i>labGrown diamond</i>
+                                @endif
+                                diamond
+                            </button>
+                        </a>
                     </div>
                     <hr class="singleline">
+                    <h2 style="font-size:30px">Product Details
+                        <hr class="singleline">
+                    </h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Shape<b style="padding-left:10px">     {{ $diamond_data['shape'] }}</b></p>
+                            <p>Color<b style="padding-left:30px">     {{ $diamond_data['color'] }}</b></p>
+                            <p>Carat <b style="padding-left:30px">     {{ $diamond_data['carat'] }}</b></p>
 
-                    <h2 style="font-size:20px">Product discription</h2>
-
+                        </div>
+                        <div class="col-6">
+                            <p>Cut <b style="padding-left:30px">     {{ $diamond_data['cut'] }}</b></p>
+                            <p>Polish <b style="padding-left:30px">     {{ $diamond_data['polish'] }}</b></p>
+                            <p>Lab <b style="padding-left:30px">     {{ $diamond_data['lab'] }}</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+</body>
 </html>

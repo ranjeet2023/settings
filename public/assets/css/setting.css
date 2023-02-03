@@ -1540,3 +1540,7 @@ color: #ffffff !important;
     border:1px solid Violet;
     border-radius:10px;
 }
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }

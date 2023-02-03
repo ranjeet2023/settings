@@ -18,9 +18,12 @@ use App\Http\Controllers\ChooseStoneController;
 // Route::any('/', function () {
 //     return view('test');
 // });
-// route::get('/',[ShapeController::class,'fetch_record']);
+// route::get('/',[ShapeController::class,'index']);
 // route::any('/test',[ShapeController::class,'test']);
 // route::get('/data',[ShapeController::class,'fetch_record']);
 // Route::get('/', [ShapeController::class, 'index1']);
 // Route::get('/users', [ShapeController::class, 'getUsers'])->name('users');
-Route::get('/select/{id}', [ChooseStoneController::class, 'Select_stone']);
+
+Route::get('/select/{id}', [ChooseStoneController::class, 'Select_stone'])->name('select');
+Route::get('/choose-setting/{id}', [ChooseStoneController::class, 'Select_stone'])->name('settings');
+

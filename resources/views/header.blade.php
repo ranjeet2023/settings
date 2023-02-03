@@ -33,3 +33,93 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
+    <script id="klarna-osm-script-tag" async="" src="{{ asset('assets/js/lib.js')}}"
+    data-client-id="5e4d5d37-f827-5937-9c36-f181fb846ad3"></script>
+<div class="PageContainer">
+    <main id="main" role="main">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Ring Builder</title>
+        <link rel="stylesheet" href="{{asset('assets/css/slick.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/slick-theme.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/custom-modal.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/ringbuilder.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/ringbuilder-stone.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/ringbuilder-gemstone.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/ringbuilder-radiance.css')}}">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <div class="vdb-rb-main">
+            <div class="vdb-rb-container">
+                <div class="vdb-rb-steps-container">
+                    <div class="vdb-rb-steps-wrap " style=" @if (request()->routeIs('select') || request()->routeIs('index') || request()->routeIs('fetched_data')) background-color:grey;border-radius: 100px;padding: 5px 50px 5px 50px;  @else background-color:rgb(219, 190, 190);border-radius: 100px;padding: 5px 50px 5px 50px; @endif">
+                            <div class="vdb-rb-steps-name-with-number"  >
+                                <div class="vdb-rb-steps-number">1</div>
+                                    <div class="vdb-rb-steps-name vdb-rb-only-desktop">Choose <span>Stone</span>
+                                        <div style="float: right;padding-right:5px">
+                                            {{-- @if (request()->routeIs('settings')) --}}
+                                               @if (session()->has('shapes'))
+                                                <p>
+                                                <img  src="{{ url('assets/img/shape')}}/{{ ucfirst(strtolower(session('shapes'))) }}.png" width="25px">
+                                                <b>{{ session('rates') }}{{ session('currency') }}</b></p>
+                                                <a href="{{ url('/select') }}/{{ session('certificate') }}">view</a>|
+                                                <a href="{{ url('api/') }}">Change</a>
+                                                @endif
+                                            {{-- @endif --}}
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                    </div>
+                    <div class="vdb-rb-steps-wrap "style="@if (request()->routeIs('settings')) background-color:grey;border-radius: 100px;padding:5px 50px 5px 50px;  @else background-color:rgb(219, 190, 190);border-radius:100px;padding: 5px 50px 5px 50px;@endif ">
+                        <!--vdb-rb-active-step-->
+                            <div class="vdb-rb-steps-name-with-number">
+                                <div class="vdb-rb-steps-number">2</div>
+
+                                    <div class="vdb-rb-steps-name vdb-rb-only-desktop">Choose<span>Setting</span>
+                                    </div>
+                                <div class="vdb-rb-steps-name vdb-rb-only-mobile">Setting</div>
+                            </div>
+
+
+                    </div>
+                    <div class="vdb-rb-steps-wrap " style="background-color:rgb(219, 190, 190);border-radius: 100px;padding: 5px 50px 5px 50px;" >
+                            <div class="vdb-rb-steps-name-with-number">
+                                <div class="vdb-rb-steps-number">3</div>
+                                    <div class="vdb-rb-steps-name vdb-rb-only-desktop vdb-rb-step-ring-review">
+                                        Review <span>Complete Ring</span></div>
+                                <div class="vdb-rb-steps-name vdb-rb-only-mobile vdb-rb-step-ring-review">Review
+                                </div>
+                            </div>
+                        <div class="vdb-rb-view-order-detail vdb-rb-info-message-wrapper vdb-rb-step-ring-review-popup"
+                            id="vdbrb_step_ring_review_popup" style="display: none;">
+                            <div class="vdb-rb-order-detail-content">
+                                <p class="vdb-rb-info-message">Please choose a setting and a stone to complete your
+                                    ring</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="vdb-rb-row vdb-rb-justify-center vdb-rb-mobile-full-width">
+                    <div class="vdb-rb-col-md-10">
+                        <div class="vdb-rb-tab-wrap">
+                            <div class="vdb-rb-tabbing vdb-rb-active-tab" id="vdbrb_natural_tab" data-id="natural">
+                                <img src="https://media.giphy.com/media/RFmjTxTo50pkQ/giphy.gif"
+                                    style="width:40px;border-radius: 50px">
+                                Natural Diamonds
+                            </div>
+                            <div class="vdb-rb-tabbing" id="vdbrb_labgrown_tab" data-id="labgrown">
+                                <span class="vdb-rb-icon vdb-rb-icon-LAB-Icon">
+                                    <span class="path1"></span>
+                                </span>
+                                Lab-Grown Diamonds
+                            </div>
+                            <div class="vdb-rb-tabbing" id="vdbrb_gemstone_tab" data-id="gemstone">
+                                <span class="vdb-rb-icon vdb-rb-icon-mainmenu_switch_gemstone"></span>
+                                Colored Gemstones
+                            </div>
+                        </div>
+                    </div>
+                </div>
