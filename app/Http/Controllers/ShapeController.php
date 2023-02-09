@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 class ShapeController extends Controller
 {
-    //
     public function index(Request $request)
     {
         $client = new Client();
-
         $response = $response = $client->post('https://stage.thediamondport.com/api/get_config', [
             'query' => ['token' => '6913277571670500485'],
         ]);
@@ -21,10 +19,7 @@ class ShapeController extends Controller
     }
     public function fetch_diamond(Request $request)
     {
-
-
         $client = new Client();
-
         if (!empty($request->input('prevShape'))) {
             $shape = $request->input('prevShape');
         } else {
@@ -105,12 +100,11 @@ class ShapeController extends Controller
         $config = json_decode($response->getBody(), true);
         $data['diamond_data'] = $config['data']['data'];
         $results = $data['diamond_data'];
-
         $artilces = '';
         if ($request->ajax()) {
             foreach ($results as $result) {
                 $artilces .= '<div class="col-3 col-md-3">
-              <a href="'.url('select').'/'. $result['certificate_no'] .'"><img class="card-img-top" src="' . url('assets/img/shape/'.ucfirst(strtolower($result['shape'])).'.png') . '" alt="Card image cap"></a>
+              <a href="' . url('api/select') . '/' . $result['certificate_no'] . '"><img class="card-img-top" src="' . url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png') . '" alt="Card image cap"></a>
                 <div class="card-body">
                   <p class="card-text">  ' . $result['shape'] . '
                   ' . $result['color'] . '
@@ -122,9 +116,7 @@ class ShapeController extends Controller
               </div>';
             }
             return $artilces;
-
         }
         return view('welcome');
     }
-
 }
