@@ -5,19 +5,21 @@
             <div class="vdb-rb-filter-options-block vdb-rb-shape-options">
                 <h5><b> Ring Style</b> </h5>
                 <ul id="vdbrb_shape_filter_slider_natural" class="slick-initialized slick-slider" style="">
-                    <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button" aria-disabled="true" style="">Previous</button>
+                    <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
+                        aria-disabled="true" style="">Previous</button>
                     <div class="slick-list draggable">
                         <div class="slick-track"
                             style="opacity: 1; width: 2465px; transform: translate3d(0px, 0px, 0px);">
                             <div class="slick-slide slick-current ">
                                 <div>
                                     <li style="width: 100%; display: inline-block;">
-                                            <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_round">
-                                                <a title="Round" data-val="Round" data-val="round">
-                                                    <img class="image_off" src="{{asset('assets/img/shape/venitage.png')}}" width="55" alt="venitage">
-                                                </a>
-                                            </div>
-                                            <p class="" style="text-align: center"> Vintage</p>
+                                        <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_round">
+                                            <a title="Round" data-val="Round" data-val="round">
+                                                <img class="image_off" src="{{asset('assets/img/shape/venitage.png')}}"
+                                                    width="55" alt="venitage">
+                                            </a>
+                                        </div>
+                                        <p class="" style="text-align: center"> Vintage</p>
                                     </li>
                                 </div>
                             </div>
@@ -27,7 +29,8 @@
 
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_oval">
                                             <a data-val="princess">
-                                                <img class="image_off" src="{{asset('assets/img/shape/halo.png')}}" width="55" alt="halo">
+                                                <img class="image_off" src="{{asset('assets/img/shape/halo.png')}}"
+                                                    width="55" alt="halo">
                                             </a>
                                         </div>
                                         <p class="" style="text-align: center">Halo</p>
@@ -39,7 +42,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_pear">
                                             <a data-val="cushion">
-                                                <img class="image_off" src="{{asset('assets/img/shape/pave.png')}}" width="35" alt="Cushion">
+                                                <img class="image_off" src="{{asset('assets/img/shape/pave.png')}}"
+                                                    width="35" alt="Cushion">
                                             </a>
                                         </div>
                                         <p class="shape" style="text-align: center">Pave</p>
@@ -51,7 +55,9 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_emerald">
                                             <a data-val="emerald">
-                                                <img class="image_off" src="{{asset('assets/img/shape/threestone.png')}}" width="35" alt="Emerald">
+                                                <img class="image_off"
+                                                    src="{{asset('assets/img/shape/threestone.png')}}" width="35"
+                                                    alt="Emerald">
                                             </a>
                                         </div>
                                         <p class="shape" style="text-align: center">Three Stone</p>
@@ -63,7 +69,9 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_princess">
                                             <a data-val="heart">
-                                                <img class="image_off" src="{{asset('assets/img/shape/hiddenhalo.png')}}" width="35" alt="Hidden halo">
+                                                <img class="image_off"
+                                                    src="{{asset('assets/img/shape/hiddenhalo.png')}}" width="35"
+                                                    alt="Hidden halo">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Hidden Halo</p>
@@ -75,7 +83,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_triangle">
                                             <a data-val="oval">
-                                                <img class="image_off" src="{{asset('assets/img/shape/unique.png')}}" width="35">
+                                                <img class="image_off" src="{{asset('assets/img/shape/unique.png')}}"
+                                                    width="35">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Unique</p>
@@ -88,7 +97,8 @@
 
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_square">
                                             <a data-val="radient">
-                                                <img class="image_off" src="{{asset('assets/img/shape/classic.png')}}" width="35">
+                                                <img class="image_off" src="{{asset('assets/img/shape/classic.png')}}"
+                                                    width="35">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Classic</p>
@@ -101,7 +111,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_marquise">
                                             <a data-val="sq.radiant">
-                                                <img class="image_off" src="{{asset('assets/img/shape/classic.png')}}" width="35" alt="SQUARE Radiant">
+                                                <img class="image_off" src="{{asset('assets/img/shape/classic.png')}}"
+                                                    width="35" alt="SQUARE Radiant">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Diamond Accent</p>
@@ -113,7 +124,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_sq_emerald">
                                             <a data-val="cushion">
-                                                <img class="image_off" src="{{asset('assets/img/shape/luxe.png')}}" width="35">
+                                                <img class="image_off" src="{{asset('assets/img/shape/luxe.png')}}"
+                                                    width="35">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Luxe</p>
@@ -125,7 +137,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_heart">
                                             <a data-val="asscher" class="btn btn-sm togglebtn ">
-                                                <img class="image_off" src="{{asset('assets/img/shape/naturalin.png')}}" width="35" alt="Triangle">
+                                                <img class="image_off" src="{{asset('assets/img/shape/naturalin.png')}}"
+                                                    width="35" alt="Triangle">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Natural Inspired</p>
@@ -137,7 +150,8 @@
                                     <li style="width: 100%; display: inline-block;">
                                         <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_heart">
                                             <a data-val="asscher" class="btn btn-sm togglebtn ">
-                                                <img class="image_off" src="{{asset('assets/img/shape/floral.png')}}" width="35" alt="Triangle">
+                                                <img class="image_off" src="{{asset('assets/img/shape/floral.png')}}"
+                                                    width="35" alt="Triangle">
                                             </a>
                                         </div>
                                         <p style="text-align: center">Floral</p>
@@ -151,7 +165,8 @@
                                             data-module_section="vdbrb_list_item_natural_shap_style_trilliant"
                                             data-title="Trilliant" tabindex="-1">
                                             <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_trilliant">
-                                                <img class="image_off" src="{{asset('assets/img/shape/solitaire.png')}}" width="35"><br>
+                                                <img class="image_off" src="{{asset('assets/img/shape/solitaire.png')}}"
+                                                    width="35"><br>
                                             </div>
                                             <p style="text-align: center">Solitare</p>
                                         </a>
@@ -180,10 +195,11 @@
                                 <div class="slick-slide slick-current ">
                                     <div>
                                         <li style="width: 100%; display: inline-block;">
-                                                <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_round">
-                                                    <a data-val="cushion" style="width:35px;height:30px;background-color:E5E4E2;border-radius:100px;"></a>
-                                                </div>
-                                                <p class="" style="text-align: center"> Platinum</p>
+                                            <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_round">
+                                                <a data-val="cushion"
+                                                    style="width:35px;height:30px;background-color:E5E4E2;border-radius:100px;"></a>
+                                            </div>
+                                            <p class="" style="text-align: center"> Platinum</p>
                                         </li>
                                     </div>
                                 </div>
@@ -191,7 +207,8 @@
                                     <div>
                                         <li style="width: 100%; display: inline-block;">
                                             <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_oval">
-                                                <a data-val="cushion" style="width:35px;height:30px;background-color:#efefea ;border-radius:100px;"></a>
+                                                <a data-val="cushion"
+                                                    style="width:35px;height:30px;background-color:#efefea ;border-radius:100px;"></a>
                                             </div>
                                             <p class="" style="text-align: center">White Gold</p>
                                         </li>
@@ -201,7 +218,8 @@
                                     <div>
                                         <li style="width: 100%; display: inline-block;">
                                             <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_pear">
-                                                <a data-val="cushion" style="width:35px;height:30px;background-color:#B76E79;border-radius:100px;"></a>
+                                                <a data-val="cushion"
+                                                    style="width:35px;height:30px;background-color:#B76E79;border-radius:100px;"></a>
                                             </div>
                                             <p class="shape" style="text-align: center">Rose Gold</p>
                                         </li>
@@ -211,7 +229,8 @@
                                     <div>
                                         <li style="width: 100%; display: inline-block;">
                                             <div class="vdb-rb-list-item vdbrb_list_item_natural_shap_style_pear">
-                                                <a data-val="cushion" style="width:35px;height:30px;background-color:ffd700;border-radius:100px;"></a>
+                                                <a data-val="cushion"
+                                                    style="width:35px;height:30px;background-color:ffd700;border-radius:100px;"></a>
                                             </div>
                                             <p class="shape" style="text-align: center">Yellow Gold</p>
                                         </li>
@@ -251,10 +270,12 @@
         <div class="card-body">
             {{-- <p class="card-text"> Ring</p> --}}
             <ul style="display:inline;text-align:center">
-                <a
-                    href="{{ url('/api/confirm-setting/' . $ring['product_id'])}}?settingtype={{$ring['settingtype']}}&metal_type={{$ring['metaltype']}}&purity={{$ring['purity']}}&productcost={{$ring['productcost']}}&product_title={{$ring['product_title']}}&product_name={{$ring['product_name']}}&image={{$ring['image']}}&product_id={{$ring['product_id']}}">
+                <button class="shape_ring" type="submit" product_id="{{ $ring['product_id'] }}"
+                    metaltype="{{$ring['metaltype']}}" purity="{{ $ring['purity'] }}"
+                    productcost="{{ $ring['productcost'] }}" product_title="{{$ring['product_title']}}"
+                    product_name="{{$ring['product_name']}}" image="{{$ring['image']}}">
                     <img class="card-img-top" src="{{ $ring['image'] }}" alt="Card image cap">
-                </a>
+                </button>
             </ul>
             <b>Setting type: </b>{{ $ring['settingtype'] }}<br>
             <b>Metal type: </b>{{ $ring['metaltype'] }}
@@ -276,6 +297,7 @@
     {
     $(".hide-filter").toggle();
     });
+    
     $('#price-range-submit').hide();
     $("#min_price,#max_price").on('change', function () {
     $('#price-range-submit').show();
@@ -322,8 +344,8 @@ $("#slider-range").slider({
     $("#min_price").val($("#slider-range").slider("values", 0));
     $("#max_price").val($("#slider-range").slider("values", 1));
     });
-$("#slider-range,#price-range-submit").click(function ()
-{
+    $("#slider-range,#price-range-submit").click(function ()
+    {
     var minp = $('#min_price').val();
     var maxp = $('#max_price').val();
     page =1;
@@ -332,18 +354,28 @@ $("#slider-range,#price-range-submit").click(function ()
     });
 
     $(".shape_ring").click(function() {
-        var product = $(this).attr('product_id');
-        var setting = $(this).attr('settingtype');
-        var image = $(this).attr('image');
-        var metaltype = $(this).attr('metal_type');
-        var purity = $(this).attr('purity');
+        var product_id = $(this).attr('product_id');
+        var settingtype = $(this).attr('settingtype');
+        var ring_image = $(this).attr('image');
+        var metal_type = $(this).attr('metal_type');
+        var ring_purity = $(this).attr('purity');
         var productcost = $(this).attr('productcost');
         var product_title = $(this).attr('product_title');
         var product_name = $(this).attr('product_name');
-
-        console.log(image);
-        console.log(product);
-        console.log(product_name);
+        $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                type: "post",
+                data:{product_id: product_id,setting_type:settingtype,image:ring_image, metal_type:metal_type,ring_purity:ring_purity,productcost:productcost,product_title:product_title,product_name:product_name},
+                url: "{{ url('confirm_ring') }}",
+                success: function(data){
+                    console.log(data);
+                    if (data) {
+                    window.location.href = "/confirm_ring";
+                    }
+                }
+            });
     });
 });
 </script>

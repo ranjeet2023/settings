@@ -26,11 +26,11 @@
                             </div>
                         </div>
                         <button class="submit btn btn-outline-info btn-lg">
-                            <a href="{{ url('api/diamond/destroy') }}">
+                            <a href="{{ url('remove_diamond') }}">
                                 <i class="fa fa-remove"></i>
                             </a>
                         </button>
-                        <a href="{{ url('api/select') }}/{{ session('certificate') }}">
+                        <a href="{{ url('select_diamond') }}/{{ session('certificate') }}">
                             <button class="btn btn-outline-info">View
                             </button>
                         </a>
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                     <button class=" submit btn btn-outline-info btn-lg">
-                        <a href="{{ url('api/ring/destroy') }}">
+                        <a href="{{ url('remove_ring') }}">
                             <i class="fa fa-remove"></i>
                         </a>
                     </button>
-                    <a href="{{ url('api/confirm-setting') }}"> <button class="btn btn-outline-info">View</button></a>
+                    <a href="{{ url('confirm_ring') }}"> <button class="btn btn-outline-info">View</button></a>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
     confirmButtonText: 'OK'
     }).then((result) => {
     if (result.value) {
-        window.location.href = "/api";
+        window.location.href = "/";
     }
     });
 </script>

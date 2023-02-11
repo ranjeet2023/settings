@@ -15,7 +15,7 @@
                         <h1 style="font-size:30px">${{ session('productcost')}} {{ session('metal_type')}}
                             </h1>
                         <hr class="singleline">
-                        <a href="{{ url('api/preview') }}">
+                        <a href="{{ url('ring_diamond') }}">
                              <button type="submit" class="btn btn-dark shop-button rounded-pill">
                                     Confirm
                             </button>

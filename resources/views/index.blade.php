@@ -337,7 +337,7 @@
                         </div>
 
                         {{-- eyeclean --}}
-                        <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
+                        {{-- <div class="vdb-rb-col-md-6 hide-filter" style="display:none">
                             <div class="vdb-rb-filter-options-block">
                                 <div class="vdb-rb-d-flex vdb-rb-justify-between">
                                     </span><b> Eyeclean</b></span>
@@ -353,10 +353,10 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
-                <div class="vdb-rb-mobilr-filter-options-wrapper vdb_rb_labgrown_mob_block">
+                {{-- <div class="vdb-rb-mobilr-filter-options-wrapper vdb_rb_labgrown_mob_block">
                     <div class="vdb-rb-filter-panel">
                         <!-- MOBILE VIEW HTML RENDER HERE-->
                         <div class="vdb-rb-filter-options-block vdb-rb-open-modal_labgrown"
@@ -462,7 +462,7 @@
                             <!-- MOBILE VIEW ADVANCE FILTER HTML RENDER HERE -->
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="vdb-rb-reset-filters">
                     <p class="vdb-rb-advanced-filter" id="show-hide-btn">Advanced Filters
@@ -473,7 +473,7 @@
 
 
                     <div class="hide-reset">
-                        <a href="{{ url('/') }}/api">
+                        <a href="{{ url('/') }}">
                             <p id="vdbrb_stone_reset_filter">Reset Filters
                                 <i class="fa fa-refresh " style="font-size:18px"></i>
                             </p>
@@ -672,7 +672,7 @@
                // ------------------------------------scroll pegination---------------------------------
  // ------------------------------------ end scroll pegination---------------------------------
 // ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
-                var ENDPOINT = "{{ url('api/') }}";
+                var ENDPOINT = "{{ url('/') }}";
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
                 $(window).scroll(function () {
                     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -717,7 +717,10 @@
                 data.eyeclean = eyeclean;
                 }
                 $.ajax({
-                        url: ENDPOINT + "/fetch_data?page=" + page,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: ENDPOINT + "/fetch_diamond?page=" + page,
                         datatype: "html",
                         type: "post",
                         data: data,
