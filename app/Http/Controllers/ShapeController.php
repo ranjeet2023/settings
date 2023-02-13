@@ -28,9 +28,11 @@ class ShapeController extends Controller
     public function fetch_diamond(Request $request)
     {
 
+
         $client = new Client();
         if (!empty($request->input('prevShape'))) {
-            $shape = $request->input('prevShape');
+            $shapes = $request->input('prevShape');
+            $shape = implode(',', $shapes);
         } else {
             $shape = null;
         }
@@ -112,17 +114,24 @@ class ShapeController extends Controller
         $artilces = '';
         if ($request->ajax()) {
             foreach ($results as $result) {
-                $artilces .= '<div class="col-3 col-md-3">
-              <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '"><img class="card-img-top" src="' . url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png') . '" alt="Card image cap"></a>
-                <div class="card-body">
-                  <p class="card-text">  ' . $result['shape'] . '
-                  ' . $result['color'] . '
-                  ' . $result['clarity'] . ' </p>
+                $artilces .= '
+                <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
+                <div class="imageBox MuiBox-root css-0">
+                <img src="' . url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png') . '" alt="diamond"></div>
+                <div class="MuiCardContent-root infoBox css-1qw96cp" style="color: rgb(49, 79, 222);">
+                    <div class="MuiBox-root css-73nay0">
+                        <h3>  ' . $result['shape'] . ' ' . $result['carat'] . '  ' . $result['color'] . '  ' . $result['clarity'] . ' </h3>
+                    </div>
+                    <div class="MuiBox-root css-69i1ev">
+                        <h2>' . $result['rate'] . '' . $result['currency_symbol'] . '</h2>
+                        <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '">
+                        <button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall css-1s9fsba" tabindex="0" type="button">
+                        View<span class="MuiTouchRipple-root css-w0pj6f"></span>
+                        </button>
+                        </a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                  <h3><b>' . $result['rate'] . '' . $result['currency_symbol'] . '</b></h3>
-                </div>
-              </div>';
+            </div>';
             }
             return $artilces;
         }
