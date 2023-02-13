@@ -1530,7 +1530,7 @@
                         onChange: function (data) {
                         var minValue = data.from;
                         var maxValue = data.to;
-                        var values = [minValue, maxValue];
+                        values = [minValue, maxValue];
                         console.log(values);
                         }
                     });
@@ -1542,7 +1542,7 @@
                     onChange: function (data) {
                     var minValue = data.from;
                     var maxValue = data.to;
-                    var values = [minValue, maxValue];
+                    values = [minValue, maxValue];
                     console.log(values);
                     }
                     });
@@ -1563,11 +1563,10 @@
                             var customValues = data;
                             var minIndex = data.from;
                             var maxIndex = data.to;
-                            var color = custom_values.slice(minIndex, maxIndex + 1);
-                            console.log(data);
+                             color = custom_values.slice(minIndex, maxIndex + 1);
                             $("#diamond-grid").empty();
                             page =1;
-                            // search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
+                            search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
                             search();
                         }
                     });
@@ -1588,7 +1587,7 @@
                             console.log(data);
                             var minIndex = data.from;
                             var maxIndex = data.to;
-                            var cut = custom_values_cut.slice(minIndex, maxIndex + 1);
+                            cut = custom_values_cut.slice(minIndex, maxIndex + 1);
                             console.log(data);
                             $("#diamond-grid").empty();
                             page =1;
@@ -1612,7 +1611,7 @@
                             console.log(data);
                             var minIndex = data.from;
                             var maxIndex = data.to;
-                            var clarity = custom_values_Clarity.slice(minIndex, maxIndex + 1);
+                             clarity = custom_values_Clarity.slice(minIndex, maxIndex + 1);
                             $("#diamond-grid").empty();
                             page =1;
                             search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
@@ -1635,7 +1634,7 @@
                             console.log(data);
                             var minIndex = data.from;
                             var maxIndex = data.to;
-                            var lab = custom_values_lab.slice(minIndex, maxIndex + 1);
+                             lab = custom_values_lab.slice(minIndex, maxIndex + 1);
                             $("#diamond-grid").empty();
                             page =1;
                             search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
@@ -1659,7 +1658,7 @@
                                 console.log(data);
                                 var minIndex = data.from;
                                 var maxIndex = data.to;
-                                var polish = custom_values_polish.slice(minIndex, maxIndex + 1);
+                                polish = custom_values_polish.slice(minIndex, maxIndex + 1);
                                  $("#diamond-grid").empty();
                                 page =1;
                                  search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
@@ -1697,7 +1696,7 @@
                                 console.log(data);
                                 var minIndex = data.from;
                                 var maxIndex = data.to;
-                                var symmetry = custom_values_polish.slice(minIndex, maxIndex + 1);
+                                symmetry = custom_values_polish.slice(minIndex, maxIndex + 1);
                                 $("#diamond-grid").empty();
                                 page =1;
                                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
@@ -1727,7 +1726,7 @@
                             console.log(data);
                             var minIndex = data.from;
                             var maxIndex = data.to;
-                            var fluorescence= custom_values_fluorescence.slice(minIndex, maxIndex + 1);
+                             fluorescence= custom_values_fluorescence.slice(minIndex, maxIndex + 1);
                             $("#diamond-grid").empty();
                             page =1;
                             search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
@@ -1755,22 +1754,47 @@
                     window.onscroll = function () {
                         if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
                             page++;
-                            // alert(page);
                             search(prevShape, color, clarity, lab, cut, polish, symmetry, fluorescence, minp, maxp, page);
                         }
                     };
-                    function search() {
+                   function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page) {
                         data = {};
-                        data.color =$(".js-range-slider_color").data("ionRangeSlider");
-                        data.cut =$(".js-range-slider_cut").data("ionRangeSlider");
-                        data.polish =$(".js-range-slider_polish").data("ionRangeSlider");;
-                        console.log(data);
-                        $.ajax({
+                        if(minp) {
+                            data.minp = minp;
+                        }
+                        if(maxp) {
+                            data.maxp = maxp;
+                        }
+                        if(prevShape) {
+                            data.prevShape = prevShape;
+                        }
+                        if(color) {
+                            data.color = color;
+                        }
+                        if(clarity) {
+                            data.clarity= clarity;
+                        }
+                        if(lab) {
+                            data.lab= lab;
+                        }
+                        if(cut) {
+                            data.cut= cut;
+                        }
+                        if(polish) {
+                            data.polish= polish;
+                        }
+                        if(symmetry) {
+                            data.symmetry = symmetry;
+                        }
+                        if(fluorescence){
+                            data.fluorescence = fluorescence;
+                        }
+                    $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             url: ENDPOINT + "/fetch_diamond?page=" + page,
-                            datatype:"html",
+                            datatype: "html",
                             type: "post",
                             data: data,
                             beforeSend: function () {
@@ -1791,64 +1815,6 @@
                     }
 
                 });
-                //    function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page) {
-                //         data = {};
-                //         if(minp) {
-                //             data.minp = minp;
-                //         }
-                //         if(maxp) {
-                //             data.maxp = maxp;
-                //         }
-                //         if(prevShape) {
-                //             data.prevShape = prevShape;
-                //         }
-                //         if(color) {
-                //             data.color = color;
-                //         }
-                //         if(clarity) {
-                //             data.clarity= clarity;
-                //         }
-                //         if(lab) {
-                //             data.lab= lab;
-                //         }
-                //         if(cut) {
-                //             data.cut= cut;
-                //         }
-                //         if(polish) {
-                //             data.polish= polish;
-                //         }
-                //         if(symmetry) {
-                //             data.symmetry = symmetry;
-                //         }
-                //         if(fluorescence){
-                //             data.fluorescence = fluorescence;
-                //         }
-                //     $.ajax({
-                //             headers: {
-                //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //             },
-                //             url: ENDPOINT + "/fetch_diamond?page=" + page,
-                //             datatype: "html",
-                //             type: "post",
-                //             data: data,
-                //             beforeSend: function () {
-                //                 $('.auto-load').show();
-                //             }
-                //         })
-                //         .done(function (response) {
-                //             if(response){
-                //                 $('.auto-load').hide();
-                //                 $("#diamond-grid").append(response);
-                //             }else{
-                //                 $('.auto-load').html("We don't have more data to display ");
-                //             }
-                //         })
-                //         .fail(function (jqXHR, ajaxOptions, thrownError) {
-                //             console.log('Server error occured');
-                //         });
-                //     }
-
-                // });
     </script>
 
 </body>
