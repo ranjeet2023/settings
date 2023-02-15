@@ -1391,7 +1391,9 @@
                             </button>
                             <button
                                 class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-18vedka"
-                                tabindex="-1" type="button" disabled="">Results (386210)</button>
+                                tabindex="-1" type="button" disabled="">
+
+                                <H4 id="results">Results</H4> </button>
                         </div>
                         <div class="MuiBox-root css-0">
                             <button
@@ -1527,7 +1529,7 @@
                     $(".js-range-slider_carat").ionRangeSlider({
                     type: "double",
                     skin: "round",
-                        onChange: function (data) {
+                        onFinish: function (data) {
                         var minValue = data.from;
                         var maxValue = data.to;
                         values = [minValue, maxValue];
@@ -1539,7 +1541,7 @@
                     $(".js-range-slider_price").ionRangeSlider({
                     type: "double",
                     skin: "round",
-                    onChange: function (data) {
+                    onFinish: function (data) {
                     var minValue = data.from;
                     var maxValue = data.to;
                     values = [minValue, maxValue];
@@ -1558,13 +1560,14 @@
                         from: my_from,
                         to: my_to,
                         values: custom_values,
-                        onChange: function (data)
+                        onFinish: function (data)
                         {
                             var customValues = data;
                             var minIndex = data.from;
                             var maxIndex = data.to;
                              color = custom_values.slice(minIndex, maxIndex + 1);
                             $("#diamond-grid").empty();
+                            $('#results').empty();
                             page =1;
                             search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,minp,maxp,page);
                             search();
@@ -1582,7 +1585,7 @@
                     from: my_from,
                     to: my_to,
                     values: custom_values_cut,
-                    onChange: function (data)
+                    onFinish: function (data)
                         {
                             console.log(data);
                             var minIndex = data.from;
@@ -1606,7 +1609,7 @@
                     from: my_from,
                     to: my_to,
                     values: custom_values_Clarity,
-                    onChange: function (data)
+                    onFinish: function (data)
                         {
                             console.log(data);
                             var minIndex = data.from;
@@ -1629,7 +1632,7 @@
                     from: my_from,
                     to: my_to,
                     values: custom_values_lab,
-                    onChange: function (data)
+                    onFinish: function (data)
                         {
                             console.log(data);
                             var minIndex = data.from;
@@ -1653,7 +1656,7 @@
                         from: my_from,
                         to: my_to,
                         values: custom_values_polish,
-                        onChange: function (data)
+                        onFinish: function (data)
                             {
                                 console.log(data);
                                 var minIndex = data.from;
@@ -1670,7 +1673,7 @@
                         type: "double",
                         skin: "round",
                         grid: false,
-                        onChange: function (data)
+                        onFinish: function (data)
                             {
                                 console.log(data);
                                 // var minIndex = data.from;
@@ -1691,7 +1694,7 @@
                         from: my_from,
                         to: my_to,
                         values: custom_values_polish,
-                        onChange: function (data)
+                        onFinish: function (data)
                             {
                                 console.log(data);
                                 var minIndex = data.from;
@@ -1721,7 +1724,7 @@
                     from: my_from,
                     to: my_to,
                     values: custom_values_fluorescence,
-                    onChange: function (data)
+                    onFinish: function (data)
                         {
                             console.log(data);
                             var minIndex = data.from;
@@ -1738,7 +1741,7 @@
                         type: "double",
                         skin: "round",
                         grid: false,
-                    //    onChange: function (data)
+                    //    onFinish: function (data)
                     //     {
                     //         console.log(data);
                     //         var minIndex = data.from;
@@ -1802,12 +1805,27 @@
                             }
                         })
                         .done(function (response) {
-                            if(response){
-                                $('.auto-load').hide();
-                                $("#diamond-grid").append(response);
-                            }else{
+                            var data = JSON.parse(response);
+                            if (data.empty) {
                                 $('.auto-load').html("We don't have more data to display ");
+                            } else {
+                                var articles = data.articles;
+                                var data2 = data.data2
+                                $('.auto-load').hide();
+                                $("#diamond-grid").append(articles);
+                                $('#results').text(data2);
                             }
+                            // var data = JSON.parse(response);
+                            // var articles = data.articles;
+                            // var data2 = data.data2;
+                            // console.log(data2);
+                            // if(response){
+                            //     $('.auto-load').hide();
+                            //     $("#diamond-grid").append(articles);
+                            //     $('#results').text(data2);
+                            // }else{
+                            //     $('.auto-load').html("We don't have more data to display ");
+                            // }
                         })
                         .fail(function (jqXHR, ajaxOptions, thrownError) {
                             console.log('Server error occured');

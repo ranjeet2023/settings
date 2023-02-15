@@ -674,12 +674,13 @@
 // ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
                 var ENDPOINT = "{{ url('/') }}";
                 search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
-                $(window).scroll(function () {
-                    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                        page++;
-                        search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
-                    }
+                window.addEventListener('scroll', function() {
+                if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+                    page++;
+                    search(prevShape, color, clarity, lab, cut, polish, symmetry, fluorescence, eyeclean, minp, maxp, page);
+                }
                 });
+
 
             function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page) {
                  data = {};
@@ -717,30 +718,35 @@
                 data.eyeclean = eyeclean;
                 }
                 $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: ENDPOINT + "/fetch_diamond?page=" + page,
-                        datatype: "html",
-                        type: "post",
-                        data: data,
-                        beforeSend: function () {
-                            $('.auto-load').show();
-                        }
-                    })
-                    .done(function (response) {
-                        if(response){
-                            $('.auto-load').hide();
-                            $("#card-deck").append(response);
-                        }else{
-                            $('.auto-load').html("We don't have more data to display ");
-                        }
-                    })
-                    .fail(function (jqXHR, ajaxOptions, thrownError) {
-                        console.log('Server error occured');
-                    });
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: ENDPOINT + "/fetch_diamond?page=" + page,
+                datatype: "html",
+                type: "post",
+                data: data,
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if(response){
+                    $('.auto-load').hide();
+                    var data = JSON.parse(response);
+                    console.log(data);
+                    // var articles = response.articles;
+                    // console.log(articles);
+                    //  $("#card-deck").append(articles);
+                    // $("#card-deck").append(articles);
+                } else {
+                    $('.auto-load').html("We don't have more data to display ");
+                }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occurred');
+            });
+            }
 
-                 }
         // -------------------------------------------------------end filter pegination--------------------------------------------------------------
 
     });
