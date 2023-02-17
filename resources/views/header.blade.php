@@ -25,7 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"> </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-    
+
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
@@ -58,7 +58,7 @@
                                                 <img src="{{ url('assets/img/shape')}}/{{ ucfirst(strtolower(session('shapes'))) }}.png" width="25px">
                                                 <b>{{ session('rates') }}{{ session('currency') }}</b>
                                             </p>
-                                            <a href="{{ url('select') }}/{{ session('certificate') }}">view</a>|
+                                            <a href="{{ url('diamondDetails') }}/{{ session('certificate') }}">view</a>|
                                             <a href="{{ url('remove_diamond/') }}">Change</a>
                                             @endif
                                         </div>

@@ -10,25 +10,20 @@ class ShapeController extends Controller
 {
     public function index(Request $request)
     {
-            if(session::has('shapes'))
-            {
-                return redirect()->route('choose_ring');
-            }
+        if (session::has('shapes')) {
+            return redirect()->route('choose_ring');
+        }
         $client = new Client();
         $response = $response = $client->post('https://stage.thediamondport.com/api/get_config', [
             'query' => ['token' => '6913277571670500485'],
         ]);
-        $data['config'] =json_decode($response->getBody()->getContents(), true);
-            // echo "<pre>";
-            // print_R($data['config']);
-            // die;
-        return view('test')->with($data);
+        $data['config'] = json_decode($response->getBody()->getContents(), true);
+        return view('index')->with($data);
+
     }
 
     public function fetch_diamond(Request $request)
     {
-
-
         $client = new Client();
         if (!empty($request->input('prevShape'))) {
             $shapes = $request->input('prevShape');
@@ -46,6 +41,12 @@ class ShapeController extends Controller
             $color = implode(',', $colors);
         } else {
             $color = null;
+        }
+        if (!empty($request->input('fancy_color'))) {
+            $fancy_colors = $request->input('fancy_color');
+            $fancycolor = implode(',', $fancy_colors);
+        } else {
+            $fancycolor= null;
         }
         if (!empty($request->input('clarity'))) {
             $claritys = $request->input('clarity');
@@ -83,47 +84,93 @@ class ShapeController extends Controller
         } else {
             $fluorescence = null;
         }
-        if (!empty($request->input('minp')) && !empty($request->input('maxp'))) {
-            $min = $request->input('minp');
-            $max = $request->input('maxp');
+        if (!empty($request->input('carat'))) {
+            $carats = $request->input('carat');
+            $carat = implode('-', $carats);
         } else {
-            $min = null;
-            $max = null;
+            $carat =null ;
+        }
+        if (!empty($request->input('table'))) {
+            $tables = $request->input('table');
+            $table = implode('-', $tables);
+        } else {
+            $table =null ;
+        }
+        if (!empty($request->input('depth'))) {
+            $depths = $request->input('depth');
+            $depth = implode('-', $depths);
+        } else {
+            $depth =null ;
         }
         $page = $request->input('page');
-        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
+        // $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
+            $response = $client->post('https://thediamondport.com/api/wh_search_diamond', [
             'form_params' => [
                 'page' => $page,
                 'shape' => $shape,
                 'color' => $color,
                 'clarity' => $clarity,
-                'carat' => $min - $max,
+                'carat_size' =>$carat,
                 'lab' => $lab,
                 'cut' => $cut,
                 'polish' => $polish,
                 'symmetry' => $symmetry,
                 'fluorescence' => $fluorescence,
                 'eyeclean' => $eyeclean,
-                'token' => '6913277571670500485',
+                'table' => $table,
+                'depth' => $depth,
+                'fancy_color' => $fancycolor,
+                'token' => '20992664171672638853',
                 'diamond_type' => 'natural',
             ],
         ]);
         $config = json_decode($response->getBody(), true);
-        $data['diamond_data'] = $config['data']['data'];
-        $results = $data['diamond_data'];
+        $results = $config['data']['data'];
+        $total_diamond = $config['data']['total'];
+        print
         $artilces = '';
         if ($request->ajax()) {
-            foreach ($results as $result) {
-                $artilces .= '
+            if (!empty($request->input('list_view'))) {
+                foreach ($results as $result) {
+                    if(empty($result['image'])) {
+                        $img = url('assets/img/shape/'.ucfirst(strtolower($result['shape'])) . '.png');
+                    }else{
+                        $img=$result['image'];
+                    }
+                    $artilces .= '
+                    <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '" style="text-decoration:none">
+                <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
+                <img src="'.$img.'" alt="diamond">
+                <p class="list-shape">' . $result['shape'] . ' </p>
+                <p class="list-size">' . $result['carat'] . ' </p>
+                <p class="list-color">' . $result['color'] . '</p>
+                <p class="list-clarity">' . $result['clarity'] . '</p>
+                <p class="list-cut">' . $result['cut'] . '</p>
+                <p class="list-pol">' . $result['polish'] . '</p>
+                <p class="list-sym">' . $result['symmetry'] . '</p>
+                <p class="list-fluor">' . $result['fluorescence'] . '</p>
+                <p class="list-lab">' . $result['lab'] . '</p>
+                <p class="list-report-no">' . $result['lab'] . '</p>
+                <p class="list-price">$' . $result['rate'] . '</p>
+            </div>   </a>' ;
+                }
+            } else {
+                foreach ($results as $result) {
+                    if(empty($result['image'])) {
+                        $img = url('assets/img/shape/'.ucfirst(strtolower($result['shape'])) . '.png');
+                    }else{
+                        $img=$result['image'];
+                    }
+                    $artilces .= '
                 <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
                 <div class="imageBox MuiBox-root css-0">
-                <img src="' . url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png') . '" alt="diamond"></div>
+                <img src="'.$img.'" alt="diamond"></div>
                 <div class="MuiCardContent-root infoBox css-1qw96cp" style="color: rgb(49, 79, 222);">
                     <div class="MuiBox-root css-73nay0">
-                        <h3>  ' . $result['shape'] . ' ' . $result['carat'] . '  ' . $result['color'] . '  ' . $result['clarity'] . ' </h3>
+                        <h3>  ' . $result['shape'] . ' ' . $result['carat'] . ' '."Carat".' ' . $result['color'] . '  ' . $result['clarity'] . ' ' . $result['polish'] . ' ' . $result['cut'] . ' ' . $result['symmetry'] . ' ' . $result['fluorescence'] . ' </h3>
                     </div>
                     <div class="MuiBox-root css-69i1ev">
-                        <h2>' . $result['rate'] . '' . $result['currency_symbol'] . '</h2>
+                        <h2>' . $result['currency_symbol'] . ' ' . $result['rate'] . '</h2>
                         <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '">
                         <button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall css-1s9fsba" tabindex="0" type="button">
                         View<span class="MuiTouchRipple-root css-w0pj6f"></span>
@@ -132,18 +179,32 @@ class ShapeController extends Controller
                     </div>
                 </div>
             </div>';
+                }
+
             }
-            return $artilces;
+            if (empty($artilces)) {
+                    $response = array(
+                        'empty' => true
+                    );
+                } else {
+                    $response_data = array(
+                        'articles' => $artilces,
+                        'tatol_diamond' => $total_diamond,
+                        'empty' => false
+                    );
+                }
+            $json_response = json_encode($response_data);
+            return $json_response;
         }
-        return view('index');
     }
 
-    public function diamondDetails(Request $request ,$id=null){
+    public function diamondDetails(Request $request, $id = null)
+    {
         $client = new Client();
-        $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
+        $response = $client->post('https://thediamondport.com/api/wh_search_diamond', [
             'form_params' => [
-                'certificate'=> $id,
-                'token' => '6913277571670500485',
+                'certificate' => $id,
+                'token' => '20992664171672638853',
                 'diamond_type' => 'natural',
             ],
         ]);
@@ -153,12 +214,12 @@ class ShapeController extends Controller
     }
     public function selectdiamond(request $request)
     {
-        $diamond_id=$request->diamond_id;
+        $diamond_id = $request->diamond_id;
         $client = new Client();
-        $result = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
+        $result = $client->post('https://thediamondport.com/api/wh_search_diamond', [
             'form_params' => [
                 'certificate' => $diamond_id,
-                'token' => '6913277571670500485',
+                'token' => '20992664171672638853',
                 'diamond_type' => 'natural',
             ],
         ]);
@@ -183,9 +244,10 @@ class ShapeController extends Controller
         return view('ring')->with($rings);
     }
 
-    public function select_ring(){
+    public function select_ring()
+    {
 
-        if(session::has('ring_image')){
+        if (session::has('ring_image')) {
             return view('ring_diamond');
         }
         $client = new Client();
@@ -213,7 +275,7 @@ class ShapeController extends Controller
         $product_title = $request->product_title;
         $product_name = $request->product_name;
         Session::put(['settingtype' => $setting_type, 'ring_image' => $ring_image, 'metal_type' => $metal_type, 'purity' => $purity, 'productcost' => $productcost,
-       'product_title' => $product_title, 'product_name' => $product_name, 'product_id' => $product_id]);
+            'product_title' => $product_title, 'product_name' => $product_name, 'product_id' => $product_id]);
         $response['message'] = 'success';
         return json_encode($response);
     }
