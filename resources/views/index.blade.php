@@ -13900,6 +13900,7 @@
                 {{-- end diamond list view --}}
             </div>
         </div>
+<<<<<<< HEAD
     </div>
     <script>
         $(document).ready(function() {
@@ -13936,6 +13937,261 @@
                         icon.classList.remove("up");
                         icon.classList.add("down");
                         $(".hide-filter").hide();
+=======
+    </main>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+            $(".down-button").click(function(){
+                    $(".hide-filter").toggle();
+              });
+            const btn = document.querySelector(".down-button");
+            const icon = document.querySelector("#down-icon");
+            btn.addEventListener("click", function() {
+            if (icon.classList.contains("down")) {
+                icon.classList.remove("down");
+                icon.classList.add("up");
+                $(".hide-filter").show();
+            } else {
+                icon.classList.remove("up");
+                icon.classList.add("down");
+                $(".hide-filter").hide();
+
+            }
+            });
+
+            var prevShape = "";
+            var color= "";
+            var clarity= "";
+            var lab = "";
+            var cut = "";
+            var polish= "";
+            var symmetry= "";
+            var fluorescence = "";
+            var eyeclean = "";
+            var page = 1;
+            var minp = "";
+            var maxp = "";
+
+// ----------------------------------------------------range slider-----------------------------------------
+        $('#price-range-submit').hide();
+        $("#min_price,#max_price").on('change', function () {
+          $('#price-range-submit').show();
+          var min_price_range = parseInt($("#min_price").val());
+          var max_price_range = parseInt($("#max_price").val());
+          if (min_price_range > max_price_range) {
+            $('#max_price').val(min_price_range);
+          }
+          $("#slider-range").slider({
+            values: [min_price_range, max_price_range]
+          });
+
+        });
+        $("#min_price,#max_price").on("paste keyup", function () {
+          $('#price-range-submit').show();
+          var min_price_range = parseInt($("#min_price").val());
+          var max_price_range = parseInt($("#max_price").val());
+          if(min_price_range == max_price_range){
+                max_price_range = min_price_range + 100;
+                $("#min_price").val(min_price_range);
+                $("#max_price").val(max_price_range);
+          }
+          $("#slider-range").slider({
+            values: [min_price_range, max_price_range]
+          });
+        });
+        $(function () {
+          $("#slider-range").slider({
+            range: true,
+            orientation: "horizontal",
+            min: 0.10,
+            max: 30,
+            values: [0.10, 30],
+            step: 0.10,
+            slide: function (event, ui) {
+              if (ui.values[0] == ui.values[1]) {
+                  return false;
+              }
+              $("#min_price").val(ui.values[0]);
+              $("#max_price").val(ui.values[1]);
+            }
+          });
+          $("#min_price").val($("#slider-range").slider("values", 0));
+          $("#max_price").val($("#slider-range").slider("values", 1));
+        });
+        $("#slider-range,#price-range-submit").click(function () {
+          var minp = $('#min_price').val();
+          var maxp = $('#max_price').val();
+               page =1;
+               $("#card-deck").empty();
+               search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+        //   search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+        });
+    // --------------------------------------------------end range slider-----------------------------------------------
+            $(".shape_diamond").click(function() {
+                    $(".shape_diamond").removeClass("active");
+                    $(".shape_diamond").removeClass("btn btn-success");
+                    $(this).addClass("active");
+                    $(this).addClass("btn btn-success");
+                    prevShape =  $(this).attr("data-val");
+                    page=1;
+                    $("#card-deck").empty();
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".color_diamond").click(function() {
+                 $(this).toggleClass("active btn btn-success");
+                    color = $(".color_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape,color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".clarity_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                   clarity = $(".clarity_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".lab_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                lab = $(".lab_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".cut_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                 cut = $(".cut_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".polish_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                polish = $(".polish_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".symmetry_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                symmetry = $(".symmetry_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".fluorescence_diamond").click(function() {
+                $(this).toggleClass("active btn btn-success");
+                fluorescence = $(".fluorescence_diamond.active").map(function() {
+                    return $(this).attr("data-val");
+                }).toArray();
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+            $(".eyeclean_diamond").click(function() {
+                $(".eyeclean_diamond").removeClass("active");
+                    $(".eyeclean_diamond").removeClass("btn btn-success");
+                    $(this).addClass("active");
+                    $(this).addClass("btn btn-success");
+                eyeclean = $(this).attr("data-val");
+                $("#card-deck").empty();
+                page=1;
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+            });
+               // ------------------------------------scroll pegination---------------------------------
+ // ------------------------------------ end scroll pegination---------------------------------
+// ------------------------------------------------------ filter with its  pegination--------------------------------------------------------------
+                var ENDPOINT = "{{ url('/') }}";
+                search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page);
+                window.addEventListener('scroll', function() {
+                if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+                    page++;
+                    search(prevShape, color, clarity, lab, cut, polish, symmetry, fluorescence, eyeclean, minp, maxp, page);
+                }
+                });
+
+
+            function search(prevShape, color,clarity,lab,cut,polish,symmetry,fluorescence,eyeclean,minp,maxp,page) {
+                 data = {};
+                if(minp) {
+                    data.minp = minp;
+                }
+                if(maxp) {
+                    data.maxp = maxp;
+                }
+                if(prevShape) {
+                    data.prevShape = prevShape;
+                }
+                if(color) {
+                    data.color = color;
+                }
+                if(clarity) {
+                    data.clarity= clarity;
+                }
+                if(lab) {
+                    data.lab= lab;
+                }
+                if(cut) {
+                    data.cut= cut;
+                }
+                if(polish) {
+                    data.polish= polish;
+                }
+                if(symmetry) {
+                    data.symmetry = symmetry;
+                }
+                if(fluorescence){
+                    data.fluorescence = fluorescence;
+                }
+                if(eyeclean){
+                data.eyeclean = eyeclean;
+                }
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: ENDPOINT + "/fetch_diamond?page=" + page,
+                datatype: "html",
+                type: "post",
+                data: data,
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if(response){
+                    $('.auto-load').hide();
+                    var data = JSON.parse(response);
+                    console.log(data);
+                    // var articles = response.articles;
+                    // console.log(articles);
+                    //  $("#card-deck").append(articles);
+                    // $("#card-deck").append(articles);
+                } else {
+                    $('.auto-load').html("We don't have more data to display ");
+                }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occurred');
+            });
+            }
+
+        // -------------------------------------------------------end filter pegination--------------------------------------------------------------
+>>>>>>> 704d97044bf2d7869765b98ca51e12a6321cdb0d
 
                     }
                     });
