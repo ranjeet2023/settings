@@ -127,7 +127,10 @@ class ShapeController extends Controller
         $config = json_decode($response->getBody(), true);
         $results = $config['data']['data'];
         $total_diamond = $config['data']['total'];
+<<<<<<< HEAD
         print
+=======
+>>>>>>> 704d97044bf2d7869765b98ca51e12a6321cdb0d
         $artilces = '';
         if ($request->ajax()) {
             if (!empty($request->input('list_view'))) {
@@ -183,6 +186,7 @@ class ShapeController extends Controller
 
             }
             if (empty($artilces)) {
+<<<<<<< HEAD
                     $response = array(
                         'empty' => true
                     );
@@ -194,6 +198,19 @@ class ShapeController extends Controller
                     );
                 }
             $json_response = json_encode($response_data);
+=======
+                $response = array(
+                    'empty' => true
+                );
+            } else {
+                $response = array(
+                    'articles' => $artilces,
+                    'data2' => $total_diamond,
+                    'empty' => false
+                );
+            }
+            $json_response = json_encode($response);
+>>>>>>> 704d97044bf2d7869765b98ca51e12a6321cdb0d
             return $json_response;
         }
     }
