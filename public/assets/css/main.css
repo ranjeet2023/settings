@@ -1324,10 +1324,10 @@ code {
     justify-content: center
 }
 
-.header img {
+/* .header img {
     margin: 30px;
     width: 250px
-}
+} */
 
 .header-btn {
     border-radius: 10px 10px 0 0 !important;
@@ -1974,15 +1974,15 @@ code {
         monospace;
 }
 
-.header div {
+/* .header div {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.header img {
+/* .header img {
     width: 250px;
-    margin: 30px;
+    margin: 30px; */
 }
 
 .header-btn {
@@ -2232,16 +2232,11 @@ code {
     border-radius: 0;
 }
 
-.header div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.header img {
+/* .header img {
     width: 250px;
     margin: 30px;
-}
+} */
 
 .header-btn {
     text-transform: none !important;

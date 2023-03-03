@@ -10,9 +10,9 @@ class ShapeController extends Controller
 {
     public function index(Request $request)
     {
-        if (session::has('shapes')) {
-            return redirect()->route('choose_ring');
-        }
+        // if (session::has('shapes')) {
+        //     return redirect()->route('choose_ring');
+        // }
         $client = new Client();
         $response = $response = $client->post('https://thediamondport.com/api/get_config', [
             'query' => ['token' => '20992664171672638853'],
@@ -46,7 +46,7 @@ class ShapeController extends Controller
             $fancy_colors = $request->input('fancy_color');
             $fancycolor = implode(',', $fancy_colors);
         } else {
-            $fancycolor= null;
+            $fancycolor = null;
         }
         if (!empty($request->input('clarity'))) {
             $claritys = $request->input('clarity');
@@ -88,29 +88,29 @@ class ShapeController extends Controller
             $carats = $request->input('carat');
             $carat = implode('-', $carats);
         } else {
-            $carat =null ;
+            $carat = null;
         }
         if (!empty($request->input('table'))) {
             $tables = $request->input('table');
             $table = implode('-', $tables);
         } else {
-            $table =null ;
+            $table = null;
         }
         if (!empty($request->input('depth'))) {
             $depths = $request->input('depth');
             $depth = implode('-', $depths);
         } else {
-            $depth =null ;
+            $depth = null;
         }
         $page = $request->input('page');
         // $response = $client->post('https://stage.thediamondport.com/api/wh_search_diamond', [
-            $response = $client->post('https://thediamondport.com/api/wh_search_diamond', [
+        $response = $client->post('https://thediamondport.com/api/wh_search_diamond', [
             'form_params' => [
                 'page' => $page,
                 'shape' => $shape,
                 'color' => $color,
                 'clarity' => $clarity,
-                'carat_size' =>$carat,
+                'carat_size' => $carat,
                 'lab' => $lab,
                 'cut' => $cut,
                 'polish' => $polish,
@@ -132,15 +132,15 @@ class ShapeController extends Controller
         if ($request->ajax()) {
             if (!empty($request->input('list_view'))) {
                 foreach ($results as $result) {
-                    if(empty($result['image'])) {
-                        $img = url('assets/img/shape/'.ucfirst(strtolower($result['shape'])) . '.png');
-                    }else{
-                        $img=$result['image'];
+                    if (empty($result['image'])) {
+                        $img = url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png');
+                    } else {
+                        $img = $result['image'];
                     }
                     $artilces .= '
                     <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '" style="text-decoration:none">
                 <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
-                <img src="'.$img.'" alt="diamond">
+                <img src="' . $img . '" alt="diamond">
                 <p class="list-shape">' . $result['shape'] . ' </p>
                 <p class="list-size">' . $result['carat'] . ' </p>
                 <p class="list-color">' . $result['color'] . '</p>
@@ -152,22 +152,22 @@ class ShapeController extends Controller
                 <p class="list-lab">' . $result['lab'] . '</p>
                 <p class="list-report-no">' . $result['lab'] . '</p>
                 <p class="list-price">$' . $result['rate'] . '</p>
-            </div>   </a>' ;
+            </div>   </a>';
                 }
             } else {
                 foreach ($results as $result) {
-                    if(empty($result['image'])) {
-                        $img = url('assets/img/shape/'.ucfirst(strtolower($result['shape'])) . '.png');
-                    }else{
-                        $img=$result['image'];
+                    if (empty($result['image'])) {
+                        $img = url('assets/img/shape/' . ucfirst(strtolower($result['shape'])) . '.png');
+                    } else {
+                        $img = $result['image'];
                     }
                     $artilces .= '
                 <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
                 <div class="imageBox MuiBox-root css-0">
-                <img src="'.$img.'" alt="diamond"></div>
+                <img src="' . $img . '" alt="diamond"></div>
                 <div class="MuiCardContent-root infoBox css-1qw96cp" style="color: rgb(49, 79, 222);">
                     <div class="MuiBox-root css-73nay0">
-                        <h3>  ' . $result['shape'] . ' ' . $result['carat'] . ' '."Carat".' ' . $result['color'] . '  ' . $result['clarity'] . ' ' . $result['polish'] . ' ' . $result['cut'] . ' ' . $result['symmetry'] . ' ' . $result['fluorescence'] . ' </h3>
+                        <h3>  ' . $result['shape'] . ' ' . $result['carat'] . ' ' . "Carat" . ' ' . $result['color'] . '  ' . $result['clarity'] . ' ' . $result['polish'] . ' ' . $result['cut'] . ' ' . $result['symmetry'] . ' ' . $result['fluorescence'] . ' </h3>
                     </div>
                     <div class="MuiBox-root css-69i1ev">
                         <h2>' . $result['currency_symbol'] . ' ' . $result['rate'] . '</h2>
@@ -183,16 +183,16 @@ class ShapeController extends Controller
 
             }
             if (empty($artilces)) {
-                    $response = array(
-                        'empty' => true
-                    );
-                } else {
-                    $response_data = array(
-                        'articles' => $artilces,
-                        'tatol_diamond' => $total_diamond,
-                        'empty' => false
-                    );
-                }
+                $response = array(
+                    'empty' => true,
+                );
+            } else {
+                $response_data = array(
+                    'articles' => $artilces,
+                    'tatol_diamond' => $total_diamond,
+                    'empty' => false,
+                );
+            }
             $json_response = json_encode($response_data);
             return $json_response;
         }
@@ -225,64 +225,180 @@ class ShapeController extends Controller
         ]);
         $config = json_decode($result->getBody(), true);
         $data['diamond_data'] = $config['data']['data'][0];
-        Session::put(['certificate' => $data['diamond_data']['certificate_no'], 'rates' => $data['diamond_data']['rate'], 'shapes' => $data['diamond_data']['shape'], 'currency' => $data['diamond_data']['currency_symbol']]);
+        Session::put('diamond', $data['diamond_data']);
         $response['message'] = 'success';
         return json_encode($response);
     }
 
-    public function choose_ring(Request $request, $id = null)
+    public function getconfigring()
     {
-        $client = new Client();
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOTA2NDJiZDkwYjFkZjE0M2MzZTU2YWEzMjg0NmIwMDcxNzMxZTkzNWE4ZjUwY2JhZjI3MGI5NGRjYjZmNmY4ODRmOTMzODY2ZTI0MzU3ZjUiLCJpYXQiOjE2NzU5MzU1MDcuOTk4NTA4OTMwMjA2Mjk4ODI4MTI1LCJuYmYiOjE2NzU5MzU1MDcuOTk4NTExMDc1OTczNTEwNzQyMTg3NSwiZXhwIjoxNzA3NDcxNTA3Ljk5MTI4MTk4NjIzNjU3MjI2NTYyNSwic3ViIjoiOSIsInNjb3BlcyI6W119.WPKkQZ-JOBmifhMvLMJWDp-Wy_Ddu_DAKFxYvVHapH1mCy623VXaORFHp4GHsX80isw35xXmEyYWd2ZwTpzRnd4KoK0Vr0W0j4nK93qW4fInJ10FuKJgJSGUkXHuZYU0-OH2ehq3_BAsch4LiKrSsfF69gU4IoPT-HysSuTrrpChE2BtajJSXDirn3JAXhCrn79NfJAtOes5oQyAHpFRkke0CPUAKEKM5Ie67f-KeQaBoZjGUNpx_UAUjUfCLllq-J9QTnyprZ5xKmScilW8CCoIgmnDTUepQ9-rUCNG_L1RkT5PBgwHttTOrpbLOMecUqxTTr3xJ-h_n2lLBZbrGc68HNz1lvD_KYlf2-VHQ5Dd25INPqTDG1VJRfFOcyaV2n1eVO-XV0eM-pOQNDBagpAK5jjEt96UuNKNx48dj7uchBkLE-9mjqMCKFT4GALQvaXDp1TtwANQgPow3lVa69cFiztat_HvTL52N6YHDSKAsdKGvf_1cKbhkoGPf6cVaGdBcdJ8KDgzZITkvWljwnY129uUUn4tr2kTglFC9i0yaRXcvlhhWykPmt6oHATOzsvkrzxe0HN5iqDCmCdvfjMgOZzc5CdTYkPjDR7fgOeAUDe6XKos-mLWIcbXvq2secQDDLZQR8FT3OQ_BGViJrPUpI8Ioduh9kj47yuWKls';
-        $response = $client->request('POST', 'https://thediamondport.com/api/get-semi-product', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-        ]);
-        $Ring_data = json_decode($response->getBody()->getContents(), true);
-        $rings['ring_data'] = $Ring_data['data'];
-        return view('ring')->with($rings);
-    }
-
-    public function select_ring()
-    {
-
-        if (session::has('ring_image')) {
-            return view('ring_diamond');
+        if (session::has('ring')) {
+            return redirect()->route('ring_diamond');
         }
         $client = new Client();
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOTA2NDJiZDkwYjFkZjE0M2MzZTU2YWEzMjg0NmIwMDcxNzMxZTkzNWE4ZjUwY2JhZjI3MGI5NGRjYjZmNmY4ODRmOTMzODY2ZTI0MzU3ZjUiLCJpYXQiOjE2NzU5MzU1MDcuOTk4NTA4OTMwMjA2Mjk4ODI4MTI1LCJuYmYiOjE2NzU5MzU1MDcuOTk4NTExMDc1OTczNTEwNzQyMTg3NSwiZXhwIjoxNzA3NDcxNTA3Ljk5MTI4MTk4NjIzNjU3MjI2NTYyNSwic3ViIjoiOSIsInNjb3BlcyI6W119.WPKkQZ-JOBmifhMvLMJWDp-Wy_Ddu_DAKFxYvVHapH1mCy623VXaORFHp4GHsX80isw35xXmEyYWd2ZwTpzRnd4KoK0Vr0W0j4nK93qW4fInJ10FuKJgJSGUkXHuZYU0-OH2ehq3_BAsch4LiKrSsfF69gU4IoPT-HysSuTrrpChE2BtajJSXDirn3JAXhCrn79NfJAtOes5oQyAHpFRkke0CPUAKEKM5Ie67f-KeQaBoZjGUNpx_UAUjUfCLllq-J9QTnyprZ5xKmScilW8CCoIgmnDTUepQ9-rUCNG_L1RkT5PBgwHttTOrpbLOMecUqxTTr3xJ-h_n2lLBZbrGc68HNz1lvD_KYlf2-VHQ5Dd25INPqTDG1VJRfFOcyaV2n1eVO-XV0eM-pOQNDBagpAK5jjEt96UuNKNx48dj7uchBkLE-9mjqMCKFT4GALQvaXDp1TtwANQgPow3lVa69cFiztat_HvTL52N6YHDSKAsdKGvf_1cKbhkoGPf6cVaGdBcdJ8KDgzZITkvWljwnY129uUUn4tr2kTglFC9i0yaRXcvlhhWykPmt6oHATOzsvkrzxe0HN5iqDCmCdvfjMgOZzc5CdTYkPjDR7fgOeAUDe6XKos-mLWIcbXvq2secQDDLZQR8FT3OQ_BGViJrPUpI8Ioduh9kj47yuWKls';
-        $response = $client->request('POST', 'https://thediamondport.com/api/get-semi-product', [
+        $token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
+        $response = $client->request('POST', 'http://127.0.0.1:300/api/get_config_ring', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
+            ],
+
+        ]);
+        $data['ring_filter'] = json_decode($response->getBody()->getContents(), true);
+        return view('ring')->with($data);
+    }
+
+
+
+    public function all_ring(Request $request)
+    {
+
+        // if (session::has('ring_image')) {
+        //     return view('ring_diamond');
+        // }
+        $client = new Client();
+        $page = $request->input('page');
+        if(!empty($request->ringmetal)){
+            $metal=$request->ringmetal;
+        }else{
+            $metal=null;
+        }
+        if (!empty($request->ringstyle)) {
+            $settings = $request->ringstyle;
+            $setting= implode(',', $settings);
+        } else {
+            $setting = null;
+        }
+        if (!empty($request->maxValue)) {
+            $pricemin = $request->minValue;
+            if($pricemin==null){
+                $pricemin=0;
+            }else{
+                $pricemin = $request->minValue;
+            }
+            $pricemax = $request->maxValue;
+        } else {
+            $pricemin= null;
+            $pricemax = null;
+        }
+        $token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
+        $response = $client->request('POST', 'http://127.0.0.1:300/api/getring', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            'form_params' => [
+                'page' => $page,
+                'metaltype'=>$metal,
+                'settingtype'=>$setting,
+                'pricemin'=>$pricemin,
+                'pricemax'=>$pricemax,
             ],
         ]);
         $Ring_data = json_decode($response->getBody()->getContents(), true);
         $rings['ring_data'] = $Ring_data['data'];
-        return view('ring')->with($rings);
+        $artilces = '';
+        if ($request->ajax()) {
+            if (!empty($request->input('list_view'))) {
+                foreach ($rings['ring_data']['data'] as $result) {
+                    // if (empty($result['additional_image_1'])) {
+                        // $img = null;
+                        $img = url('assets/img/shape/halo.png');
+                    // } else {
+                        // $img = $result['additional_image_1'];
+                    // }
+                    $artilces .= '
+                    <a href=" ' . url('ring_details') . '/' . $result['id'] . '" style="text-decoration:none">
+                <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
+                <img src="' . $img . '" alt="diamond">
+                <p class="list-shape">' . $result['sub_category'] . ' </p>
+                <p class="list-size">' . $result['metal_name'] . ' </p>
+                <p class="list-color">' . $result['design_name'] . '</p>
+                <p class="list-price">$ ' . $result['total_price'] . '</p>
+            </div>   </a>';
+                }
+            } else {
+                foreach ($rings['ring_data']['data'] as $result) {
+                    // if (empty($result['additional_image_1'])) {
+                        $img = url('assets/img/shape/halo.png');
+                    // } else {
+                        // $img = $result['additional_image_1'];
+                    // }
+                    $artilces .= '
+                <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
+                <div class="imageBox MuiBox-root css-0">
+                <img src="' . $img . '" alt="ring"></div>
+                <div class="MuiCardContent-root infoBox css-1qw96cp" style="color: rgb(49, 79, 222);">
+                    <div class="MuiBox-root css-73nay0">
+                        <h3>  ' . $result['sub_category'] . ' ' . $result['metal_name'] . '  ' . $result['design_name'] . '</h3>
+                    </div>
+                    <div class="MuiBox-root css-69i1ev">
+                        <h2>$ ' . $result['total_price'] . '</h2>
+                        <a href="' . url('ring_details') . '/' . $result['id'] . ' ">
+                        <button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall css-1s9fsba" tabindex="0" type="button">
+                        View<span class="MuiTouchRipple-root css-w0pj6f"></span>
+                        </button>
+                        </a>
+                    </div>
+                </div>
+            </div>';
+                }
+
+            }
+            if (empty($artilces)) {
+                $response_data= array(
+                    'empty' => true,
+                );
+            } else {
+                $response_data = array(
+                    'articles' => $artilces,
+                    'empty' => false,
+                );
+            }
+            $json_response = json_encode($response_data);
+            return $json_response;
+        }
+
+        return;
 
     }
+    public function ringdetails(Request $request)
+         {
+            $client = new Client();
+            $id = $request->id;
+            $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
+            $response = $client->request('POST', 'http://127.0.0.1:300/api/add_ring', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+                'form_params' => [
+                    'product_id' => $id,
+                ],
+            ]);
+            $Ring_data = json_decode($response->getBody()->getContents(), true);
+            $rings['ring_data'] = $Ring_data['data'];
+            return view('select_ring')->with($rings);
 
+        }
     public function confirm_ring(Request $request)
     {
+        $client = new Client();
+        $id = $request->ring_id;
+        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
+        $response = $client->request('POST', 'http://127.0.0.1:300/api/add_ring', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            'form_params' => [
+                'product_id' => $id,
+            ],
+        ]);
+        $Ring_data = json_decode($response->getBody()->getContents(), true);
+        $rings['ring_data'] = $Ring_data['data'];
+        Session::put('ring', $rings['ring_data']);
+        // Session::put(['id' => $rings['ring_data']['id'],'category' => $rings['ring_data']['category'], 'sub_category' => $rings['ring_data']['sub_category'], 'sku' => $rings['ring_data']['sku'], 'price' => $rings['ring_data']['total_price'], 'Product_name' => $rings['ring_data']['Product_name'],'Product_description' => $rings['ring_data']['Product_description'],'design_name' => $rings['ring_data']['design_name']]);
+        $responses['message'] = 'success';
+        return json_encode($responses);
+       }
 
-        $setting_type = $request->settingtype;
-        $product_id = $request->product_id;
-        $ring_image = $request->image;
-        $metal_type = $request->metal_type;
-        $purity = $request->purity;
-        $productcost = $request->productcost;
-        $product_title = $request->product_title;
-        $product_name = $request->product_name;
-        Session::put(['settingtype' => $setting_type, 'ring_image' => $ring_image, 'metal_type' => $metal_type, 'purity' => $purity, 'productcost' => $productcost,
-            'product_title' => $product_title, 'product_name' => $product_name, 'product_id' => $product_id]);
-        $response['message'] = 'success';
-        return json_encode($response);
-    }
-    public function ring_view()
-    {
-        return view('select_ring');
-    }
 
     public function ring_diamond()
     {
@@ -291,23 +407,13 @@ class ShapeController extends Controller
 
     public function remove_ring(Request $request)
     {
-        Session::forget('ring_image');
-        Session::forget('ring_style');
-        Session::forget('ring_rates');
-        Session::forget('settingtype');
-        Session::forget('product_id');
-        Session::forget('metal_type');
-        Session::forget('purity');
-        Session::forget('productcost');
-        Session::forget('product_title');
-        Session::forget('product_name');
-        return redirect()->route('choose_ring');
+        Session::forget('ring');
+        return redirect()->route('getconfigring');
     }
 
     public function remove_diamond(Request $request)
     {
-        Session::forget('shapes');
-        Session::forget('rates');
+        Session::forget('diamond');
         return redirect()->route('index');
     }
 }

@@ -1,0 +1,220 @@
+        .toggle-buttons-modern-wrap {
+            border-radius: 32px;
+            display: flex;
+            position: relative;
+            transition: all .1s ease-in-out;
+            width: -moz-fit-content;
+            width: fit-content;
+        }
+
+        .metal-inner {
+            position: unset !important;
+        }
+
+        body.desktop .q-focus-helper:after {
+            background: #fff;
+        }
+
+        .q-btn {
+            align-items: stretch;
+            background: #0000;
+            border: 0;
+            color: inherit;
+            cursor: default;
+            display: inline-flex;
+            flex-direction: column;
+            font-size: 14px;
+            font-weight: 500;
+            height: auto;
+            line-height: 1.715em;
+            min-height: 2.572em;
+            outline: 0;
+            padding: 4px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            vertical-align: middle;
+            width: auto;
+        }
+
+        body.desktop .q-focus-helper:after,
+        body.desktop .q-focus-helper:before {
+            border-radius: inherit;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transition: background-color .3s cubic-bezier(.25, .8, .5, 1), opacity .6s cubic-bezier(.25, .8, .5, 1);
+            width: 100%;
+        }
+
+        *,
+        :after,
+        :before {
+            -webkit-tap-highlight-color: transparent;
+            -moz-tap-highlight-color: #0000;
+            box-sizing: inherit;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn .metal.white {
+            background: linear-gradient(144.34deg, #000000 10.16%, #fff 50.12%, #d1d3d4 97.89%);
+            border: none !important;
+            padding: 2px;
+
+            position: relative;
+        }
+
+        .no-outline {
+            outline: 0 !important;
+        }
+
+        .q-mb-sm {
+            margin-bottom: 5px;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn {
+            /* background: #0000; */
+            height: 50px;
+            padding-left: 8px;
+            width: 50px;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn .metal.white .metal-inner {
+            background: linear-gradient(206.57deg, #c1c2c3 8.81%, #fff 50.17%, #d1d3d4 99.6%);
+            border-radius: 100%;
+            height: 100%;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .row>* {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 100%;
+            padding-right: 0px;
+            padding-left: 0px;
+            margin-top: var(--bs-gutter-y);
+        }
+
+        .metal-inner {
+            position: unset !important;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn.active .metal {
+            background: #2d85e2 !important;
+        }
+
+        .metal-inner {
+            position: unset !important;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn.active {
+            border: 1px solid #0000;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn .metal.rose .metal-inner {
+            background: linear-gradient(33.43deg, #ffb1b1 -10.28%, #ffe0e0 48.56%, #ff7272 118.07%, #ff9191 118.08%);
+            border-radius: 100%;
+            height: 100%;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn .metal.yellow .metal-inner {
+            background: linear-gradient(212.45deg, #ffc700 -8.69%, #f2bd00 22.85%, #ffe884 51.92%, #f2bd00 110.05%);
+            border-radius: 100%;
+            height: 100%;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .toggle-buttons-modern-wrap.metals .q-btn .metal {
+            border: 1px solid #c4c4c4;
+            border-radius: 32px;
+            height: 32px;
+            overflow: hidden;
+            position: relative;
+            width: 32px;
+        }
+        /* change background color  */
+
+        .toggle-buttons-modern-wrap .q-btn {
+            background: linear-gradient(0deg, #e7f1f5, #e7f1f5);
+            border: 1.5px solid #0000;
+            height: 64px;
+            width: 64px;
+        }
+
+        .q-btn:before {
+            border-radius: inherit;
+            bottom: 0;
+            box-shadow: 0 1px 5px #0003, 0 2px 2px #00000024, 0 3px 1px -2px #0000001f;
+            content: "";
+            display: block;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .q-btn--flat:before,
+        .q-btn--outline:before,
+        .q-btn--unelevated:before {
+            box-shadow: none;
+        }
+
+        *,
+        :after,
+        :before {
+            -webkit-tap-highlight-color: transparent;
+            -moz-tap-highlight-color: #0000;
+            box-sizing: inherit;
+        }
+
+        .q-btn--round {
+            border-radius: 50%;
+            min-height: 3em;
+            min-width: 3em;
+            padding: 0;
+        }
+
+        .flex-center,
+        .items-center {
+            align-items: center;
+        }
+
+        .column,
+        .flex,
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .q-btn__content {
+            transition: opacity .3s;
+            z-index: 0;
+        }
+
+        .row {
+            margin-left: 0px;
+            text-align: center;
+        }
+
+        .toggle-buttons-modern-wrap .button-wrap>span {
+            color: #484848;
+            font-family: LinetoLight;
+            font-size: 13px;
+        }
+
+        .toggle-buttons-modern-wrap .button-wrap {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin-right: 66px;
+        }
+        ..css-73nay0 {
+            height: 0px;
+        }

@@ -8,7 +8,7 @@
 }
 
 .selected svg {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
 }
 
 .css-1yuhvjn {
@@ -625,7 +625,7 @@ p {
     font-size: 11px;
     border-radius: 0px;
 }
-#ringimage{
+.ringimage{
     border:2px ;
     border-radius:100%;
     background-color:rgb(235, 215, 215);
@@ -714,10 +714,10 @@ code {
     align-items: center;
 }
 
-.header img {
+/* .header img {
     width: 250px;
     margin: 30px;
-}
+} */
 
 .header-btn {
     text-transform: none !important;
@@ -774,7 +774,8 @@ code {
     padding: 0 10px;
     box-sizing: border-box;
     flex-wrap: wrap;
-    margin: 0 50px 20px 50px;
+    margin: 0 50px 0px 50px;
+    /* margin: 0 50px 20px 50px; */
 }
 .RingShapes {
     display: flex;
@@ -1069,7 +1070,7 @@ button {
 
 .header img {
     width: 250px;
-    margin: 30px;
+    /* margin: 30px; */
 }
 
 .header-btn {

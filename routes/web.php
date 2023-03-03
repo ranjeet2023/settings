@@ -18,15 +18,14 @@ Route::any('/test', function () {
 });
 // Route::get('/test', [ShapeController::class, 'index'])->name('index');
 Route::get('/', [ShapeController::class, 'index'])->name('index');
-
 Route::post('/fetch_diamond', [ShapeController::class, 'fetch_diamond'])->name('fetched_diamond');
 Route::get('/diamondDetails/{id}', [ShapeController::class, 'diamondDetails'])->name('diamondDetails');
 Route::post('/selectdiamond', [ShapeController::class, 'selectdiamond'])->name('selectdiamond');
 
-
-Route::get('/choose_ring', [ShapeController::class, 'select_ring'])->name('choose_ring');
-Route::post('/confirm_ring', [ShapeController::class, 'confirm_ring'])->name('confirm_ring');
-Route::get('/confirm_ring', [ShapeController::class, 'ring_view']);
+Route::get('/get_config_ring', [ShapeController::class, 'getconfigring'])->name('getconfigring');
+Route::get('/choose_ring', [ShapeController::class, 'all_ring'])->name('all_ring');
+Route::get('/ring_details/{id}', [ShapeController::class, 'ringdetails'])->name('ringdetails');
+Route::post('/confirm_ring/', [ShapeController::class, 'confirm_ring'])->name('confirm_ring');
 
 Route::get('/ring_diamond', [ShapeController::class, 'ring_diamond'])->name('ring_diamond');
 

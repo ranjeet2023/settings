@@ -26,17 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-// Route::get('/', [ShapeController::class, 'index'])->name('index');
-// Route::post('/fetch_diamond', [ShapeController::class, 'fetch_diamond']);
-// Route::get('/select/{id}', [ChooseStoneController::class, 'Select'])->name('select');
-// Route::get('/choose-ring/{id}', [SelectRingController::class, 'All_Setting'])->name('confirm');
-// Route::get('/settings/', [SelectRingController::class, 'All_Setting'])->name('settings');
-// Route::get('/confirm-setting/{product_id}', [SelectRingController::class, 'Select_setting'])->name('Ring-settings');
-// Route::get('/confirm-setting', [SelectRingController::class, 'ring_view'])->name('confirm-setting');
-// Route::get('/preview', [SelectRingController::class, 'Settings'])->name('Select_setting');
-// Route::get('/ring/destroy', [SelectRingController::class, 'destroy_ring'])->name('destroy_ring');
-// Route::get('/diamond/destroy', [SelectRingController::class, 'destroy_diamond'])->name('destroy_diamond');
-
-
 
 
