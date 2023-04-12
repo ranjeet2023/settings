@@ -86,11 +86,9 @@
                         </button>
                     </div>
                     <div class="MuiBox-root css-0">
-                        <a href="{{ url('/') }}">
-                            <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1d4ezjn" tabindex="0" type="button">Reset Filter<span class="MuiTouchRipple-root css-w0pj6f">
+                            <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1d4ezjn reset" tabindex="0" type="button" >Reset Filter<span class="MuiTouchRipple-root css-w0pj6f">
                                 </span>
                             </button>
-                        </a>
                     </div>
                     <div class="filter-actions MuiBox-root css-70qvj9">
                         <p>Outlook: </p><button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1xvjyjn" tabindex="0" type="button">
@@ -102,7 +100,7 @@
                             </span>
                         </button>
                         <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1xzydj0 grid_view" tabindex="0" type="button">
-                            <a href="{{ url('/') }}">
+                            <a href="{{ url('/get_config_ring') }}">
                                 <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="AppsIcon">
                                     <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z">
                                     </path>
@@ -175,6 +173,7 @@
             </div>
     <script>
     $(document).ready(function() {
+
         var minp = "";
         var table = "";
         var  page=1;
@@ -183,6 +182,14 @@
         var minValue="";
         var maxValue="";
         var list_view= "";
+
+        var classList = ["js-range-slider_price"];
+        $(".reset").click(function() {
+            classList.forEach(function(className) {
+                $("." + className).data("ionRangeSlider").reset();
+            });
+        });
+
 
         $(".js-range-slider_price").ionRangeSlider({
             type: "double",
@@ -266,8 +273,10 @@
                         $('.auto-load').html("We don't have more data to display ");
                     } else {
                         var articles = data.articles;
+                        var totalring = data.total_rings;
                         $('.auto-load').hide();
                         $("#diamond-grid").append(articles);
+                        $('#results').text(totalring);
                     }
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError) {

@@ -59,7 +59,7 @@
                 $diamond_data['fluorescence'] }}</p>
             <p>SKU : {{ $diamond_data['sku'] }} | Certificate No.: {{ $diamond_data['certificate_no'] }} </p>
             <div style="display: flex; align-items: center; color: rgb(49, 79, 222);">
-                <h1>{{ $diamond_data['currency_symbol'] }} {{ $diamond_data['rate'] }} </h1><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1dia5b9" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="InfoIcon">
+                <h1>$ {{ $diamond_data['rate'] }} </h1><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1dia5b9" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="InfoIcon">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
                     </path>
                 </svg>

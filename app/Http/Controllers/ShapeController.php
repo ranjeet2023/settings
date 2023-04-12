@@ -25,6 +25,12 @@ class ShapeController extends Controller
     public function fetch_diamond(Request $request)
     {
         $client = new Client();
+        if (!empty($request->input('diamond'))) {
+            $diamond = $request->input('diamond');
+        } else {
+            $diamond = 'Natural';
+        }
+
         if (!empty($request->input('prevShape'))) {
             $shapes = $request->input('prevShape');
             $shape = implode(',', $shapes);
@@ -121,7 +127,7 @@ class ShapeController extends Controller
                 'depth' => $depth,
                 'fancy_color' => $fancycolor,
                 'token' => '20992664171672638853',
-                'diamond_type' => 'natural',
+                'diamond_type' => $diamond,
             ],
         ]);
         $config = json_decode($response->getBody(), true);
@@ -183,7 +189,7 @@ class ShapeController extends Controller
 
             }
             if (empty($artilces)) {
-                $response = array(
+                $response_data = array(
                     'empty' => true,
                 );
             } else {
@@ -295,13 +301,14 @@ class ShapeController extends Controller
         ]);
         $Ring_data = json_decode($response->getBody()->getContents(), true);
         $rings['ring_data'] = $Ring_data['data'];
+        $rings['total_rings']=$Ring_data['data']['total'];
         $artilces = '';
         if ($request->ajax()) {
             if (!empty($request->input('list_view'))) {
                 foreach ($rings['ring_data']['data'] as $result) {
                     // if (empty($result['additional_image_1'])) {
                         // $img = null;
-                        $img = url('assets/img/shape/halo.png');
+                        $img =  url('assets/img/shape/' . ucfirst(strtolower($result['sub_category'])) . '.png');
                     // } else {
                         // $img = $result['additional_image_1'];
                     // }
@@ -318,7 +325,7 @@ class ShapeController extends Controller
             } else {
                 foreach ($rings['ring_data']['data'] as $result) {
                     // if (empty($result['additional_image_1'])) {
-                        $img = url('assets/img/shape/halo.png');
+                        $img =url('assets/img/shape/' . ucfirst(strtolower($result['sub_category'])) . '.png');
                     // } else {
                         // $img = $result['additional_image_1'];
                     // }
@@ -350,6 +357,7 @@ class ShapeController extends Controller
             } else {
                 $response_data = array(
                     'articles' => $artilces,
+                    'total_rings'=>$rings['total_rings'],
                     'empty' => false,
                 );
             }
@@ -361,23 +369,23 @@ class ShapeController extends Controller
 
     }
     public function ringdetails(Request $request)
-         {
-            $client = new Client();
-            $id = $request->id;
-            $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
-            $response = $client->request('POST', 'http://127.0.0.1:300/api/add_ring', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $token,
-                ],
-                'form_params' => [
-                    'product_id' => $id,
-                ],
-            ]);
-            $Ring_data = json_decode($response->getBody()->getContents(), true);
-            $rings['ring_data'] = $Ring_data['data'];
-            return view('select_ring')->with($rings);
+        {
+        $client = new Client();
+        $id = $request->id;
+        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNGIzNzg5ZGNiYzc4MzNlZTQ1MzdlZjZjMzRkMDNiYWQwODQ5ODU4NGY3NTMxODZkNDg3NzEyNGViZDM2ZWQwODVjYjcyMjVhMmNlMmU0YmMiLCJpYXQiOjE2Nzc2NjAxODYuNjQ3MjAxLCJuYmYiOjE2Nzc2NjAxODYuNjQ3MjA0LCJleHAiOjE3MDkyODI1ODYuNjQwOTczLCJzdWIiOiI0NzIiLCJzY29wZXMiOltdfQ.OfX2MhycmBqoFpZ3Wf1WinaJfsUTDibQ965snlazaFnJHfmuVaVuPwrXe1n5KyTGxl-zc2JHb_mP-P9a8kOnxCvRSp3WMYrfTvTgkAGaq0_DvZwfrM9JaKjy66TFLMZc8xDMhnKXaXkzsvI58-yKk4Bu8VY9oM1FRqKkfnHmlVikMsIvR0FpBRzjzFLB7wEYN5y3kGOXwnx4rPk1rAfXrtvNktdwZrEsrkyPJYlk79RH_qRlsyPrqdiLMOQjEjooxG8AOBHXqLdXZgMP0Ik6ZuF3A02AkgT4Xd-ME_aKrJ6O2jVxhR_nPHXHKIf_uFycxpMM-sGyGuvUgjQ2br5eOeXuIBuBg-_nHtkiNQXtZynd7YsX0IWePBHEB61y-vQ4bjyuS5ko8RGUgk_HLMbqA0pifeFLnuRm-tQ0ppV7-8Fm23rBpVaHRC-tm7YhcV0p4L33BkM7nFrECY1Z-rO-Z4PQaYDSKdh20UyqRNjkQ-8SWqyujMRGSGfU3C-tsr2NiBA5BmdnKyfeHM-ry08uqnNW19eMc9FY_gqz5ECZvKIXNc8y-e0VI2ruJKa2LuoPel3kXUdajWN2W9zHnQQW08IUgssftXmxzWUf5YDtxR9VtIG3sSnFuWLHQhojwoxiknmJvlgvudHjx477PTxvwQ4gc2IHCyHEOdGEExFzbIA';
+        $response = $client->request('POST', 'http://127.0.0.1:300/api/add_ring', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            'form_params' => [
+                'product_id' => $id,
+            ],
+        ]);
+        $Ring_data = json_decode($response->getBody()->getContents(), true);
+        $rings['ring_data'] = $Ring_data['data'];
+        return view('select_ring')->with($rings);
 
-        }
+    }
     public function confirm_ring(Request $request)
     {
         $client = new Client();

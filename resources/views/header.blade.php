@@ -135,7 +135,8 @@
                 <li @if(Route::is('index','fetched_diamond','diamondDetails','selectdiamond'))  class="past"  @endif>
                     <span>
                         <div class="row">
-                            <div class="col" style="float:left"> <strong style="font-size:20px"><a href="{{ url('/') }}" style= text-decoration:none>Diamond</a></strong></div>
+                            <div class="col" style="float:left"> <strong style="font-size:20px"><a href="{{ url('/') }}" style= text-decoration:none>Diamond</a></strong>
+                            </div>
                             @if(Session::has('diamond'))
                             @php
                             $data = Session::get('diamond');

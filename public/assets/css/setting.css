@@ -832,8 +832,8 @@ code {
     box-sizing: border-box;
     flex-wrap: wrap;
     width: 90%;
-    background-color: White;
-    padding: 10px;
+    background-color: #d9d9d9;
+    /* padding: 10px; */
     overflow: auto;
     /* box-shadow: 2px 4px 6px 2px #8b8b8b52; */
     margin-bottom: 40px;
