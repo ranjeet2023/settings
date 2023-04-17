@@ -33,11 +33,12 @@ Route::get('/ring_diamond', [ShapeController::class, 'ring_diamond'])->name('rin
 Route::get('/remove_ring', [ShapeController::class, 'remove_ring'])->name('remove_ring');
 Route::get('/remove_diamond', [ShapeController::class, 'remove_diamond'])->name('remove_diamond');
 
-
 Route::get('ring-import', [RingImportController::class, 'fileImportExport']);
 Route::post('ring-import-data', [RingImportController::class, 'fileImport'])->name('file-import');
-
 
 Route::fallback(function () {
     return view('404');
 });
+
+
+

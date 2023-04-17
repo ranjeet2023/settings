@@ -11,20 +11,15 @@
         <h2 class="mb-4">
            Import ring file
         </h2>
-        @if (session('success'))
+        @if(session('success'))
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    {{session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
-            <script>
-                setTimeout(function() {
-                    $('#success-message').addClass('d-none');
-                }, 5000);
-            </script>
         @endif
         <form action=" {{url('ring-import-data')}}" method="POST" enctype="multipart/form-data">
             @csrf

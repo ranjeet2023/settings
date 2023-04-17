@@ -15,7 +15,17 @@ class RingImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $rows)
     {
+
         foreach ($rows as $row) {
+            $data = explode(',',$row['categories']);
+            $record=explode('/',$data[0]);
+
+            if(empty($record[2]) ||  empty($record[1]) || empty($record[0])) {
+                $record[2]=null;
+                $record[1]=null;
+                $record[0]=null;
+            }
+
             RingData::updateOrCreate(
                 ['item' => $row['item']],
             [
@@ -26,7 +36,9 @@ class RingImport implements ToCollection, WithHeadingRow
                 'page'=>$row['page'],
                 'default_metal'=>$row['default_metal'],
                 'default_color'=>$row['default_color'],
-                'categories'=>$row['categories'],
+                'categories'=> $record[0],
+                'subcategory'=> $record[1],
+                'diamond_type'=> $record[2],
                 'approx_semimount_dwt'=>$row['approx_semi_mount_dwt'],
                 'pc_casting'=>$row['pc_casting'],
                 'stone_breakdown'=>$row['stone_breakdown'],
