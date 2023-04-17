@@ -5,7 +5,6 @@ namespace App\Imports;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\RingData;
-use App\Helper\Helper;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class RingImport implements ToCollection, WithHeadingRow
@@ -17,14 +16,9 @@ class RingImport implements ToCollection, WithHeadingRow
     {
 
         foreach ($rows as $row) {
-            $data = explode(',',$row['categories']);
-            $record=explode('/',$data[0]);
-
-            if(empty($record[2]) ||  empty($record[1]) || empty($record[0])) {
-                $record[2]=null;
-                $record[1]=null;
-                $record[0]=null;
-            }
+            
+            $categories = explode('/', explode(',', $row['categories'])[0]) + [null, null, null];
+            [$categories, $subcategory, $diamond_type] = array_slice($categories, 0, 3);
 
             RingData::updateOrCreate(
                 ['item' => $row['item']],
@@ -36,9 +30,9 @@ class RingImport implements ToCollection, WithHeadingRow
                 'page'=>$row['page'],
                 'default_metal'=>$row['default_metal'],
                 'default_color'=>$row['default_color'],
-                'categories'=> $record[0],
-                'subcategory'=> $record[1],
-                'diamond_type'=> $record[2],
+                'categories' => $categories,
+                'subcategory' => $subcategory,
+                'diamond_type' => $diamond_type,
                 'approx_semimount_dwt'=>$row['approx_semi_mount_dwt'],
                 'pc_casting'=>$row['pc_casting'],
                 'stone_breakdown'=>$row['stone_breakdown'],
