@@ -42,8 +42,8 @@ class RingImport implements ToCollection, WithHeadingRow
                 'additional_image_1'=> $row['item'].'side.jpg',
                 'additional_image_2'=> $row['item'].'set.jpg',
                 'setting_width'=> $row['setting_width'] ?? "",
-                'type'=> $row['type'] ?? "",
-                'vendor'=> $row['vendor'] ?? "",
+                'type'=> $categories,
+                'vendor'=> 'Tdp',
                 'page_title'=> $row['page_title'] ?? ""
             ]
         );
