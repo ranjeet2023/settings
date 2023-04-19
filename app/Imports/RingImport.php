@@ -16,46 +16,35 @@ class RingImport implements ToCollection, WithHeadingRow
     {
 
         foreach ($rows as $row) {
-            
+
+
             $categories = explode('/', explode(',', $row['categories'])[0]) + [null, null, null];
             [$categories, $subcategory, $diamond_type] = array_slice($categories, 0, 3);
 
             RingData::updateOrCreate(
-                ['item' => $row['item']],
+                ['sku' =>  $row['sku'] ?? $row['item'] ?? null ],
             [
-                'image_top'=>$row['item'].'.jpg',
-                'image_side'=>$row['item'].'side.jpg',
-                'image_side2'=>$row['item'].'set.jpg',
-                'catalogsupplement'=>$row['catalogsupplement'],
-                'page'=>$row['page'],
-                'default_metal'=>$row['default_metal'],
-                'default_color'=>$row['default_color'],
-                'categories' => $categories,
-                'subcategory' => $subcategory,
-                'diamond_type' => $diamond_type,
-                'approx_semimount_dwt'=>$row['approx_semi_mount_dwt'],
-                'pc_casting'=>$row['pc_casting'],
-                'stone_breakdown'=>$row['stone_breakdown'],
-                'diamond_cttw_provided'=>$row['diamond_cttw_provided'],
-                'diamond_quality_that_prices_are_based_at'=>$row['diamond_quality_that_prices_are_based_at'],
-                'gold_polished_1300'=>$row['gold_polished_1300'],
-                'gold_complete_1300'=>$row['gold_complete_1300'],
-                'gold_semi_mount_1300'=>$row['gold_semi_mount_1300'],
-                'gold_polished_1700'=>$row['gold_polished_1700'],
-                'gold_complete_1700'=>$row['gold_complete_1700'],
-                'gold_semi_mount_1700'=>$row['gold_semi_mount_1700'],
-                'silver_polished_40'=>$row['silver_polished_40'],
-                'silver_complete_40'=>$row['silver_complete_40'],
-                'silver_semi_mount_40'=>$row['silver_semi_mount_40'],
-                'silver_polished_60'=>$row['silver_polished_60'],
-                'silver_complete_60'=>$row['silver_complete_60'],
-                'silver_semi_mount_60'=>$row['silver_semi_mount_60'],
-                'platinum_polished_1200'=>$row['platinum_polished_1200'],
-                'platinum_complete_1200'=>$row['platinum_complete_1200'],
-                'platinum_semi_mount_1200'=>$row['platinum_semi_mount_1200'],
-                'platinum_polished_1600'=>$row['platinum_polished_1600'],
-                'platinum_complete_1600'=>$row['platinum_complete_1600'],
-                'platinum_semi_mount_1600'=>$row['platinum_semi_mount_1600']
+                'base_sku'=>$row['base_sku'] ?? "",
+                'category'=>$categories ?? "",
+                'sub_category'=>$subcategory ?? "",
+                'product_name'=>$row['product_name'] ?? "",
+                'product_description'=>$row['product_description'] ??  "",
+                'design_name'=>$row['design_name'] ?? "",
+                'metal_name'=> $row['metal_name'] ?? $row['default_metal'] ?? "",
+                'base_price'=> $row['base_price'] ?? "",
+                'additional_metal_price'=> $row['additional_metal_price'] ?? "",
+                'total_price'=> $row['total_price'] ?? "",
+                'weight'=> $row['weight'] ?? $row['stone_breakdown'] ?? "",
+                'status'=> $row['status'] ?? "",
+                'qty'=> $row['qty'] ?? "",
+                'main_image'=> $row['item'].'jpg',
+                'diamond_can_be_matched_with'=> $diamond_type ?? "",
+                'additional_image_1'=> $row['item'].'side.jpg',
+                'additional_image_2'=> $row['item'].'set.jpg',
+                'setting_width'=> $row['setting_width'] ?? "",
+                'type'=> $row['type'] ?? "",
+                'vendor'=> $row['vendor'] ?? "",
+                'page_title'=> $row['page_title'] ?? ""
             ]
         );
       }

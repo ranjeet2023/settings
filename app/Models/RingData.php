@@ -10,7 +10,6 @@ class RingData extends Model
     use HasFactory;
 
     protected $guarded=[];
-    protected $table='ringdata';
+    protected $table='ring';
 
 }
-    
