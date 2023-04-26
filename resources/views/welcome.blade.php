@@ -8,9 +8,14 @@
 </head>
 <body>
     <div class="container mt-5 text-center">
+
         <h2 class="mb-4">
            Import ring file
+           <a href="{{url('ring-import-excel')}}"><button class="btn float-right">
+                    <span class="badge badge-success">import GH File</span>
+           </button></a>
         </h2><b>OverNightMounting</b>
+
         @if(session('success'))
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
