@@ -10,7 +10,7 @@
     <div class="container mt-5 text-center">
         <h2 class="mb-4">
            Import ring file
-        </h2><b>OverNightMounting</b>
+        </h2><b> GH</b>
         @if(session('success'))
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         @endif
-        <form action=" {{url('ring-import-data')}}" method="POST" enctype="multipart/form-data">
+        <form action=" {{url('ring-import-sheet-excel')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
                 <div class="custom-file text-left">

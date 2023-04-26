@@ -19,7 +19,10 @@ class RingImport implements ToCollection, WithHeadingRow
 
 
             $categories = explode('/', explode(',', $row['categories'])[0]) + [null, null, null];
-            [$categories, $subcategory, $diamond_type] = array_slice($categories, 0, 3);
+            [$categories, $subcategory, $diamond] = array_slice($categories, 0, 3);
+
+            $diamonds=array("",1=>"Round",2=>"Princess",3=>"Cushion",4=>"Radiant",5=>"Asscher",6=>"Emerald",7=>"Oval",8=>"Pear",9=>"Marquise",10=>"Heart",11=>"Square");
+            $diamond_type =array_search($diamond,$diamonds);
 
             RingData::updateOrCreate(
                 ['sku' =>  $row['sku'] ?? $row['item'] ?? null ],
@@ -38,12 +41,12 @@ class RingImport implements ToCollection, WithHeadingRow
                 'status'=> $row['status'] ?? "",
                 'qty'=> $row['qty'] ?? "",
                 'main_image'=> $row['item'].'jpg',
-                'diamond_can_be_matched_with'=> $diamond_type ?? "",
+                'diamond_can_be_matched_with'=> $diamond_type ?? " ",
                 'additional_image_1'=> $row['item'].'side.jpg',
                 'additional_image_2'=> $row['item'].'set.jpg',
                 'setting_width'=> $row['setting_width'] ?? "",
                 'type'=> $categories,
-                'vendor'=> 'Tdp',
+                'vendor'=> 'overnightmounting',
                 'page_title'=> $row['page_title'] ?? ""
             ]
         );
