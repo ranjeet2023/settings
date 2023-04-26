@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\RingData;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class RingImport implements ToCollection, WithHeadingRow
+class OverNightImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -30,8 +30,8 @@ class RingImport implements ToCollection, WithHeadingRow
                 'base_sku'=>$row['base_sku'] ?? "",
                 'category'=>$categories ?? "",
                 'sub_category'=>$subcategory ?? "",
-                'product_name'=>$row['product_name'] ?? "",
-                'product_description'=>$row['product_description'] ??  "",
+                'product_name'=>$categories." ,".$diamond_type,
+                'product_description'=>$row['default_metal']." ,".$categories." ,".$diamond_type,
                 'design_name'=>$row['design_name'] ?? "",
                 'metal_name'=> $row['metal_name'] ?? $row['default_metal'] ?? "",
                 'base_price'=> $row['base_price'] ?? "",
@@ -39,7 +39,7 @@ class RingImport implements ToCollection, WithHeadingRow
                 'total_price'=> $row['total_price'] ?? "",
                 'weight'=> $row['weight'] ?? $row['stone_breakdown'] ?? "",
                 'status'=> $row['status'] ?? "",
-                'qty'=> $row['qty'] ?? "",
+                'qty'=> 10,
                 'main_image'=> $row['item'].'jpg',
                 'diamond_can_be_matched_with'=> $diamond_type ?? " ",
                 'additional_image_1'=> $row['item'].'side.jpg',

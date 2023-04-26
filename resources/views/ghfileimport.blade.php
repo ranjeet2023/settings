@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5 text-center">
         <h2 class="mb-4">
-           Import ring file   <a href="{{url('ring-import')}}"><button class="btn float-right">
+           Import ring file   <a href="{{url('overnightmounting')}}"><button class="btn float-right">
             <span class="badge badge-success">import O.N.M File</span>
    </button></a>
         </h2><b> GH</b>

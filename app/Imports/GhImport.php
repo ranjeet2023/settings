@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\RingData;
 
-class Excelfileimport implements ToCollection, WithHeadingRow
+class GhImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -33,22 +33,23 @@ class Excelfileimport implements ToCollection, WithHeadingRow
                         array_push($diamond, $value);
                     }
                 }
+                $basesku=explode('-',$row['id']);
                 RingData::updateOrCreate(
-                    ['sku' => $row['id'] ?? $row['item'] ?? null],
+                    ['sku' => $row['id']],
                     [
-                        'base_sku' => $row['bandcompatibleid'] ?? "",
-                        'category' => $row['itemtype'] ?? "",
-                        'sub_category' => $row['style'] ?? "",
-                        'product_name' => $row['product_name'] ?? "",
-                        'product_description' => $row['description'] ?? "",
+                        'base_sku' => $basesku[0],
+                        'category' => $row['itemtype'] ,
+                        'sub_category' => $row['style'] ,
+                        'product_name' =>$row['style'].",".$row['metal'],
+                        'product_description' => $row['style'].",".$row['metal'],
                         'design_name' => $row['design_name'] ?? "",
                         'metal_name' => $row['metal'] ?? $row['default_metal'] ?? "",
                         'base_price' => $row['price'] ?? "",
                         'additional_metal_price' => $row['additional_metal_price'] ?? "",
-                        'total_price' => $row['base_price'] ?? "",
+                        'total_price' => $row['price'] ?? "",
                         'weight' => $row['weight'] ?? $row['metalweight'] ?? "",
                         'status' => $row['status'] ?? "1",
-                        'qty' => $row['qty'] ?? "",
+                        'qty' => 10,
                         'main_image' => $row['imagesurl'] ?? "",
                         'diamond_can_be_matched_with' => implode(',', $diamond) ?? "",
                         'additional_image_1' => $row['RadiantImagesurlvalue'] ?? "",

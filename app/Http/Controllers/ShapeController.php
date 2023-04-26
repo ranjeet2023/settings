@@ -348,7 +348,6 @@ class ShapeController extends Controller
                 </div>
             </div>';
                 }
-
             }
             if (empty($artilces)) {
                 $response_data= array(
