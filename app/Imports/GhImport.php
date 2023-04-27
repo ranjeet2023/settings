@@ -50,14 +50,14 @@ class GhImport implements ToCollection, WithHeadingRow
                         'weight' => $row['weight'] ?? $row['metalweight'] ?? "",
                         'status' => $row['status'] ?? "1",
                         'qty' => 10,
-                        'main_image' => $row['imagesurl'] ?? "",
                         'diamond_can_be_matched_with' => implode(',', $diamond) ?? "",
-                        'additional_image_1' => $row['RadiantImagesurlvalue'] ?? "",
-                        'additional_image_2' => $row['emeraldimagesurlvalue'] ?? "",
+                        'main_image' => $basesku[0].",".implode(',', $diamond)."."."r.jpg",
+                        'additional_image_1' => $basesku[0].",".implode(',', $diamond)."."."w.jpg",
+                        'additional_image_2' => $basesku[0].",".implode(',', $diamond)."."."y.jpg",
                         'setting_width' => $row['setting_width'] ?? "",
                         'type' => $row['itemtype'],
                         'vendor' => 'GH',
-                        'page_title' => $row['page_title'] ?? ""
+                        'page_title' =>  $row['style'].",".$row['metal']
                     ]
                 );
             }

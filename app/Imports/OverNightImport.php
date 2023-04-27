@@ -25,9 +25,9 @@ class OverNightImport implements ToCollection, WithHeadingRow
             $diamond_type =array_search($diamond,$diamonds);
 
             RingData::updateOrCreate(
-                ['sku' =>  $row['sku'] ?? $row['item'] ?? null ],
+                ['sku' =>  $row['base_sku'] ?? $row['item'] ?? null ],
             [
-                'base_sku'=>$row['base_sku'] ?? "",
+                'base_sku'=>$row['item'],
                 'category'=>$categories ?? "",
                 'sub_category'=>$subcategory ?? "",
                 'product_name'=>$categories." ,".$diamond_type,
@@ -47,7 +47,7 @@ class OverNightImport implements ToCollection, WithHeadingRow
                 'setting_width'=> $row['setting_width'] ?? "",
                 'type'=> $categories,
                 'vendor'=> 'overnightmounting',
-                'page_title'=> $row['page_title'] ?? ""
+                'page_title'=>$row['default_metal']." ,".$categories." ,".$diamond_type
             ]
         );
       }
