@@ -33,6 +33,8 @@ class GhImport implements ToCollection, WithHeadingRow
                         array_push($diamond, $value);
                     }
                 }
+                $diamonds=array("",1=>"Round",2=>"Princess",3=>"Cushion",4=>"Radiant",5=>"Asscher",6=>"Emerald",7=>"Oval",8=>"Pear",9=>"Marquise",10=>"Heart",11=>"Square");
+                $diamond_type=$diamonds[$diamond[0]];
                 $basesku=explode('-',$row['id']);
                 RingData::updateOrCreate(
                     ['sku' => $row['id']],
@@ -51,9 +53,13 @@ class GhImport implements ToCollection, WithHeadingRow
                         'status' => $row['status'] ?? "1",
                         'qty' => 10,
                         'diamond_can_be_matched_with' => implode(',', $diamond) ?? "",
-                        'main_image' => $basesku[0].",".implode(',', $diamond)."."."r.jpg",
-                        'additional_image_1' => $basesku[0].",".implode(',', $diamond)."."."w.jpg",
-                        'additional_image_2' => $basesku[0].",".implode(',', $diamond)."."."y.jpg",
+                        'main_image' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."1.png",
+                        'additional_image_1' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."2.png",
+                        'additional_image_2' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."3.png",
+                        'additional_image_3' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."4.png",
+                        'additional_image_4' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."5.png",
+                        'additional_image_5' =>'https://integrations.thediamondport.com/public/rings/'. $basesku[0]."/".$diamond_type."/".$basesku[2]."/"."6.png",
+                        'video' =>'https://integrations.thediamondport.com/public/rings/'.$basesku[0]."/".$diamond_type."/".$basesku[2]."/"."y.mp4",
                         'setting_width' => $row['setting_width'] ?? "",
                         'type' => $row['itemtype'],
                         'vendor' => 'GH',

@@ -258,7 +258,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                     url: ENDPOINT + "/choose_ring?page=" + page,
+                      url: ENDPOINT + "/choose_ring?page="+ page,
                       datatype: "html",
                       type: "get",
                       data: data,
@@ -284,8 +284,7 @@
                 });
         }
     });
-
-</script>
+    </script>
 </body>
 
 </html>

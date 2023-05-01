@@ -17,7 +17,7 @@ use App\Http\Controllers\RingImportController;
 Route::any('/test', function () {
     return view('test');
 });
-// Route::get('/test', [ShapeController::class, 'index'])->name('index');
+
 Route::get('/', [ShapeController::class, 'index'])->name('index');
 Route::post('/fetch_diamond', [ShapeController::class, 'fetch_diamond'])->name('fetched_diamond');
 Route::get('/diamondDetails/{id}', [ShapeController::class, 'diamondDetails'])->name('diamondDetails');
