@@ -131,7 +131,7 @@
                     <div class="main MuiBox-root css-0">
                         <div class="diamond-grid" id="diamond-grid">
                         </div>
-                        <div class="auto-load  text-center" >
+                        <div class="auto-load  text-center text-dark" >
                             <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="60"
                                 viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            {{-- start diamond list view --}}
+            {{-- start ring list view --}}
             <div class="MuiBox-root css-0 list_view" style="display:none">
                 <div class="main MuiBox-root css-0">
                     <div class="MuiBox-root css-0">
@@ -269,13 +269,14 @@
                 })
                 .done(function(response) {
                     var data = JSON.parse(response);
+                    console.log(data.empty);
                     if (data.empty) {
-                        $('.auto-load').html("We don't have more data to display ");
+                        $('.auto-load').html("We don't have more data to display");
                     } else {
-                        var articles = data.articles;
-                        var totalring = data.total_rings;
+                        var data_response =data.data_response;
+                        var totalring = data    .total_rings;
                         $('.auto-load').hide();
-                        $("#diamond-grid").append(articles);
+                        $("#diamond-grid").append(data_response);
                         $('#results').text(totalring);
                     }
                 })

@@ -14040,10 +14040,10 @@
                         if (data.empty) {
                             $('.auto-load').html("We don't have more data to display ");
                         } else {
-                            var articles = data.articles;
+                            var result = data.data_response;
                             var totaldiamond = data.tatol_diamond;
                             $('.auto-load').hide();
-                            $("#diamond-grid").append(articles);
+                            $("#diamond-grid").append(result);
                             $('#results').text(totaldiamond);
                         }
                     })

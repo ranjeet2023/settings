@@ -134,7 +134,7 @@ class ShapeController extends Controller
         $results = $config['data']['data'];
         $total_diamond = $config['data']['total'];
 
-        $artilces = '';
+        $data_response = '';
         if ($request->ajax()) {
             if (!empty($request->input('list_view'))) {
                 foreach ($results as $result) {
@@ -143,7 +143,7 @@ class ShapeController extends Controller
                     } else {
                         $img = $result['image'];
                     }
-                    $artilces .= '
+                    $data_response .= '
                     <a href="' . url('diamondDetails') . '/' . $result['certificate_no'] . '" style="text-decoration:none">
                 <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
                 <img src="' . $img . '" alt="diamond">
@@ -167,7 +167,7 @@ class ShapeController extends Controller
                     } else {
                         $img = $result['image'];
                     }
-                    $artilces .= '
+                    $data_response .= '
                 <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
                 <div class="imageBox MuiBox-root css-0">
                 <img src="' . $img . '" alt="diamond"></div>
@@ -188,13 +188,13 @@ class ShapeController extends Controller
                 }
 
             }
-            if (empty($artilces)) {
+            if (empty($data_response)) {
                 $response_data = array(
                     'empty' => true,
                 );
             } else {
                 $response_data = array(
-                    'articles' => $artilces,
+                    'data_response' => $data_response,
                     'tatol_diamond' => $total_diamond,
                     'empty' => false,
                 );
@@ -284,43 +284,52 @@ class ShapeController extends Controller
             $pricemin= null;
             $pricemax = null;
         }
-        $token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM3YmY3ZDUwZTk1ZTI4YWVlNTVmYTdiMTBiMjgwYzk3NjI4MDgwMTUxMWFhYTAxNmI2ZDNkNDFhMDNiOTRjZDYyYzUwYTNjZDMzYWE1N2UiLCJpYXQiOiIxNjgyNjg2NTY2LjU5NjAyNiIsIm5iZiI6IjE2ODI2ODY1NjYuNTk2MDI4IiwiZXhwIjoiMTcxNDMwODk2Ni41OTQ1OTUiLCJzdWIiOiI0OTEiLCJzY29wZXMiOltdfQ.iHj-DbCp6XkZaPcTgN2paCS-wGCgIEfxCXbaXB8jrf9OgIUMm6cw7bpzt98_CQCcUbj9-HK_lRvQ-a8NHASHDD7EwLWcj3y5Ze8zwxgdaVwFs2z2CMT_WTzy5KbASRdZ7Ph1-YgHfexqzrXKfOauG6cc4H4HuUCo3FWIRIGGL9UTJz7R478MhimZur4Bp4O1HCC7fhwQTQ99S_mWopHhjAKjLa9cmZyTpx10ZzjvSNIjozx2eKvqUsZxv9Msm9l1RNZJDwg4C4xztms7vI3x3n2RtaqdxCn6pj-G_C7zAS17UWIkOpPp6IMJY8yaEaTHeC_1nS1NQP3C6NZxMxi2FSxxMYDQ2N4nKKHCymIxIzPSvYrEY1zQfI2csYc9b9EdbqTmNy0n5I0sBBhaBUmqu4rgFJo8RY3cDrhdcwSRzdiSpZzrnnMtsDFSZKWnMNJeyoi21IjY7ei-HMm73zqkhQ1oRwapmTyBtfiRM4ZECKyLibTAW2Evv1NdGNdjMwDDvVsbxMxOz-xSVMLUWkX_4c51Bngqikyu-6F1faY-B67g7srYI988efcFOjzdPIrilbbzVSqbXRXcs9X8-UIJVkDtP4GUEcNuBxJG_9diNK4-5PZlHOb9J5cl7AT1RqlYsLA7fXo_WBnSnRYPsz4xrGzf2_lUBAmc-OT5UcR_Tpc';
+        $token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDY5YzE5Y2ExOWU4MjRkOGE4YTg0MWJiYzY4OGViODhlNzY2M2FmYjNhYzE4YjFhNWUyNjQzYzQwMmE2ODhiMWM5MTIyYTk0MzkxYmIwNTMiLCJpYXQiOiIxNjgzMDk0Mzk4LjQ2MzgyNCIsIm5iZiI6IjE2ODMwOTQzOTguNDYzODI3IiwiZXhwIjoiMTcxNDcxNjc5OC40NjIyNTciLCJzdWIiOiI0OTEiLCJzY29wZXMiOltdfQ.L4DAmXn3-rDx5ZDfangUJVBwP5U4QYDFaFqFpRzSQ71fOh5WEgh5ImvWliB7qbpTmN9oui9WRSj5_6P_7Xo6gZ-_9s7FlKLRzpDRR-vIk7HIQrC05mnamwGXKk6dXeLEpM8Y2EkvAm2FosWTjMjyr1b625-RDYTz77eDd1_EugYiDUMN0npzxZAPxo4HlMZ3rpnPSfLEyuoLIipt3gfOZnd2PGlj-qohp1FjwXnybocU3uFb09FoZ3rY6iuCPKyPePhVzIPkKx77-f5OY7LgTojcugX-zCVSbf42Pf4TBwK736C3HeAoeOHE9rr4JkSiykqCsMXeJqhLB3JAllc9RPINYmxQHuUrtMiC_nmKVJFinTPgefeAbKshiNkCXEMaXFb9oBlGlABVcoa_IEvMP1UCiod9grmGW4k2QsvQbYoYNO-kcN9nOeoEGLZh3qujsYdE-eou80O3vyYeS7gwceEZwWZbNHEXCO_F19XkwKFT3lcTX78qXrnx7pMo8T9UXbHFbUARY5oJnQkn2p7b6RckM8-u7OBz-F6YbBG-OCDWZSUxPPzPUOpNADNrXngA5tq5hY33O1zx4asLZ8QKzwlVE29Qm0ERWSqd-P6etlYFjEHaU51jgnH4HEjA2zR-dhKO8gn72N77ENexn7YMcEfwhvfZS_uqjtRL_L1cXaU';
         $response = $client->request('POST', 'https://integrations.thediamondport.com/feed/get-ring-data', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-            'form_params' => [
-                'page' => $page,
-                'metal'=>$metal,
-                'sub_category'=>$setting,
-                'pricemin'=>$pricemin,
-                'pricemax'=>$pricemax,
-            ],
-        ]);
-        dd(json_decode($response->getBody(), true));
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $token,
+                    ],
+                    'form_params' => [
+                        'page' => $page,
+                        'metal'=>$metal,
+                        'sub_category'=>$setting,
+                        'pricemin'=>$pricemin,
+                        'pricemax'=>$pricemax,
+                    ],
+                ]);
         $rings = json_decode($response->getBody()->getContents(), true);
-        $artilces = '';
-        if ($request->ajax()) {
-            if (!empty($request->input('list_view'))) {
-                foreach ($rings as $result) {
-                        $img =  url('assets/img/shape/' . ucfirst(strtolower($result['sub_category'])) . '.png');
-                    $artilces .= '
-                                <a href=" ' . url('ring_details') . '/' . $result['id'] . '" style="text-decoration:none">
-                                    <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
-                                            <img src="' . $result['main_image'] . '" alt="diamond">
-                                            <p class="list-shape">' . $result['sub_category'] . ' </p>
-                                            <p class="list-size">' . $result['metal_name'] . ' </p>
-                                            <p class="list-color">' . $result['design_name'] . '</p>
-                                            <p class="list-price">$ ' . $result['total_price'] . '</p>
-                                    </div>
-                                </a>';
-                        }
-                    } else {
+        $data_response = '';
+        if($rings['success']==true && (count($rings['data'])>0)){
+            if ($request->ajax()) {
+                    if (!empty($request->input('list_view'))) {
                         foreach ($rings['data'] as $result) {
-                            $artilces .= '
+                            if(empty( $result['main_image'])){
+                                $img =  url('assets/img/shape/' . ucfirst(strtolower($result['sub_category'])) . '.png');
+                            }else{
+                                $img= $result['main_image'];
+                            }
+                            $data_response .= '
+                                        <a href=" ' . url('ring_details') . '/' . $result['id'] . '" style="text-decoration:none">
+                                            <div class="diamond-list-row" style="border-left: 3px solid rgb(2, 190, 232); width: 100%; color: rgb(49, 79, 222);">
+                                                    <img src="' . $img . '" alt="diamond">
+                                                    <p class="list-shape">' . $result['sub_category'] . ' </p>
+                                                    <p class="list-size">' . $result['metal_name'] . ' </p>
+                                                    <p class="list-color">' . $result['design_name'] . '</p>
+                                                    <p class="list-price">$ ' . $result['total_price'] . '</p>
+                                            </div>
+                                        </a>';
+                    }
+                    }else {
+                        foreach ($rings['data'] as $result) {
+                            if(empty( $result['main_image'])){
+                                $img =  url('assets/img/shape/' . ucfirst(strtolower($result['main_image'])) . '.png');
+                            }else{
+                                $img= $result['main_image'];
+                            }
+                            $data_response .= '
                                 <div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root entityCard css-1okfn8i">
                                     <div class="imageBox MuiBox-root css-0">
-                                        <img src="' . $result['main_image'] . '" alt="ring">
+                                        <img src="' . $img . '" alt="ring">
                                     </div>
                                     <div class="MuiCardContent-root infoBox css-1qw96cp" style="color: rgb(49, 79, 222);">
                                         <div class="MuiBox-root css-73nay0">
@@ -336,25 +345,23 @@ class ShapeController extends Controller
                                         </div>
                                     </div>
                                 </div>';
-                            }
                         }
-                        if (empty($artilces)) {
-                            $response_data= array(
-                                'empty' => true,
-                            );
-                        } else {
-                            $response_data = array(
-                                'articles' => $artilces,
-                                // 'total_rings'=>$rings['total_rings'],
-                                'empty' => false,
-                            );
-                        }
-                        $json_response = json_encode($response_data);
-                        return $json_response;
                     }
-                 return;
 
-    }
+            }
+            $response_data = array(
+                'data_response' => $data_response,
+                'total_rings'=>$rings['total'],
+                'empty' => false,
+            );
+            }else{
+                $response_data= array(
+                    'empty' => true,
+                );
+            }
+            $json_response = json_encode($response_data);
+            return $json_response;
+        }
     public function ringdetails(Request $request)
         {
         $client = new Client();
